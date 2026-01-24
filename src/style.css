@@ -52,13 +52,14 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 2rem;
 }
 
 .logo {
   font-size: 1.25rem;
   font-weight: 900;
   letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .nav-badge {
@@ -69,6 +70,8 @@ body {
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .container {
@@ -130,17 +133,18 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.6) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.4) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 2rem;
+  padding: 1.5rem;
   z-index: 10;
 }
 
 @media (min-width: 768px) {
   .hero-overlay {
     padding: 3rem;
+    background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.6) 50%, transparent 100%);
   }
 }
 
@@ -188,16 +192,20 @@ body {
   gap: 0.6rem;
   font-size: 0.8125rem;
   color: #4ade80;
-  /* Bright Neon Green */
+  /* Bright Neon Green (text-green-400) */
   font-weight: 800;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
+  /* More padding */
   border-radius: 9999px;
-  background-color: rgba(74, 222, 128, 0.05);
+  background-color: rgba(74, 222, 128, 0.1);
+  /* Clearer background */
   backdrop-filter: blur(12px);
   width: fit-content;
-  border: 1px solid rgba(74, 222, 128, 0.4);
-  box-shadow: 0 0 15px rgba(74, 222, 128, 0.15);
-  margin-top: 0.5rem;
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  /* Stronger border */
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+  /* Enhanced Glow */
+  margin-top: 1rem;
 }
 
 /* Bento Grid */

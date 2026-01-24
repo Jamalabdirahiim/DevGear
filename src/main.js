@@ -12,7 +12,7 @@ const products = [
     price: "$729",
     category: "Monitor",
     image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-3.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=872&qlt=100,1&resMode=sharp2&size=872,804&chrss=full",
-    link: "https://amzn.to/3NJ3HeX",
+    link: "https://www.amazon.com/dp/B09QP4J15J",
     badge: "Editor's Choice",
     keyword: "Best 4K coding monitor",
     platform: ["Mac", "Win"]
@@ -23,7 +23,7 @@ const products = [
     price: "$99",
     category: "Viral",
     image: "/divoom.png",
-    link: "https://amzn.to/4jVQ605",
+    link: "https://www.amazon.com/dp/B0811XB8VB",
     badge: "Viral Hit",
     keyword: "Viral desk gadget",
     platform: ["Mac", "Win"]
@@ -34,7 +34,7 @@ const products = [
     price: "$398",
     category: "Audio",
     image: "https://d1ncau8tqf99kp.cloudfront.net/converted/103364_original_local_1200x1050_v3_converted.webp",
-    link: "https://amzn.to/4pVypyY",
+    link: "https://www.amazon.com/dp/B09XS7JWHH",
     badge: "Deep Work",
     keyword: "Best focus headphones",
     platform: ["Mac", "Win"]
@@ -45,7 +45,7 @@ const products = [
     price: "$179",
     category: "Power",
     image: "https://cdn.shopify.com/s/files/1/0493/9834/9974/files/Rectangle1_885945a5-b5d8-439f-bc99-54bf72715ff4_1600x.png?v=1762766510",
-    link: "https://amzn.to/4ra5PLd",
+    link: "https://www.amazon.com/dp/B0BYP2F3SG",
     badge: "Pro Choice",
     keyword: "Best laptop power bank",
     platform: ["Mac", "Win"]
@@ -56,7 +56,7 @@ const products = [
     price: "$399",
     category: "Dock",
     image: "https://www.caldigit.com/wp-content/uploads/2021/12/TS4_Thunderbolt-4-Dock_Laptop-Charging1000px_Version04.jpg",
-    link: "https://amzn.to/4jTup0o",
+    link: "https://www.amazon.com/dp/B09GPQ2V8R",
     keyword: "Best Thunderbolt 4 dock",
     platform: ["Mac", "Win"]
   },
@@ -66,7 +66,7 @@ const products = [
     price: "$219",
     category: "Keyboard",
     image: "https://www.keychron.com/cdn/shop/files/Keychron-Q1-HE-QMK-Wireless-Custom-Keyboard-Shell-White.jpg?v=1754623218&width=1214",
-    link: "https://amzn.to/4tdI86K",
+    link: "https://www.amazon.com/dp/B0CL85V755",
     badge: "New Tech",
     keyword: "Best programming keyboard",
     platform: ["Mac", "Win"]
@@ -77,7 +77,7 @@ const products = [
     price: "$179",
     category: "Light",
     image: "https://image.benq.com/is/image/benqco/together45?$ResponsivePreset$&fmt=png-alpha",
-    link: "https://amzn.to/3ZtHtQG",
+    link: "https://www.amazon.com/dp/B09WRF19F9",
     keyword: "Best monitor light bar",
     platform: ["Mac", "Win"]
   }
