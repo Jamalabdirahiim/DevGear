@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-    base: '/DevGear/', // Repository name for GitHub Pages
+    base: './', // Works for both Vercel (root) and GitHub Pages (subdir)
 })
