@@ -119,7 +119,7 @@ const renderGrid = () => {
   }
 
   gridContainer.innerHTML = products.map(product => `
-    <a href="${product.link || '#'}" target="_blank" rel="noopener noreferrer" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
+    <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
       ${product.badge ? `<div class="badge-top-pick">${escapeHTML(product.badge)}</div>` : ''}
       <div class="card-img-container">
         <img 
