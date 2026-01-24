@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevGear 2026 | The Best Developer Desk Setup</title>
+  <meta name="description"
+    content="A curated list of high-performance hardware for coding, ergonomics, and deep work." />
+
+  <!-- Security Headers (Hardened for Production & Dev) -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' ws: wss:; frame-ancestors 'none';">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <!-- Critical Styles to prevent FOUC -->
+  <style>
+    body {
+      background-color: #09090b;
+      color: #ededed;
+    }
+
+    #app {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    #app.loaded {
+      opacity: 1;
+    }
+  </style>
+
+  <!-- Performance & Fonts -->
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">DevGear</div>
+      <div class="nav-badge">2026 EDITION</div>
+    </div>
+  </nav>
+
+  <div id="app">
+    <main class="container">
+      <!-- Hero Section will be injected here -->
+      <div id="hero-container"></div>
+
+      <!-- Bento Grid will be injected here -->
+      <div id="grid-container" class="bento-grid"></div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p class="footer-disclaimer">
+          As an Amazon Associate, I earn from qualifying purchases. This site is independently curated.
+        </p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.75rem;">© 2026 DevGear. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
