@@ -78,7 +78,7 @@ const products = [
     id: 8,
     title: "Logitech MX Master 3S",
     category: "Mouse",
-    image: "https://m.media-amazon.com/images/I/61ni399AnWL.jpg", // High-quality Amazon asset
+    image: "https://www.logitech.com/content/dam/logitech/en/products/mice/mx-master-3s/mx-master-3s-graphite-ident.jpg", // Official Logitech asset
     link: "https://amzn.to/3LMFfJc",
     badge: "Essential",
     keyword: "Best ergonomic mouse",
