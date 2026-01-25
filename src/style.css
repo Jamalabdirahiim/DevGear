@@ -269,10 +269,13 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  transform: scale(1.2);
+  /* Default zoom for better framing */
 }
 
 .product-card:hover .card-img {
-  transform: scale(1.05);
+  transform: scale(1.25);
+  /* Slight extra zoom on hover */
 }
 
 .card-content {
