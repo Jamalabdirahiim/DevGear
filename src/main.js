@@ -82,7 +82,7 @@ const products = [
     link: "https://amzn.to/3LMFfJc",
     badge: "Essential",
     keyword: "Best ergonomic mouse",
-    platform: ["Mac", "Win"]
+    platform: ["Mac", "Windows"]
   }
 ];
 

@@ -338,37 +338,47 @@ body {
 }
 
 .platform-tag {
-  font-size: 0.6rem;
-  font-weight: 800;
-  padding: 0.15rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 900;
+  padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
   border-width: 1px;
   border-style: solid;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Mac Styling - Frosty Silver */
 .platform-tag.mac {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-.platform-tag.win {
-  background-color: rgba(0, 120, 212, 0.1);
-  color: #60a5fa;
-  border-color: rgba(0, 120, 212, 0.5);
-  box-shadow: 0 0 10px rgba(0, 120, 212, 0.2);
+/* Windows Styling - Microsoft Azure Blue */
+.platform-tag.win,
+.platform-tag.windows {
+  background-color: rgba(0, 164, 239, 0.15);
+  color: #00a4ef;
+  border-color: rgba(0, 164, 239, 0.6);
+  box-shadow: 0 0 12px rgba(0, 164, 239, 0.25);
+  text-shadow: 0 0 5px rgba(0, 164, 239, 0.4);
 }
 
+/* Enhanced Hover State */
 .product-card:hover .platform-tag.mac {
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
-.product-card:hover .platform-tag.win {
-  box-shadow: 0 0 15px rgba(0, 120, 212, 0.4);
+.product-card:hover .platform-tag.win,
+.product-card:hover .platform-tag.windows {
+  border-color: #60a5fa;
+  box-shadow: 0 0 20px rgba(0, 164, 239, 0.5);
+  color: #fff;
 }
 
 .card-cta {
