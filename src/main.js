@@ -73,6 +73,16 @@ const products = [
     link: "https://amzn.to/3ZtHtQG",
     keyword: "Best light bar",
     platform: ["Mac", "Windows"]
+  },
+  {
+    id: 8,
+    title: "Logitech MX Master 3S",
+    category: "Mouse",
+    image: "https://m.media-amazon.com/images/I/61ni399AnWL.jpg", // High-quality Amazon asset
+    link: "https://amzn.to/3LMFfJc",
+    badge: "Essential",
+    keyword: "Best ergonomic mouse",
+    platform: ["Mac", "Win"]
   }
 ];
 
