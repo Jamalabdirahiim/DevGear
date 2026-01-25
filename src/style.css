@@ -358,14 +358,24 @@ body {
 }
 
 .card-cta {
-  font-size: 0.75rem;
-  color: var(--accent-purple);
-  font-weight: 600;
-  transition: transform 0.2s ease;
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 }
 
 .product-card:hover .card-cta {
-  transform: translateX(4px);
+  background-color: var(--accent-purple);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  transform: translateY(-1px);
 }
 
 /* Footer */

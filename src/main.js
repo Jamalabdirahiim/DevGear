@@ -148,7 +148,7 @@ const renderGrid = () => {
           <div class="platform-tags">
             ${(product.platform || []).map(p => `<span class="platform-tag ${p.toLowerCase()}">${escapeHTML(p)}</span>`).join('')}
           </div>
-          <span class="card-cta">View on Amazon →</span>
+          <span class="card-cta">View Product</span>
         </div>
       </div>
     </a>
