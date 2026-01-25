@@ -55,11 +55,21 @@ body {
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 2.5rem;
+  /* Industrial standard height */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+  /* Interactive micro-animation */
 }
 
 .nav-badge {
