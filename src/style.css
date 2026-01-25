@@ -76,15 +76,52 @@ body {
 }
 
 .nav-badge {
+  position: relative;
   font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  padding: 0.35rem 0.75rem;
+  font-weight: 800;
+  color: #d8b4fe;
+  /* Premium light purple */
+  padding: 0.4rem 1rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.03);
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1);
+  text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
   line-height: 1;
   white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 0.05em;
+  z-index: 1;
+}
+
+/* "Electric Flow" Shimmer Animation */
+.nav-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(115deg,
+      transparent 30%,
+      rgba(168, 85, 247, 0.6) 45%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(168, 85, 247, 0.6) 55%,
+      transparent 70%);
+  animation: badgeShine 3s infinite linear;
+  pointer-events: none;
+  z-index: -1;
+  mix-blend-mode: overlay;
+}
+
+@keyframes badgeShine {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(150%);
+  }
 }
 
 .container {
