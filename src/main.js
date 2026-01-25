@@ -83,6 +83,16 @@ const products = [
     badge: "Essential",
     keyword: "Best ergonomic mouse",
     platform: ["Mac", "Windows"]
+  },
+  {
+    id: 9,
+    title: "Premium Tech Gear",
+    category: "Upgrade",
+    image: "https://m.media-amazon.com/images/I/71bB+3PYmpL._AC_SL400_.jpg",
+    link: "https://amzn.to/4sUpVel",
+    badge: "Just Added",
+    keyword: "Latest addition",
+    platform: ["Mac", "Windows"]
   }
 ];
 
