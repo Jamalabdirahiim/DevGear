@@ -20,7 +20,7 @@ const products = [
     id: 2,
     title: "Divoom Ditoo-Pro",
     category: "Viral",
-    image: "https://divoom.com/cdn/shop/files/D2.jpg?v=1744097040",
+    image: "https://divoom.com/cdn/shop/files/gempages_512109010883707816-4bb47ddc-be67-450f-8efb-4ef8b26c402d.png?v=14376486518071211302",
     link: "https://amzn.to/4jVQ605",
     badge: "Viral Hit",
     keyword: "Viral desk gadget",
