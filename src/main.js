@@ -86,7 +86,7 @@ const products = [
   },
   {
     id: 9,
-    title: "KZ Ergonomic Chair", /* Inferred from kzchair.com domain */
+    title: "SIHOO M57 Ergonomic Mesh Office Chair",
     category: "Chair",
     image: "https://www.kzchair.com/cdn/shop/products/H5d13d89beeee483b816e7b38b577c4adT.png_960x960_0bad36c7-456a-4e1e-aab6-99392650aa71_1800x1800.png?v=1664608353",
     link: "https://amzn.to/4sXROC3",
