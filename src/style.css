@@ -338,23 +338,37 @@ body {
 }
 
 .platform-tag {
-  font-size: 0.625rem;
-  font-weight: 700;
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
   text-transform: uppercase;
-  background-color: #27272a;
-  color: #a1a1aa;
+  letter-spacing: 0.02em;
+  border-width: 1px;
+  border-style: solid;
+  transition: all 0.3s ease;
 }
 
 .platform-tag.mac {
+  background-color: rgba(255, 255, 255, 0.05);
   color: #fff;
-  background-color: #3f3f46;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
 }
 
 .platform-tag.win {
-  color: #fff;
-  background-color: #0078d4;
+  background-color: rgba(0, 120, 212, 0.1);
+  color: #60a5fa;
+  border-color: rgba(0, 120, 212, 0.5);
+  box-shadow: 0 0 10px rgba(0, 120, 212, 0.2);
+}
+
+.product-card:hover .platform-tag.mac {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.product-card:hover .platform-tag.win {
+  box-shadow: 0 0 15px rgba(0, 120, 212, 0.4);
 }
 
 .card-cta {
