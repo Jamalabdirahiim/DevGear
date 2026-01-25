@@ -20,7 +20,7 @@ const products = [
     id: 2,
     title: "Divoom Ditoo-Pro",
     category: "Viral",
-    image: "https://divoom.com/es/products/divoom-pro",
+    image: "https://nologystore.com/en/products/divoom-ditoo-pro-retro-speaker-green",
     link: "https://amzn.to/4jVQ605",
     badge: "Viral Hit",
     keyword: "Viral desk gadget",
