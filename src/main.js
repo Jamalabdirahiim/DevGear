@@ -1,3 +1,7 @@
+import { inject } from '@vercel/analytics';
+
+inject();
+
 const escapeHTML = (str) => {
   if (!str) return '';
   const div = document.createElement('div');
