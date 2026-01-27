@@ -63,6 +63,22 @@
 
       <!-- Bento Grid will be injected here -->
       <div id="grid-container" class="bento-grid"></div>
+
+      <!-- Setup Cost Calculator Section -->
+      <section id="calculator" class="calculator-section">
+        <div class="calculator-header">
+          <h2 class="calculator-title">Setup Cost Calculator</h2>
+          <p class="calculator-subtitle">Curated bundles for every budget. Click to see the gear.</p>
+        </div>
+        <div class="calculator-toggles">
+          <button class="tier-btn" data-tier="500">$500 Bundle</button>
+          <button class="tier-btn active" data-tier="1500">$1,500 Bundle</button>
+          <button class="tier-btn" data-tier="5000">$5,000 Bundle</button>
+        </div>
+        <div id="bundle-results" class="bundle-grid">
+          <!-- Dynamically populated by main.js -->
+        </div>
+      </section>
     </main>
 
     <footer>

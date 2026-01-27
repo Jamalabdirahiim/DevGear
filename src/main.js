@@ -169,6 +169,76 @@ const renderGrid = () => {
   `).join('');
 };
 
+const bundles = {
+  500: [
+    { title: "Keychron C3 Pro", price: "$35", link: "https://amzn.to/3B4HjA7", category: "Keyboard" },
+    { title: "Logitech G305 Wireless", price: "$39", link: "https://amzn.to/4t6V7B2", category: "Mouse" },
+    { title: "KOORUI 24\" 1080p Monitor", price: "$89", link: "https://amzn.to/3ZtHtQG", category: "Monitor" },
+    { title: "Moosoo Monitor Arm", price: "$25", link: "https://amzn.to/3B4HjA7", category: "Accessory" }
+  ],
+  1500: [
+    { title: "Dell UltraSharp 4K", price: "$499", link: "https://amzn.to/3NJ3HeX", category: "Monitor" },
+    { title: "Logitech MX Master 3S", price: "$99", link: "https://amzn.to/3LMFfJc", category: "Mouse" },
+    { title: "Keychron Q1 Pro", price: "$199", link: "https://amzn.to/4tdI86K", category: "Keyboard" },
+    { title: "Sony WH-1000XM5", price: "$349", link: "https://amzn.to/4pVypyY", category: "Audio" }
+  ],
+  5000: [
+    { title: "Samsung Odyssey G9 OLED", price: "$1,199", link: "https://amzn.to/3NJ3HeX", category: "Monitor" },
+    { title: "Herman Miller Aeron", price: "$1,800", link: "https://amzn.to/4sXROC3", category: "Chair" },
+    { title: "CalDigit TS4 Dock", price: "$399", link: "https://amzn.to/4jTup0o", category: "Dock" },
+    { title: "KEF LSX II Speakers", price: "$1,299", link: "https://amzn.to/4pVypyY", category: "Audio" }
+  ]
+};
+
+const renderBundle = (tier) => {
+  const container = document.querySelector('#bundle-results');
+  if (!container) return;
+
+  const items = bundles[tier] || [];
+  container.innerHTML = items.map(item => `
+    <div class="bundle-item">
+      <div class="bundle-item-info">
+        <span class="bundle-item-category">${escapeHTML(item.category)}</span>
+        <h4 class="bundle-item-title">${escapeHTML(item.title)}</h4>
+      </div>
+      <div class="bundle-item-actions">
+        <span class="bundle-item-price">${escapeHTML(item.price)}</span>
+        <a href="${item.link}" target="_blank" class="bundle-buy-btn" data-product="${escapeHTML(item.title)}">
+          Buy on Amazon
+        </a>
+      </div>
+    </div>
+  `).join('');
+
+  // Re-attach GA tracking to new buttons
+  container.querySelectorAll('.bundle-buy-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const product = e.currentTarget.getAttribute('data-product');
+      if (typeof gtag === 'function') {
+        gtag('event', 'click', {
+          'event_category': 'affiliate_link',
+          'event_label': product,
+          'value': 1
+        });
+      }
+    });
+  });
+};
+
+const initCalculator = () => {
+  const buttons = document.querySelectorAll('.tier-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderBundle(btn.dataset.tier);
+    });
+  });
+
+  // Render default bundle
+  renderBundle(1500);
+};
+
 const init = () => {
   try {
     const heroContainer = document.querySelector('#hero-container');
@@ -177,6 +247,7 @@ const init = () => {
 
     if (heroContainer) renderHero();
     if (gridContainer) renderGrid();
+    initCalculator();
 
     // Final check to ensure app shows up even if parts failed
     if (appContainer) {
