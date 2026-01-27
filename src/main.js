@@ -298,27 +298,6 @@ const renderBundle = (tier) => {
   });
 };
 
-const initTheme = () => {
-  const toggleBtn = document.getElementById('theme-toggle');
-  const root = document.documentElement;
-
-  // Check local storage or system preference
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
-    root.classList.add('light-mode');
-  }
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      root.classList.toggle('light-mode');
-      const isLight = root.classList.contains('light-mode');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-  }
-};
-
 const initCalculator = () => {
   const buttons = document.querySelectorAll('.bundle-btn');
   buttons.forEach(btn => {
@@ -339,7 +318,6 @@ const init = () => {
     const gridContainer = document.querySelector('#grid-container');
     const appContainer = document.querySelector('#app');
 
-    initTheme();
     if (heroContainer) renderHero();
     if (gridContainer) renderGrid();
     initCalculator();

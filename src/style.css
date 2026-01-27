@@ -19,22 +19,6 @@
   --gradient-purple-pink: linear-gradient(to right, #a855f7, #ec4899);
 }
 
-:root.light-mode {
-  --bg-color: #ffffff;
-  --text-color: #18181b;
-  --zinc-950: #ffffff;
-  /* Override for seamless switch */
-  --zinc-900: #f4f4f5;
-  --zinc-800: #e4e4e7;
-  --zinc-400: #71717a;
-  --zinc-100: #18181b;
-  /* Dark text for light mode */
-
-  --card-bg: #f4f4f5;
-  --card-border: #e4e4e7;
-  --text-muted: #71717a;
-}
-
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
