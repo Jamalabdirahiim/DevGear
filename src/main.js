@@ -175,22 +175,82 @@ const renderGrid = () => {
 
 const bundles = {
   500: [
-    { title: "Keychron C3 Pro", price: "$35", link: "https://amzn.to/3B4HjA7", category: "Keyboard" },
-    { title: "Logitech G305 Wireless", price: "$39", link: "https://amzn.to/4t6V7B2", category: "Mouse" },
-    { title: "KOORUI 24\" 1080p Monitor", price: "$89", link: "https://amzn.to/3ZtHtQG", category: "Monitor" },
-    { title: "Moosoo Monitor Arm", price: "$25", link: "https://amzn.to/3B4HjA7", category: "Accessory" }
+    {
+      title: "Keychron C3 Pro",
+      price: "$35",
+      link: "https://amzn.to/3B4HjA7",
+      category: "Keyboard",
+      image: "https://m.media-amazon.com/images/I/61hn0-nLw+L._AC_SL1500_.jpg",
+      badge: "Value King"
+    },
+    {
+      title: "Logitech G305 Wireless",
+      price: "$39",
+      link: "https://amzn.to/4t6V7B2",
+      category: "Mouse",
+      image: "https://resource.logitechg.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g305/g305-gallery-1.png?v=1",
+      badge: "Best Seller"
+    },
+    {
+      title: "KOORUI 24\" 1080p Monitor",
+      price: "$89",
+      link: "https://amzn.to/3ZtHtQG",
+      category: "Monitor",
+      image: "https://m.media-amazon.com/images/I/71Xyg-d6BFL._AC_SL1500_.jpg",
+      badge: "165Hz"
+    }
   ],
   1500: [
-    { title: "Dell UltraSharp 4K", price: "$499", link: "https://amzn.to/3NJ3HeX", category: "Monitor" },
-    { title: "Logitech MX Master 3S", price: "$99", link: "https://amzn.to/3LMFfJc", category: "Mouse" },
-    { title: "Keychron Q1 Pro", price: "$199", link: "https://amzn.to/4tdI86K", category: "Keyboard" },
-    { title: "Sony WH-1000XM5", price: "$349", link: "https://amzn.to/4pVypyY", category: "Audio" }
+    {
+      title: "Dell UltraSharp 4K",
+      price: "$499",
+      link: "https://amzn.to/3NJ3HeX",
+      category: "Monitor",
+      image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-3.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=872&qlt=100,1&resMode=sharp2&size=872,804&chrss=full",
+      badge: "Crisp Text"
+    },
+    {
+      title: "Logitech MX Master 3S",
+      price: "$99",
+      link: "https://amzn.to/3LMFfJc",
+      category: "Mouse",
+      image: "https://www.logitech.com/content/dam/logitech/en/products/mice/mx-master-3s/mx-master-3s-graphite-ident.jpg",
+      badge: "Productivity"
+    },
+    {
+      title: "Sony WH-1000XM5",
+      price: "$349",
+      link: "https://amzn.to/4pVypyY",
+      category: "Audio",
+      image: "https://d1ncau8tqf99kp.cloudfront.net/converted/103364_original_local_1200x1050_v3_converted.webp",
+      badge: "Silence"
+    }
   ],
   5000: [
-    { title: "Samsung Odyssey G9 OLED", price: "$1,199", link: "https://amzn.to/3NJ3HeX", category: "Monitor" },
-    { title: "Herman Miller Aeron", price: "$1,800", link: "https://amzn.to/4sXROC3", category: "Chair" },
-    { title: "CalDigit TS4 Dock", price: "$399", link: "https://amzn.to/4jTup0o", category: "Dock" },
-    { title: "KEF LSX II Speakers", price: "$1,299", link: "https://amzn.to/4pVypyY", category: "Audio" }
+    {
+      title: "Samsung Odyssey OLED G9",
+      price: "$1,199",
+      link: "https://amzn.to/3NJ3HeX",
+      category: "Monitor",
+      image: "https://image-us.samsung.com/SamsungUS/home/computing/monitors/gaming/06072023/Odyssey_OLED_G9_G95SC_Front_Silver_RGB.jpg?$product-details-jpg$",
+      badge: "Endgame"
+    },
+    {
+      title: "Herman Miller Aeron",
+      price: "$1,800",
+      link: "https://amzn.to/4sXROC3",
+      category: "Chair",
+      image: "https://s7d2.scene7.com/is/image/hermanmiller/20220202_AERON_Gaming_B_Black_Front_Mid?$1000$",
+      badge: "Buy It For Life"
+    },
+    {
+      title: "CalDigit TS4 Dock",
+      price: "$399",
+      link: "https://amzn.to/4jTup0o",
+      category: "Dock",
+      image: "https://www.caldigit.com/wp-content/uploads/2021/12/TS4_Thunderbolt-4-Dock_Laptop-Charging1000px_Version04.jpg",
+      badge: "The Hub"
+    }
   ]
 };
 
@@ -200,24 +260,33 @@ const renderBundle = (tier) => {
 
   const items = bundles[tier] || [];
   container.innerHTML = items.map(item => `
-    <div class="product-card-bundle">
-      <div class="bundle-item-info">
-        <span class="bundle-item-category">${escapeHTML(item.category)}</span>
-        <h4 class="bundle-item-title">${escapeHTML(item.title)}</h4>
+    <a href="${item.link}" target="_blank" class="product-card" aria-label="View ${escapeHTML(item.title)} on Amazon">
+      ${item.badge ? `<div class="badge-top-pick">${escapeHTML(item.badge)}</div>` : ''}
+      <div class="card-img-container">
+        <img 
+          src="${item.image || ''}" 
+          alt="${escapeHTML(item.title)}" 
+          class="card-img" 
+          loading="lazy"
+          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000&opacity=0.3';"
+        />
       </div>
-      <div class="bundle-item-actions">
-        <span class="bundle-item-price">${escapeHTML(item.price)}</span>
-        <a href="${item.link}" target="_blank" class="bundle-buy-btn" data-product="${escapeHTML(item.title)}">
-          Buy on Amazon
-        </a>
+      <div class="card-content">
+        <div class="card-category">${escapeHTML(item.category)}</div>
+        <h3 class="card-title">${escapeHTML(item.title)}</h3>
+        <div class="card-footer">
+          <span class="bundle-item-price" style="font-size: 0.9rem;">${escapeHTML(item.price)}</span>
+          <span class="card-cta">View</span>
+        </div>
       </div>
-    </div>
+    </a>
   `).join('');
 
-  // Re-attach GA tracking to new buttons
-  container.querySelectorAll('.bundle-buy-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const product = e.currentTarget.getAttribute('data-product');
+  // Re-attach GA tracking
+  container.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Allow default link behavior (opening new tab), just track event
+      const product = card.getAttribute('aria-label');
       if (typeof gtag === 'function') {
         gtag('event', 'click', {
           'event_category': 'affiliate_link',
@@ -227,6 +296,27 @@ const renderBundle = (tier) => {
       }
     });
   });
+};
+
+const initTheme = () => {
+  const toggleBtn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  // Check local storage or system preference
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+    root.classList.add('light-mode');
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      root.classList.toggle('light-mode');
+      const isLight = root.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  }
 };
 
 const initCalculator = () => {
@@ -249,6 +339,7 @@ const init = () => {
     const gridContainer = document.querySelector('#grid-container');
     const appContainer = document.querySelector('#app');
 
+    initTheme();
     if (heroContainer) renderHero();
     if (gridContainer) renderGrid();
     initCalculator();

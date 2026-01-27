@@ -19,6 +19,22 @@
   --gradient-purple-pink: linear-gradient(to right, #a855f7, #ec4899);
 }
 
+:root.light-mode {
+  --bg-color: #ffffff;
+  --text-color: #18181b;
+  --zinc-950: #ffffff;
+  /* Override for seamless switch */
+  --zinc-900: #f4f4f5;
+  --zinc-800: #e4e4e7;
+  --zinc-400: #71717a;
+  --zinc-100: #18181b;
+  /* Dark text for light mode */
+
+  --card-bg: #f4f4f5;
+  --card-border: #e4e4e7;
+  --text-muted: #71717a;
+}
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -473,13 +489,15 @@ body {
 
 /* --- Setup Cost Calculator Section --- */
 .calculator-section {
-  padding: 4rem 1.5rem;
-  background-color: var(--zinc-950);
-  border-bottom: 1px solid var(--zinc-800);
+  padding: 2rem 1.5rem 1rem;
+  /* Reduced padding */
+  background-color: var(--bg-color);
+  border-bottom: none;
 }
 
 .calculator-container {
-  max-width: 1000px;
+  max-width: 1200px;
+  /* Wider to match grid */
   margin: 0 auto;
   background-color: var(--zinc-950);
   border: 1px solid var(--zinc-800);
@@ -534,24 +552,13 @@ body {
 }
 
 .bundle-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border-top: 1px solid var(--zinc-800);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  border-top: none;
 }
 
-.product-card-bundle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--zinc-800);
-  transition: all 0.2s ease;
-}
-
-.product-card-bundle:last-child {
-  border-bottom: none;
-}
+/* Reusing .product-card styles for bundles */
 
 .bundle-item-info {
   display: flex;
@@ -606,26 +613,40 @@ body {
 
 /* --- Developer Guide Section --- */
 .guide-section {
-  padding: 6rem 1.5rem;
-  background-color: var(--zinc-950);
+  padding: 1rem 1.5rem 3rem;
+  /* Tighter top padding */
+  background-color: var(--bg-color);
 }
 
 .guide-container {
   max-width: 1200px;
   margin: 0 auto;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
 }
 
-.guide-text {
-  font-size: 1.25rem;
-  line-height: 1.7;
+.guide-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.guide-list li {
   color: var(--zinc-400);
-  font-weight: 400;
-  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-.guide-text strong {
+.guide-list strong {
   color: var(--zinc-100);
-  font-weight: 700;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
 }
 
 /* Footer */
