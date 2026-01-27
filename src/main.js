@@ -38,7 +38,8 @@ const products = [
     link: "https://amzn.to/4pVypyY",
     badge: "Deep Work",
     keyword: "Best focus headphones",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    description: "Block out the noise in a busy cafe or dorm. These are the only headphones that let me code in deep focus for 4 hours straight."
   },
   {
     id: 4,
@@ -86,7 +87,8 @@ const products = [
     link: "https://amzn.to/3LMFfJc",
     badge: "Essential",
     keyword: "Best ergonomic mouse",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    description: "The industry standard for productivity. Once you use the horizontal scroll for your code, you can never go back."
   },
   {
     id: 9,
@@ -96,7 +98,8 @@ const products = [
     link: "https://amzn.to/4sXROC3",
     badge: "Comfort",
     keyword: "Best office chair",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    description: "The best budget ergonomic chair for long coding nights. Essential for back health when you're at the desk for 10+ hours."
   }
 ];
 
@@ -158,6 +161,7 @@ const renderGrid = () => {
       <div class="card-content">
         <div class="card-category">${escapeHTML(product.category || 'Gear')}</div>
         <h3 class="card-title">${escapeHTML(product.title || 'Untitled Hardware')}</h3>
+        ${product.description ? `<p class="card-description">${escapeHTML(product.description)}</p>` : ''}
         <div class="card-footer">
           <div class="platform-tags">
             ${(product.platform || []).map(p => `<span class="platform-tag ${p.toLowerCase()}">${escapeHTML(p)}</span>`).join('')}
@@ -196,7 +200,7 @@ const renderBundle = (tier) => {
 
   const items = bundles[tier] || [];
   container.innerHTML = items.map(item => `
-    <div class="bundle-item">
+    <div class="product-card-bundle">
       <div class="bundle-item-info">
         <span class="bundle-item-category">${escapeHTML(item.category)}</span>
         <h4 class="bundle-item-title">${escapeHTML(item.title)}</h4>
@@ -226,7 +230,7 @@ const renderBundle = (tier) => {
 };
 
 const initCalculator = () => {
-  const buttons = document.querySelectorAll('.tier-btn');
+  const buttons = document.querySelectorAll('.bundle-btn');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
