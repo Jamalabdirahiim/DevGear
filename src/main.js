@@ -137,15 +137,18 @@ const renderHero = () => {
   `;
 };
 
-const renderGrid = () => {
-  const gridContainer = document.querySelector('#grid-container');
+const renderGrid = (containerId = '#grid-container', filterFn = null) => {
+  const gridContainer = document.querySelector(containerId);
   if (!gridContainer) return;
-  if (!products || products.length === 0) {
+
+  const filteredProducts = filterFn ? products.filter(filterFn) : products;
+
+  if (!filteredProducts || filteredProducts.length === 0) {
     gridContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Curating latest hardware...</p>';
     return;
   }
 
-  gridContainer.innerHTML = products.map(product => `
+  gridContainer.innerHTML = filteredProducts.map(product => `
     <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
       ${product.badge ? `<div class="badge-top-pick">${escapeHTML(product.badge)}</div>` : ''}
       <div class="card-img-container">
@@ -166,7 +169,7 @@ const renderGrid = () => {
           <div class="platform-tags">
             ${(product.platform || []).map(p => `<span class="platform-tag ${p.toLowerCase()}">${escapeHTML(p)}</span>`).join('')}
           </div>
-          <span class="card-cta">View Product</span>
+          <span class="card-cta">Check Price on Amazon</span>
         </div>
       </div>
     </a>
@@ -177,7 +180,6 @@ const bundles = {
   500: [
     {
       title: "Keychron C3 Pro",
-      price: "$35",
       link: "https://amzn.to/3B4HjA7",
       category: "Keyboard",
       image: "https://m.media-amazon.com/images/I/61hn0-nLw+L._AC_SL1500_.jpg",
@@ -185,7 +187,6 @@ const bundles = {
     },
     {
       title: "Logitech G305 Wireless",
-      price: "$39",
       link: "https://amzn.to/4t6V7B2",
       category: "Mouse",
       image: "https://resource.logitechg.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g305/g305-gallery-1.png?v=1",
@@ -193,7 +194,6 @@ const bundles = {
     },
     {
       title: "KOORUI 24\" 1080p Monitor",
-      price: "$89",
       link: "https://amzn.to/3ZtHtQG",
       category: "Monitor",
       image: "https://m.media-amazon.com/images/I/71Xyg-d6BFL._AC_SL1500_.jpg",
@@ -203,7 +203,6 @@ const bundles = {
   1500: [
     {
       title: "Dell UltraSharp 4K",
-      price: "$499",
       link: "https://amzn.to/3NJ3HeX",
       category: "Monitor",
       image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-3.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=872&qlt=100,1&resMode=sharp2&size=872,804&chrss=full",
@@ -211,7 +210,6 @@ const bundles = {
     },
     {
       title: "Logitech MX Master 3S",
-      price: "$99",
       link: "https://amzn.to/3LMFfJc",
       category: "Mouse",
       image: "https://www.logitech.com/content/dam/logitech/en/products/mice/mx-master-3s/mx-master-3s-graphite-ident.jpg",
@@ -219,7 +217,6 @@ const bundles = {
     },
     {
       title: "Sony WH-1000XM5",
-      price: "$349",
       link: "https://amzn.to/4pVypyY",
       category: "Audio",
       image: "https://d1ncau8tqf99kp.cloudfront.net/converted/103364_original_local_1200x1050_v3_converted.webp",
@@ -229,7 +226,6 @@ const bundles = {
   5000: [
     {
       title: "Samsung Odyssey OLED G9",
-      price: "$1,199",
       link: "https://amzn.to/3NJ3HeX",
       category: "Monitor",
       image: "https://image-us.samsung.com/SamsungUS/home/computing/monitors/gaming/06072023/Odyssey_OLED_G9_G95SC_Front_Silver_RGB.jpg?$product-details-jpg$",
@@ -237,7 +233,6 @@ const bundles = {
     },
     {
       title: "Herman Miller Aeron",
-      price: "$1,800",
       link: "https://amzn.to/4sXROC3",
       category: "Chair",
       image: "https://s7d2.scene7.com/is/image/hermanmiller/20220202_AERON_Gaming_B_Black_Front_Mid?$1000$",
@@ -245,7 +240,6 @@ const bundles = {
     },
     {
       title: "CalDigit TS4 Dock",
-      price: "$399",
       link: "https://amzn.to/4jTup0o",
       category: "Dock",
       image: "https://www.caldigit.com/wp-content/uploads/2021/12/TS4_Thunderbolt-4-Dock_Laptop-Charging1000px_Version04.jpg",
@@ -275,8 +269,7 @@ const renderBundle = (tier) => {
         <div class="card-category">${escapeHTML(item.category)}</div>
         <h3 class="card-title">${escapeHTML(item.title)}</h3>
         <div class="card-footer">
-          <span class="bundle-item-price" style="font-size: 0.9rem;">${escapeHTML(item.price)}</span>
-          <span class="card-cta">View</span>
+          <span class="card-cta">Check Price on Amazon</span>
         </div>
       </div>
     </a>
@@ -285,7 +278,6 @@ const renderBundle = (tier) => {
   // Re-attach GA tracking
   container.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      // Allow default link behavior (opening new tab), just track event
       const product = card.getAttribute('aria-label');
       if (typeof gtag === 'function') {
         gtag('event', 'click', {
@@ -316,11 +308,24 @@ const init = () => {
   try {
     const heroContainer = document.querySelector('#hero-container');
     const gridContainer = document.querySelector('#grid-container');
+    const focusGrid = document.querySelector('#focus-grid');
+    const checklistGrid = document.querySelector('#checklist-grid');
     const appContainer = document.querySelector('#app');
 
-    if (heroContainer) renderHero();
-    if (gridContainer) renderGrid();
-    initCalculator();
+    // Detect page and render accordingly
+    if (focusGrid) {
+      // Focus page: render only focus-related products
+      const focusFilter = (p) => ['Monitor', 'Audio', 'Keyboard', 'Light', 'Dock'].includes(p.category);
+      renderGrid('#focus-grid', focusFilter);
+    } else if (checklistGrid) {
+      // Checklist page: render all products as "Recommended Picks"
+      renderGrid('#checklist-grid');
+    } else {
+      // Homepage: render all
+      if (heroContainer) renderHero();
+      if (gridContainer) renderGrid();
+      initCalculator();
+    }
 
     // Final check to ensure app shows up even if parts failed
     if (appContainer) {
