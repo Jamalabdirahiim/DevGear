@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/focus",
+            "destination": "/focus.html"
+        },
+        {
+            "source": "/checklist",
+            "destination": "/checklist.html"
+        }
+    ]
+}
