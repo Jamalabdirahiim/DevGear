@@ -324,7 +324,7 @@ const init = () => {
       // Homepage: render all
       if (heroContainer) renderHero();
       if (gridContainer) renderGrid();
-      initCalculator();
+      // initCalculator(); // Temporarily removed
     }
 
     // Final check to ensure app shows up even if parts failed
