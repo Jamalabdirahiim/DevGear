@@ -498,7 +498,8 @@ body {
   padding: 1rem;
   background-color: var(--zinc-900);
   border: 1px solid var(--zinc-800);
-  border-radius: 100px; /* Pill shape container */
+  border-radius: 100px;
+  /* Pill shape container */
   width: fit-content;
   margin: 0 auto;
 }
@@ -648,13 +649,11 @@ body {
   border-color: var(--zinc-100);
 }
 
-/* --- Developer Guide Section (Footer Style) --- */
+/* --- Developer Guide Section (Footer) --- */
 .guide-section {
   padding: 4rem 1.5rem;
-  background-color: var(--card-bg);
-  /* Slight contrast from main bg */
-  border-top: 1px solid var(--zinc-800);
-  margin-top: 4rem;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--card-border);
 }
 
 .guide-footer-layout {
@@ -665,19 +664,32 @@ body {
   gap: 3rem;
 }
 
+.guide-col {
+  padding: 0;
+}
+
+.guide-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--accent-purple);
+  margin-bottom: 1rem;
+  display: block;
+}
+
 .guide-col h4 {
-  color: var(--zinc-100);
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
 }
 
 .guide-col p {
-  color: var(--zinc-400);
-  font-size: 0.95rem;
+  color: var(--text-secondary);
   line-height: 1.6;
+  font-size: 0.95rem;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -1029,6 +1041,20 @@ body {
   border-color: var(--accent-purple);
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(168, 85, 247, 0.2);
+}
+
+.link-card-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--accent-purple);
+  margin-bottom: 1.5rem;
+  display: block;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.internal-link-card:hover .link-card-icon {
+  opacity: 1;
 }
 
 .internal-link-card h4 {
