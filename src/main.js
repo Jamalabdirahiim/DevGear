@@ -321,10 +321,59 @@ const init = () => {
       // Checklist page: render all products as "Recommended Picks"
       renderGrid('#checklist-grid');
     } else {
-      // Homepage: render all
+      // Homepage: render all default
       if (heroContainer) renderHero();
-      if (gridContainer) renderGrid();
-      // initCalculator(); // Temporarily removed
+      if (gridContainer) renderGrid(); // Initial render
+
+      // Smart Gear Filter Logic
+      const filterPills = document.querySelectorAll('.filter-pill');
+      if (filterPills.length > 0) {
+        filterPills.forEach(pill => {
+          pill.addEventListener('click', () => {
+            // 1. Visual state
+            filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+
+            // 2. Filter logic
+            const filterValue = pill.dataset.filter;
+
+            // Add fade-out effect for smooth transition
+            const grid = document.querySelector('#grid-container');
+            if (grid) {
+              grid.style.opacity = '0';
+
+              setTimeout(() => {
+                if (filterValue === 'all') {
+                  renderGrid();
+                } else {
+                  // Get products for this budget tier from bundles object
+                  // Note: We need to match products from the bundle to the main product list
+                  // or just render the bundle items directly if they match format.
+                  // Let's use the bundle items directly as they are already curated.
+                  const bundleItems = bundles[filterValue];
+                  if (bundleItems) {
+                    // We need to render these specifically. 
+                    // renderGrid expects a filter function OR we can update it to accept an array.
+                    // Let's refactor renderGrid slightly to be more flexible or just pass a filter that finds them.
+
+                    // Better approach: Since 'bundles' items might be slightly different objects, 
+                    // let's exact match by title from the main 'products' array to ensure consistency.
+                    const targetTitles = bundleItems.map(b => b.title);
+                    const budgetFilter = (p) => targetTitles.includes(p.title);
+                    renderGrid('#grid-container', budgetFilter);
+                  }
+                }
+                // Fade back in
+                grid.style.opacity = '1';
+              }, 200); // Wait for fade out
+            }
+          });
+        });
+
+        // Set "Show All" as active initially
+        const allBtn = document.querySelector('[data-filter="all"]');
+        if (allBtn) allBtn.classList.add('active');
+      }
     }
 
     // Final check to ensure app shows up even if parts failed
