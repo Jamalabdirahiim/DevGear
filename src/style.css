@@ -92,8 +92,8 @@ body {
   width: auto;
   display: block;
   object-fit: contain;
-  margin-right: -4rem;
-  /* Aggressive overlap to touch the version tag */
+  margin-right: -2.5rem;
+  /* Reduced overlap so it touches but doesn't cover */
   margin-left: -1rem;
   /* Pull it left slightly to balance */
 }
