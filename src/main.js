@@ -185,13 +185,16 @@ const renderHero = () => {
         loading="lazy"
       />
       <div class="hero-overlay">
-        <div class="hero-top-trust">
-          <span class="secure-checkout-tag">✓ Secure Amazon Checkout</span>
-        </div>
+        <span class="hero-top-trust">
+          <!-- Badge removed temporarily -->
+        </span>
         <h1 class="hero-h1">
-          The Best <span class="text-transparent bg-clip-text bg-gradient-hero">Developer Desk Setup</span>.
+          <span class="text-transparent bg-clip-text bg-gradient-hero">Build Your Dream</span><br>
+          <span class="text-white">Desk Setup Today.</span>
         </h1>
-        <p class="hero-subtitle">I'm a 22yo student developer building my career on these exact tools. Every item is manually verified for 2026 workflows, Mac/Windows compatibility, and long-term durability. Secure checkout via Amazon.</p>
+        <p class="hero-subtitle">
+          Stop wasting time researching gear. We’ve curated the ultimate development and focus tools so you can skip the guesswork and get straight to deep work.
+        </p>
         <div class="hero-trust">
           <span>✅ Verified for Mac & PC</span>
           <span class="pulse-dot"></span>
