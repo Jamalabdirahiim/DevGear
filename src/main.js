@@ -45,7 +45,7 @@ const products = [
     id: 3,
     title: "Sony WH-1000XM5",
     category: "Audio",
-    image: "https://d1ncau8tqf99kp.cloudfront.net/converted/103364_original_local_1200x1050_v3_converted.webp",
+    image: "https://cdn.mos.cms.futurecdn.net/wKD3wkz4zg8ZY6iLUWjkeN.jpg",
     link: "https://amzn.to/4pVypyY",
     badge: "Deep Work",
     keyword: "Best focus headphones",
@@ -237,7 +237,7 @@ const bundles = {
       title: "Sony WH-1000XM5",
       link: "https://amzn.to/4pVypyY",
       category: "Audio",
-      image: "https://d1ncau8tqf99kp.cloudfront.net/converted/103364_original_local_1200x1050_v3_converted.webp",
+      image: "https://cdn.mos.cms.futurecdn.net/wKD3wkz4zg8ZY6iLUWjkeN.jpg",
       badge: "Silence"
     }
   ],
