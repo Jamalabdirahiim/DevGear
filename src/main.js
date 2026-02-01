@@ -56,7 +56,7 @@ const products = [
     id: 4,
     title: "Anker Prime 27k",
     category: "Power",
-    image: "https://pccircle.com/wp-content/uploads/2024/04/713YBqjTEfL._AC_SL1500_.jpg",
+    image: "https://cdn.mos.cms.futurecdn.net/Jqkrpqzc5E27MRQdyhH2h3.jpg",
     link: "https://amzn.to/4ra5PLd",
     badge: "Pro Choice",
     keyword: "Best power bank",
