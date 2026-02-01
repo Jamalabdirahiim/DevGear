@@ -185,16 +185,16 @@ const renderHero = () => {
         loading="lazy"
       />
       <div class="hero-overlay">
-        <span class="hero-top-trust">
-          <!-- Badge removed temporarily -->
-        </span>
         <h1 class="hero-h1">
           <span class="text-transparent bg-clip-text bg-gradient-hero">Build Your Dream</span><br>
           <span class="text-white">Desk Setup Today.</span>
         </h1>
         <p class="hero-subtitle">
-          Stop wasting time researching gear. We’ve curated the ultimate development and focus tools so you can skip the guesswork and get straight to deep work.
+          Stop wasting time researching gear. I’ve curated the ultimate development and focus tools so you can skip the guesswork and get straight to deep work.
         </p>
+        <div class="hero-top-trust" style="margin-top: 1rem; margin-bottom: 2rem;">
+          <span class="secure-checkout-tag">✓ Secure Amazon Checkout</span>
+        </div>
         <div class="hero-trust">
           <span>✅ Verified for Mac & PC</span>
           <span class="pulse-dot"></span>
