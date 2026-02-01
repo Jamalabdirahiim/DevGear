@@ -118,7 +118,7 @@ const products = [
     title: "Creative Pebble V3",
     category: "Audio",
     image: "/assets/pebble.jpg", // Local asset
-    link: "#", // User to provide
+    link: "https://amzn.to/3O2Iugd",
     badge: "Best Value",
     keyword: "Best budget speakers",
     platform: ["Mac", "Windows"],
@@ -129,7 +129,7 @@ const products = [
     title: "Logitech G305 Lightspeed",
     category: "Mouse",
     image: "/assets/g305.jpg", // Local asset
-    link: "#", // User to provide
+    link: "https://amzn.to/4khfSfs",
     badge: "Top Seller",
     keyword: "Best budget mouse",
     platform: ["Mac", "Windows"],
@@ -140,7 +140,7 @@ const products = [
     title: "Keychron V1 QMK",
     category: "Keyboard",
     image: "/assets/keychron.jpg", // Local asset
-    link: "#", // User to provide
+    link: "https://amzn.to/3M6MPyf",
     badge: "Entry Custom",
     keyword: "Best budget keyboard",
     platform: ["Mac", "Windows"],
@@ -151,7 +151,7 @@ const products = [
     title: "KOORUI 24N1A Monitor",
     category: "Monitor",
     image: "/assets/koorui.jpg", // Local asset
-    link: "#", // User to provide
+    link: "https://amzn.to/4qcdXdc",
     badge: "Bestseller",
     keyword: "Best budget screen",
     platform: ["Mac", "Windows"],
