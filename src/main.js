@@ -71,7 +71,9 @@ const products = [
     badge: "Pro Choice",
     keyword: "Best power bank",
     description: "Massive capacity that can charge a MacBook Pro repeatedly. The smart display lets you monitor input/output in real-time.",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    whyThisPick: "27,650mAh capacity with real-time power monitoring display",
+    notIdealFor: ["You rarely work away from outlets", "You need ultra-lightweight portability"]
   },
   {
     id: 5,
@@ -81,7 +83,9 @@ const products = [
     link: "https://amzn.to/4jTup0o",
     keyword: "Best Thunderbolt 4 dock",
     description: "The King of Docks. 18 ports to connect everything from monitors to SD cards with a single Thunderbolt cable.",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    whyThisPick: "18 ports including dual 4K displays via single cable",
+    notIdealFor: ["You don't have Thunderbolt 4 devices", "You prefer wireless connectivity"]
   },
   {
     id: 6,
@@ -104,7 +108,9 @@ const products = [
     link: "https://amzn.to/3ZtHtQG",
     keyword: "Best light bar",
     description: "Saves desk space and eliminates screen glare. The wireless controller and backlighting make it the premium choice.",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    whyThisPick: "Zero desk footprint with wireless dimming control",
+    notIdealFor: ["You prefer traditional desk lamps", "Your monitor is curved"]
   },
   {
     id: 8,
@@ -115,7 +121,9 @@ const products = [
     badge: "Essential",
     keyword: "Best ergonomic mouse",
     platform: ["Mac", "Windows"],
-    description: "The industry standard for productivity. Once you use the horizontal scroll for your code, you can never go back."
+    description: "The industry standard for productivity. Once you use the horizontal scroll for your code, you can never go back.",
+    whyThisPick: "Horizontal scroll wheel perfect for wide code files",
+    notIdealFor: ["You prefer lightweight gaming mice", "You need left-handed ergonomics"]
   },
   {
     id: 9,
@@ -126,7 +134,9 @@ const products = [
     badge: "Comfort",
     keyword: "Best budget chair",
     platform: ["Mac", "Windows"],
-    description: "The best budget ergonomic chair for long coding nights. Essential for back health when you're at the desk for 10+ hours."
+    description: "The best budget ergonomic chair for long coding nights. Essential for back health when you're at the desk for 10+ hours.",
+    whyThisPick: "Full lumbar support at budget price for long sessions",
+    notIdealFor: ["You're over 6'2" tall", "You want Herman Miller quality"]
   },
   // --- New Budget Products ($500 Tier) ---
   {
@@ -138,7 +148,9 @@ const products = [
     badge: "Best Value",
     keyword: "Best budget speakers",
     platform: ["Mac", "Windows"],
-    description: "Minimalist USB-C speakers that look great and sound surprisingly full. Perfect for a clean, wire-free desk."
+    description: "Minimalist USB-C speakers that look great and sound surprisingly full. Perfect for a clean, wire-free desk.",
+    whyThisPick: "USB-C powered with zero desk clutter for under $30",
+    notIdealFor: ["You need bass-heavy audio", "You podcast/stream professionally"]
   },
   {
     id: 12,
@@ -149,7 +161,9 @@ const products = [
     badge: "Top Seller",
     keyword: "Best budget mouse",
     platform: ["Mac", "Windows"],
-    description: "The undisputed king of budget wireless mice. Zero latency, months of battery life, and a clean shape."
+    description: "The undisputed king of budget wireless mice. Zero latency, months of battery life, and a clean shape.",
+    whyThisPick: "Gaming-grade wireless sensor at $40",
+    notIdealFor: ["You need ergonomic hand support", "You want RGB lighting"]
   },
   {
     id: 13,
@@ -160,7 +174,9 @@ const products = [
     badge: "Entry Custom",
     keyword: "Best budget keyboard",
     platform: ["Mac", "Windows"],
-    description: "Your gateway to the custom keyboard hobby. Hot-swappable, programmable, and feels incredible out of the box."
+    description: "Your gateway to the custom keyboard hobby. Hot-swappable, programmable, and feels incredible out of the box.",
+    whyThisPick: "QMK programmable with hot-swap at entry price",
+    notIdealFor: ["You need wireless connectivity", "You want pre-lubed switches"]
   },
   {
     id: 14,
@@ -171,7 +187,9 @@ const products = [
     badge: "Bestseller",
     keyword: "Best budget screen",
     platform: ["Mac", "Windows"],
-    description: "An IPS panel with 99% sRGB coverage for ~$100. The perfect secondary vertical monitor or budget main screen."
+    description: "An IPS panel with 99% sRGB coverage for ~$100. The perfect secondary vertical monitor or budget main screen.",
+    whyThisPick: "99% sRGB color accuracy for under $100",
+    notIdealFor: ["You need 4K resolution", "You want high refresh rate gaming"]
   }
 ];
 
