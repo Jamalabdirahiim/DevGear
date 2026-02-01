@@ -452,11 +452,10 @@ const init = () => {
       // Checklist page: render all products as "Recommended Picks"
       renderGrid('#checklist-grid');
     } else {
-      // Homepage: render all default
-      if (heroContainer) renderHero();
-      if (gridContainer) renderGrid(); // Initial render
+      // Homepage: render full app structure
+      renderApp();
 
-      // Smart Gear Filter Logic
+      // Smart Gear Filter Logic (now that DOM is built)
       const filterPills = document.querySelectorAll('.filter-pill');
       if (filterPills.length > 0) {
         filterPills.forEach(pill => {

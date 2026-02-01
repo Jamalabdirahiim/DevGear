@@ -46,37 +46,36 @@ body {
   left: 0;
   right: 0;
   height: auto;
-  min-height: 2.5rem;
-  /* Further reduced height */
-  z-index: 1000;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom: 1px solid transparent;
+  width: 100%;
+  height: 80px;
+  /* Fixed height as requested */
+  z-index: 100;
+  padding: 0 40px;
+  /* Horizontal padding only */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0.25rem 0;
-  /* Minimal padding */
+  /* Vertically center content */
+  box-sizing: border-box;
 }
 
-.navbar.sticky-header.scrolled {
-  background: rgba(9, 9, 11, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid #27272a;
-  padding-block: 0.25rem;
-  /* Slight compression on scroll */
+.navbar.scrolled {
+  background: rgba(9, 9, 11, 0.85);
+  /* Slightly less transparency */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  /* Height remains 80px, padding remains 0 40px */
 }
 
 .nav-wrap {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.5rem 1.5rem;
+  height: 100%;
+  /* Fill the fixed 80px height */
 }
 
 /* Logo Styling */
