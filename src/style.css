@@ -61,13 +61,12 @@ body {
 }
 
 .navbar.sticky-header.scrolled {
-  background: rgba(9, 9, 11, 0.85);
-  /* Darker, less transparent */
-  backdrop-filter: blur(8px);
-  /* Reduced blur radius */
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(9, 9, 11, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid #27272a;
   padding-block: 0.25rem;
+  /* Slight compression on scroll */
 }
 
 .nav-wrap {
@@ -258,8 +257,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem 1.5rem 2rem;
-  /* Reduced top padding to pull content UP slightly, but safe below navbar */
+  padding: 6rem 1.5rem 3rem;
   z-index: 10;
 }
 
@@ -298,19 +296,11 @@ body {
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
-.bg-gradient-hero {
-  background-image: linear-gradient(to right, #c084fc, #db2777);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .hero-h1 {
-  font-size: 1.75rem;
-  /* Reduced from 2rem */
+  font-size: 2rem;
   font-weight: 900;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.1;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.05;
   letter-spacing: -0.04em;
 }
 
@@ -322,8 +312,7 @@ body {
 
 @media (min-width: 1024px) {
   .hero-h1 {
-    font-size: 4rem;
-    /* Reduced from 4.5rem */
+    font-size: 4.5rem;
   }
 }
 
