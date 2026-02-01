@@ -248,8 +248,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   /* Reset to flex-start so padding dictates position */
-  padding: 8rem 1.5rem 2rem;
-  /* Top 8rem clears navbar, Bottom 2rem prevents crop but keeps it lifted */
+  padding: 12rem 1.5rem 2rem;
+  /* Increased to 12rem to definitively clear navbar */
   z-index: 10;
   overflow-y: auto;
   /* Allow scrolling if content is too tall on small screens */
@@ -265,8 +265,8 @@ body {
 
 @media (min-width: 768px) {
   .hero-overlay {
-    padding: 8rem 3rem 3rem;
-    /* Increased top padding for desktop */
+    padding: 12rem 3rem 3rem;
+    /* Adjusted for desktop aswell */
     background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.6) 50%, transparent 100%);
   }
 }
