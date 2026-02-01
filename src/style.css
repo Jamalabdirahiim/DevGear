@@ -80,13 +80,14 @@ body {
 .logo-link {
   text-decoration: none;
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  align-items: center;
+  /* Changed from baseline to fix diagonal misalignment */
+  gap: 0.75rem;
 }
 
 .logo-img {
-  height: 5rem;
-  /* Increased from 2rem to 5rem for better visibility */
+  height: 5.5rem;
+  /* Increased slightly and rely on centering */
   width: auto;
   display: block;
   object-fit: contain;
