@@ -36,6 +36,8 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  padding-top: 5rem;
+  /* ~80px to clear the sticky header */
 }
 
 /* Sticky Header with Glassmorphism */
@@ -58,8 +60,8 @@ body {
 
 .navbar.sticky-header.scrolled {
   background: rgba(9, 9, 11, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid #27272a;
   padding-block: 0.25rem;
   /* Slight compression on scroll */
@@ -202,7 +204,6 @@ body {
   width: 100%;
   height: 70vh;
   min-height: 500px;
-  border-radius: 2rem;
   overflow: hidden;
   margin-bottom: 4rem;
   background-color: #000;
@@ -225,6 +226,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -239,10 +241,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* Changed from flex-end */
   padding: 6.5rem 1.5rem 1.5rem;
-  /* Added top padding to clear header */
   z-index: 10;
+}
+
+/* Align content to site container even when background is full-width */
+.hero-overlay>* {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 768px) {
@@ -258,17 +266,19 @@ body {
 }
 
 .secure-checkout-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #71717a;
-  /* Zinc 500 */
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.1em;
+  background: #10b981;
+  /* Opaque Emerald Green */
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  /* Pill shape */
+  border: 1px solid rgba(16, 185, 129, 0.2);
   display: inline-block;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .hero-h1 {
