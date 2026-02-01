@@ -85,10 +85,11 @@ body {
 }
 
 .logo-img {
-  height: 2rem;
-  /* 32px */
+  height: 5rem;
+  /* Increased from 2rem to 5rem for better visibility */
   width: auto;
   display: block;
+  object-fit: contain;
 }
 
 .logo-version {
