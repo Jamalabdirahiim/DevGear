@@ -421,46 +421,52 @@ const init = () => {
               setTimeout(() => {
                 if (filterValue === 'all') {
                   renderGrid();
-                } else {
-                  // Get products for this budget tier from bundles object
-                  // Note: We need to match products from the bundle to the main product list
-                  // or just render the bundle items directly if they match format.
-                  // Let's use the bundle items directly as they are already curated.
-                  const bundleItems = bundles[filterValue];
-                  if (bundleItems) {
-                    // We need to render these specifically. 
-                    // renderGrid expects a filter function OR we can update it to accept an array.
-                    // Let's refactor renderGrid slightly to be more flexible or just pass a filter that finds them.
-
-                    // Better approach: Since 'bundles' items might be slightly different objects, 
-                    // let's exact match by title from the main 'products' array to ensure consistency.
-                    const targetTitles = bundleItems.map(b => b.title);
-                    const budgetFilter = (p) => targetTitles.includes(p.title);
-                    renderGrid('#grid-container', budgetFilter);
-                  }
+                } else if (filterValue === '500') {
+                  // Budget Tier
+                  const budgetIds = [11, 12, 13, 14, 2, 10];
+                  renderGrid('#grid-container', (p) => budgetIds.includes(p.id));
+                } else if (filterValue === '1500') {
+                  // Professional Tier
+                  const proIds = [1, 3, 5, 6, 8, 9];
+                  renderGrid('#grid-container', (p) => proIds.includes(p.id));
+                } else if (filterValue === '5000') {
+                  // Elite Tier
+                  const eliteIds = [1, 3, 5, 6, 7, 8, 10];
+                  renderGrid('#grid-container', (p) => eliteIds.includes(p.id));
                 }
-                // Fade back in
-                grid.style.opacity = '1';
-              }, 200); // Wait for fade out
-            }
+                // We need to render these specifically. 
+                // renderGrid expects a filter function OR we can update it to accept an array.
+                // Let's refactor renderGrid slightly to be more flexible or just pass a filter that finds them.
+
+                // Better approach: Since 'bundles' items might be slightly different objects, 
+                // let's exact match by title from the main 'products' array to ensure consistency.
+                const targetTitles = bundleItems.map(b => b.title);
+                const budgetFilter = (p) => targetTitles.includes(p.title);
+                renderGrid('#grid-container', budgetFilter);
+              }
+                }
+            // Fade back in
+            grid.style.opacity = '1';
+          }, 200); // Wait for fade out
+        }
           });
-        });
+    });
 
-        // Set "Show All" as active initially
-        const allBtn = document.querySelector('[data-filter="all"]');
-        if (allBtn) allBtn.classList.add('active');
-      }
-    }
-
-    // Final check to ensure app shows up even if parts failed
-    if (appContainer) {
-      setTimeout(() => appContainer.classList.add('loaded'), 50);
-    }
-  } catch (error) {
-    console.error('Initialization error:', error);
-    const appContainer = document.querySelector('#app');
-    if (appContainer) appContainer.classList.add('loaded'); // Force show so user isn't stuck on white screen
+    // Set "Show All" as active initially
+    const allBtn = document.querySelector('[data-filter="all"]');
+    if (allBtn) allBtn.classList.add('active');
   }
+    }
+
+// Final check to ensure app shows up even if parts failed
+if (appContainer) {
+  setTimeout(() => appContainer.classList.add('loaded'), 50);
+}
+  } catch (error) {
+  console.error('Initialization error:', error);
+  const appContainer = document.querySelector('#app');
+  if (appContainer) appContainer.classList.add('loaded'); // Force show so user isn't stuck on white screen
+}
 };
 
 // Global Catch-all to prevent silent failures
