@@ -85,7 +85,7 @@ const products = [
     id: 7,
     title: "BenQ ScreenBar Halo",
     category: "Light",
-    image: "https://www.mymac.com/wp-content/uploads/2022/11/out-of-box.jpg",
+    image: "https://techjioblog.com/wp-content/uploads/2023/09/BenQ-Screenbar-Halo-monitor-lightbar-cover.jpg",
     link: "https://amzn.to/3ZtHtQG",
     keyword: "Best light bar",
     platform: ["Mac", "Windows"]
