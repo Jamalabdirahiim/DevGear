@@ -117,7 +117,7 @@ const products = [
     id: 11,
     title: "Creative Pebble V3",
     category: "Audio",
-    image: "https://m.media-amazon.com/images/I/61VwMpv9DYL._AC_SL1500_.jpg", // Clean product shot on white/transparent
+    image: "https://m.media-amazon.com/images/I/51KID9lMB9L._AC_SL1500_.jpg", // Clean product shot on white/transparent
     link: "#", // User to provide
     badge: "Best Value",
     keyword: "Best budget speakers",
@@ -128,7 +128,7 @@ const products = [
     id: 12,
     title: "Logitech G305 Lightspeed",
     category: "Mouse",
-    image: "https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g305/g305-gallery-1.png?v=1", // Official transparent asset
+    image: "https://m.media-amazon.com/images/I/61K-A7U7uFL._AC_SL1500_.jpg", // Official transparent asset
     link: "#", // User to provide
     badge: "Top Seller",
     keyword: "Best budget mouse",
@@ -139,7 +139,7 @@ const products = [
     id: 13,
     title: "Keychron V1 QMK",
     category: "Keyboard",
-    image: "https://www.keychron.com/cdn/shop/products/Keychron-V1-custom-mechanical-keyboard-knob-frosted-black-translucent-carbon-black-non-transparent-switch-compatible-with-mac-windows-linux_1800x1800.jpg?v=1658133989", // High-res product shot
+    image: "https://m.media-amazon.com/images/I/61-v8f895NL._AC_SL1500_.jpg", // High-res product shot
     link: "#", // User to provide
     badge: "Entry Custom",
     keyword: "Best budget keyboard",
@@ -150,7 +150,7 @@ const products = [
     id: 14,
     title: "KOORUI 24N1A Monitor",
     category: "Monitor",
-    image: "https://m.media-amazon.com/images/I/71s7HbyO3JL._AC_SL1500_.jpg", // Clean front-facing shot
+    image: "https://m.media-amazon.com/images/I/71Eic979VRL._AC_SL1500_.jpg", // Clean front-facing shot
     link: "#", // User to provide
     badge: "Bestseller",
     keyword: "Best budget screen",
