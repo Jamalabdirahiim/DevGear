@@ -185,9 +185,8 @@ const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
   if (!heroContainer) return;
 
-  document.querySelector('#app').innerHTML = `
-    ${renderNavbar()}
-    <div class="hero-section" id="hero">
+  heroContainer.innerHTML = `
+    <div class="hero-section group">
       <img 
         src="/hero-mesh.png" 
         alt="Deep Dark Gradient Mesh" 
