@@ -134,6 +134,9 @@ const renderHero = () => {
         loading="lazy"
       />
       <div class="hero-overlay">
+        <div class="hero-top-trust">
+          <span class="secure-checkout-tag">✓ Secure Amazon Checkout</span>
+        </div>
         <h1 class="hero-h1">
           The Best <span class="text-transparent bg-clip-text bg-gradient-hero">Developer Desk Setup</span>.
         </h1>

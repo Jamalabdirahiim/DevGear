@@ -25,6 +25,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+svg {
+  display: block;
+  max-width: 100%;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -42,13 +47,22 @@ body {
   height: auto;
   min-height: 4.5rem;
   z-index: 1000;
-  background: rgba(9, 9, 11, 0.8);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar.sticky-header.scrolled {
+  background: rgba(9, 9, 11, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid #27272a;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
+  padding-block: 0.25rem;
+  /* Slight compression on scroll */
 }
 
 .nav-wrap {
@@ -79,7 +93,8 @@ body {
 
 .logo-version {
   font-size: 0.7rem;
-  color: var(--zinc-400);
+  color: #71717a;
+  /* Zinc 500 */
   font-weight: 600;
   font-family: 'Inter', sans-serif;
 }
@@ -110,6 +125,7 @@ body {
 .nav-pill:hover {
   color: var(--zinc-100);
   background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 .nav-pill.active {
@@ -222,16 +238,37 @@ body {
   background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.4) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem;
+  justify-content: flex-start;
+  /* Changed from flex-end */
+  padding: 6.5rem 1.5rem 1.5rem;
+  /* Added top padding to clear header */
   z-index: 10;
 }
 
 @media (min-width: 768px) {
   .hero-overlay {
-    padding: 3rem;
+    padding: 8rem 3rem 3rem;
+    /* Increased top padding for desktop */
     background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.6) 50%, transparent 100%);
   }
+}
+
+.hero-top-trust {
+  margin-bottom: 1.5rem;
+}
+
+.secure-checkout-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #71717a;
+  /* Zinc 500 */
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-block;
 }
 
 .hero-h1 {
@@ -846,7 +883,89 @@ body {
   color: var(--zinc-100);
 }
 
-/* --- Developer Guide Section (Footer Guide above Bento) --- */
+/* --- Developer Guide Section (Above Bento) --- */
+.guide-section {
+  padding: 4rem 1.5rem;
+  background-color: var(--bg-color);
+}
+
+.guide-footer-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+}
+
+.guide-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--accent-purple);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.guide-col h4 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--zinc-100);
+  margin-bottom: 1rem;
+}
+
+.guide-col p {
+  color: var(--zinc-400);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* --- Internal Links Section --- */
+.internal-links-section {
+  padding: 4rem 1.5rem;
+  background-color: var(--zinc-950);
+}
+
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.internal-link-card {
+  background-color: var(--zinc-900);
+  border: 1px solid var(--zinc-800);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.internal-link-card:hover {
+  border-color: var(--zinc-400);
+  transform: translateY(-4px);
+}
+
+.link-card-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--accent-purple);
+  margin-bottom: 1.25rem;
+}
+
+.internal-link-card h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--zinc-100);
+}
+
+.internal-link-card p {
+  font-size: 0.9rem;
+  color: var(--zinc-400);
+  margin: 0;
+}
 
 /* --- Focus Page Styles --- */
 .focus-hero {
