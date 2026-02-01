@@ -221,8 +221,7 @@ body {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  display: flex;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
   background-color: #000;
 }
 
