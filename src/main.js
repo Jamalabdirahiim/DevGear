@@ -15,7 +15,7 @@ const products = [
     title: "Apple Mac mini (M4)",
     category: "Computer",
     image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
-    link: "https://amzn.to/3LOdy2J",
+    link: "https://www.amazon.com/Apple-2024-Desktop-Computer-10%E2%80%91core/dp/B0DLBTPDCS?th=1&linkCode=ll1&tag=jamalshop0f-20&linkId=5246b69944c8dfc444889137a64a0cdc&language=en_US&ref_=as_li_ss_tl",
     badge: "Flagship",
     keyword: "Best mini PC",
     platform: ["Mac"],
