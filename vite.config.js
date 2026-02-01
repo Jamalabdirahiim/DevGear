@@ -8,7 +8,8 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 focus: resolve(__dirname, 'focus.html'),
-                checklist: resolve(__dirname, 'checklist.html')
+                checklist: resolve(__dirname, 'checklist.html'),
+                comparison: resolve(__dirname, 'comparison.html')
             }
         }
     }
