@@ -883,8 +883,19 @@ body {
 
 .footer-bento-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  grid-auto-rows: 1fr;
+  /* Force all rows to be equal height */
+  align-items: stretch;
+  /* Stretch tiles to fill grid cells */
+}
+
+@media (max-width: 768px) {
+  .footer-bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -918,10 +929,6 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  min-height: 220px;
-  /* Ensure consistent height */
-  height: 100%;
-  /* Fill grid cell */
 }
 
 .footer-tile:hover {
