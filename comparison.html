@@ -36,7 +36,33 @@
         }
     </style>
 
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/style.css?v=1.5.0">
+    <style>
+        /* CRITICAL FIX: Inline Grid Styles to prevent oversized cards if CSS fails to load/caches */
+        #comparison-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+            gap: 2rem !important;
+            width: 100% !important;
+        }
+
+        .bento-item {
+            display: flex;
+            flex-direction: column;
+            background-color: #18181b;
+            /* zinc-900 */
+            border: 1px solid #27272a;
+            /* zinc-800 */
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .bento-img-wrap {
+            width: 100%;
+            aspect-ratio: 16/10;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -164,7 +190,7 @@
             </div>
         </footer>
     </div>
-    <script type="module" src="/src/main.js?v=1.4.0"></script>
+    <script type="module" src="/src/main.js?v=1.5.0"></script>
 </body>
 
 </html>
