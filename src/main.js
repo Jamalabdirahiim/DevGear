@@ -181,20 +181,30 @@ const handleImageError = (img) => {
   img.style.opacity = '0.5';
 };
 
-/* Main App Render */
 const renderApp = () => {
-  document.querySelector('#app').innerHTML = `
+  const app = document.querySelector('#app');
+  if (!app) return;
+
+  app.innerHTML = `
     ${renderNavbar()}
-    ${renderHero()}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" style="position: relative; z-index: 20; background: var(--bg-color);">
-      ${renderFilters()}
+    <div id="hero-container"></div>
+    <div class="container mx-auto px-4 py-8">
+      <div id="grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </div>
+    ${renderFooter()}
   `;
+
+  renderHero();
+  renderGrid();
+  setupFilters(); // Re-attach event listeners after DOM update
 };
 
 const renderHero = () => {
-  return `
-    <div class="hero-section group" id="hero">
+  const heroContainer = document.querySelector('#hero-container');
+  if (!heroContainer) return;
+
+  heroContainer.innerHTML = `
+    <div class="hero-section group">
       <img 
         src="/hero-mesh.png" 
         alt="Deep Dark Gradient Mesh" 
@@ -208,7 +218,7 @@ const renderHero = () => {
           <span class="text-white">Desk Setup Today.</span>
         </h1>
         <p class="hero-subtitle">
-          I'm a 22yo developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
+          I’m a 22yo developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
         </p>
         <div class="hero-bottom-badge" style="margin-top: 1.5rem; margin-bottom: 2rem; display: none;">
           <span class="secure-checkout-tag" style="position: relative; top: 0;">✓ Secure Amazon Checkout</span>
