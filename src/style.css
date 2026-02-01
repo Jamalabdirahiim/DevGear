@@ -61,12 +61,13 @@ body {
 }
 
 .navbar.sticky-header.scrolled {
-  background: rgba(9, 9, 11, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(9, 9, 11, 0.85);
+  /* Darker, less transparent */
+  backdrop-filter: blur(8px);
+  /* Reduced blur radius */
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid #27272a;
   padding-block: 0.25rem;
-  /* Slight compression on scroll */
 }
 
 .nav-wrap {

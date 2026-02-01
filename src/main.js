@@ -181,12 +181,20 @@ const handleImageError = (img) => {
   img.style.opacity = '0.5';
 };
 
-const renderHero = () => {
-  const heroContainer = document.querySelector('#hero-container');
-  if (!heroContainer) return;
+/* Main App Render */
+const renderApp = () => {
+  document.querySelector('#app').innerHTML = `
+    ${renderNavbar()}
+    ${renderHero()}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" style="position: relative; z-index: 20; background: var(--bg-color);">
+      ${renderFilters()}
+    </div>
+  `;
+};
 
-  heroContainer.innerHTML = `
-    <div class="hero-section group">
+const renderHero = () => {
+  return `
+    <div class="hero-section group" id="hero">
       <img 
         src="/hero-mesh.png" 
         alt="Deep Dark Gradient Mesh" 
@@ -200,7 +208,7 @@ const renderHero = () => {
           <span class="text-white">Desk Setup Today.</span>
         </h1>
         <p class="hero-subtitle">
-          I’m a 22yo developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
+          I'm a 22yo developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
         </p>
         <div class="hero-bottom-badge" style="margin-top: 1.5rem; margin-bottom: 2rem; display: none;">
           <span class="secure-checkout-tag" style="position: relative; top: 0;">✓ Secure Amazon Checkout</span>
