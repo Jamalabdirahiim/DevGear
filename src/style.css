@@ -110,14 +110,11 @@ body {
 }
 
 .logo-v.hero-subtitle {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: #a1a1aa;
-  /* Zinc 400 */
-  line-height: 1.6;
+  line-height: 1.5;
   max-width: 800px;
-  /* Restrict width for readability */
   margin-bottom: 0;
-  /* Badge handles spacing */
   font-weight: 400;
 }
 
@@ -219,13 +216,12 @@ body {
 }
 
 /* Hero Section */
-.hero {
+.hero-section {
   position: relative;
   width: 100%;
-  min-height: 80vh;
-  /* Increased from 70vh to prevent cropping */
-  display: flex;
+  min-height: 100vh;
   overflow: hidden;
+  display: flex;
   margin-bottom: 4rem;
   background-color: #000;
 }
@@ -261,13 +257,9 @@ body {
   background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.4) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  /* Reset to flex-start so padding dictates position */
-  padding: 12rem 1.5rem 2rem;
-  /* Increased to 12rem to definitively clear navbar */
+  justify-content: center;
+  padding: 6rem 1.5rem 3rem;
   z-index: 10;
-  overflow-y: auto;
-  /* Allow scrolling if content is too tall on small screens */
 }
 
 /* Align content to site container even when background is full-width */
@@ -280,8 +272,7 @@ body {
 
 @media (min-width: 768px) {
   .hero-overlay {
-    padding: 12rem 3rem 3rem;
-    /* Adjusted for desktop aswell */
+    padding: 8rem 3rem 4rem;
     background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.6) 50%, transparent 100%);
   }
 }
@@ -307,23 +298,22 @@ body {
 }
 
 .hero-h1 {
-  font-size: 2.5rem;
-  /* Smaller for small mobile */
+  font-size: 2rem;
   font-weight: 900;
-  margin: 0 0 1rem 0;
-  line-height: 1.1;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.05;
   letter-spacing: -0.04em;
 }
 
 @media (min-width: 768px) {
   .hero-h1 {
-    font-size: 5rem;
+    font-size: 3.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-h1 {
-    font-size: 7rem;
+    font-size: 4.5rem;
   }
 }
 
