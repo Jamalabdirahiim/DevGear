@@ -11,6 +11,17 @@ const escapeHTML = (str) => {
 
 const products = [
   {
+    id: 10,
+    title: "Apple Mac mini (M4)",
+    category: "Computer",
+    image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
+    link: "https://amzn.to/3LOdy2J",
+    badge: "Flagship",
+    keyword: "Best mini PC",
+    platform: ["Mac"],
+    description: "The smallest, most powerful brain for your desk. With the M4 chip, this is the ultimate budget-to-pro transition for developers who need speed without the bulk."
+  },
+  {
     id: 1,
     title: "Dell UltraSharp 4K",
     category: "Monitor",
@@ -202,6 +213,13 @@ const bundles = {
   ],
   1500: [
     {
+      title: "Apple Mac mini (M4)",
+      link: "https://amzn.to/3LOdy2J",
+      category: "Computer",
+      image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
+      badge: "Flagship"
+    },
+    {
       title: "Dell UltraSharp 4K",
       link: "https://amzn.to/3NJ3HeX",
       category: "Monitor",
@@ -224,6 +242,13 @@ const bundles = {
     }
   ],
   5000: [
+    {
+      title: "Apple Mac mini (M4)",
+      link: "https://amzn.to/3LOdy2J",
+      category: "Computer",
+      image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
+      badge: "Flagship"
+    },
     {
       title: "Samsung Odyssey OLED G9",
       link: "https://amzn.to/3NJ3HeX",
