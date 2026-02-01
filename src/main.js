@@ -141,7 +141,7 @@ const renderHero = () => {
           The Best <span class="text-transparent bg-clip-text bg-gradient-hero">Developer Desk Setup</span>.
         </h1>
         <p class="hero-p">
-          Curated gear for focus and aesthetics. Compatible with Mac & Windows.
+          Stop guessing your gear. I’m a 22yo student developer building my career on these exact tools. Every item is verified for 2026 workflows, Mac/Windows compatibility, and long-term durability. Secure checkout via Amazon.
         </p>
         <div class="hero-trust">
           <span>✅ Verified for Mac & PC</span>
@@ -442,8 +442,62 @@ const handleScroll = () => {
 
 window.addEventListener('scroll', handleScroll);
 
+// Comparison Page Logic
+const comparisonLogic = () => {
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const gridContainer = document.querySelector('#comparison-grid');
+
+  if (!gridContainer) return; // Only run on comparison page
+
+  // Filter products by price logic (rough approximation based on ID/Titles)
+  const studentPicks = products.filter(p => !p.image.includes('dell') && !p.image.includes('mac') && !p.image.includes('caldigit')); // Budget logic
+  const proPicks = products.filter(p => p.image.includes('dell') || p.image.includes('mac') || p.image.includes('caldigit') || p.image.includes('sony'));
+
+  const renderComparisonGrid = (mode) => {
+    const items = mode === 'student' ? studentPicks : proPicks;
+    gridContainer.innerHTML = items.map(product => `
+      <a href="${product.link}" target="_blank" class="bento-item group" rel="noopener noreferrer">
+        <div class="bento-img-wrap">
+          <img src="${product.image}" alt="${product.title}" loading="lazy" />
+          ${product.badge ? `<span class="bento-badge">${product.badge}</span>` : ''}
+        </div>
+        <div class="bento-content">
+          <div class="bento-header">
+            <h3 class="bento-title">${product.title}</h3>
+            <span class="bento-category">${product.category}</span>
+          </div>
+          <div class="platform-tags">
+            ${product.platform.map(p => `<span class="platform-tag ${p.toLowerCase()}">${p}</span>`).join('')}
+          </div>
+          <p class="bento-description">${product.description || `The best ${product.category.toLowerCase()} for your setup.`}</p>
+          <div class="bento-footer">
+            <span class="keyword-label">#${product.keyword}</span>
+            <button class="amazon-btn">Check Price on Amazon ↗</button>
+          </div>
+        </div>
+      </a>
+    `).join('');
+  };
+
+  // Initial Render (Student Mode default)
+  renderComparisonGrid('student');
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active from all
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      // Add active to clicked
+      btn.classList.add('active');
+
+      const mode = btn.dataset.mode;
+      renderComparisonGrid(mode);
+    });
+  });
+};
+
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
   init();
   handleScroll(); // Check scroll position immediately
+  comparisonLogic(); // Run comparison logic if on that page
 });

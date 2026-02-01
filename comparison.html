@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student vs Pro | DevGear Comparison</title>
+    <meta name="description"
+        content="The $500 Student Grind vs The $5,000 Pro Workflow. See exactly what you get at every budget tier." />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Student vs Pro Setup | DevGear">
+    <meta property="og:description" content="The ultimate desk setup comparison. Budget vs Elite.">
+    <meta property="og:image" content="https://devgear.vercel.app/hero-mesh.png">
+
+    <!-- Security & Fonts -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https: ws: wss:; frame-ancestors 'self' https://*.pinterest.com;">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #ededed;
+        }
+
+        #app {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #app.loaded {
+            opacity: 1;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0LX9YRXDYL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-0LX9YRXDYL', { 'debug_mode': true });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar sticky-header">
+        <div class="container nav-wrap">
+            <div class="logo-group">
+                <a href="/" class="logo-link">
+                    <span class="logo-text">DevGear</span>
+                    <span class="logo-version">v1.2</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-pill">Home</a>
+                <a href="/focus" class="nav-pill">Focus</a>
+                <a href="/checklist" class="nav-pill">Checklist</a>
+                <a href="/comparison.html" class="nav-pill active">Compare</a>
+            </div>
+            <div class="nav-badge-pill">2026 EDITION</div>
+        </div>
+    </nav>
+
+    <div id="app">
+        <!-- Comparison Hero (Full Width) -->
+        <div id="comparison-hero-container">
+            <section class="comparison-hero">
+                <h1 class="comparison-h1">The Setup Showdown</h1>
+                <p class="comparison-subtitle">Two budgets. Two realities. Use the toggle below to shift the vibe.</p>
+
+                <!-- The Vibe Shift Toggle -->
+                <div class="toggle-container">
+                    <button class="toggle-btn active" data-mode="student">
+                        <span class="emoji">🎓</span> $500 Student
+                    </button>
+                    <div class="toggle-track"></div>
+                    <button class="toggle-btn" data-mode="pro">
+                        <span class="emoji">💼</span> $5,000 Pro
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <main class="container">
+
+            <!-- Dynamic Comparison Grid -->
+            <div id="comparison-grid" class="bento-grid"></div>
+
+            <!-- Back Link -->
+            <div class="back-link-container" style="margin-top: 4rem;">
+                <a href="/" class="back-link">← Back to All Gear</a>
+            </div>
+
+        </main>
+
+        <footer class="footer-bento-section">
+            <div class="container footer-bento-container">
+                <div class="footer-bento-grid">
+                    <div class="footer-tile founder-tile">
+                        <div class="tile-label">Built in Public</div>
+                        <p class="tile-content">DevGear is an independent project by a Somali university student. This
+                            site is
+                            supported by affiliate commissions, but my reviews are driven by code, not clicks. Thanks
+                            for supporting
+                            the journey.</p>
+                    </div>
+                    <div class="footer-tile security-tile">
+                        <div class="tile-label">100% Secure</div>
+                        <p class="tile-content">All orders are processed by Amazon. We never handle your payment info.
+                            Buy with
+                            total peace of mind.</p>
+                    </div>
+                    <div class="footer-tile legal-tile">
+                        <p class="footer-disclaimer">
+                            As an Amazon Associate, I earn from qualifying purchases. This site is independently
+                            curated.
+                        </p>
+                        <div class="footer-links">
+                            <a href="#" class="footer-link">Privacy Policy</a>
+                            <a href="#" class="footer-link">Terms of Service</a>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.7rem; color: var(--zinc-400);">© 2026 DevGear. All
+                            rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

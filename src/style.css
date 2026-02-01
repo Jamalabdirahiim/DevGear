@@ -802,6 +802,78 @@ body {
   border-color: var(--zinc-100);
 }
 
+/* --- Comparison Page Styles --- */
+.comparison-hero {
+  padding: 8rem 1.5rem 4rem;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15), transparent 70%);
+  border-bottom: 1px solid var(--zinc-800);
+}
+
+.comparison-h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #fff, #a1a1aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.comparison-subtitle {
+  font-size: 1.1rem;
+  color: var(--zinc-400);
+  margin-bottom: 3rem;
+}
+
+/* Vibe Shift Toggle */
+.toggle-container {
+  display: inline-flex;
+  align-items: center;
+  background: var(--zinc-900);
+  border: 1px solid var(--zinc-800);
+  border-radius: 9999px;
+  padding: 0.5rem;
+  position: relative;
+  gap: 1rem;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--zinc-400);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle-btn.active {
+  background: var(--zinc-800);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-btn[data-mode="student"].active {
+  background: #3b82f6;
+  /* Blue for student */
+  color: #fff;
+}
+
+.toggle-btn[data-mode="pro"].active {
+  background: #a855f7;
+  /* Purple for pro */
+  color: #fff;
+}
+
+.emoji {
+  font-size: 1.2rem;
+}
+
 /* --- Bento Footer Styles --- */
 .footer-bento-section {
   padding: 4rem 1.5rem;
