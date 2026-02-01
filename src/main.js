@@ -29,6 +29,7 @@ const products = [
     link: "https://amzn.to/3NJ3HeX",
     badge: "Editor's Choice",
     keyword: "Best 4K monitor",
+    description: "The gold standard for coding displays. Crisp text, perfect color accuracy, and built-in USB-C hub connectivity.",
     platform: ["Mac", "Windows"]
   },
   {
@@ -39,6 +40,7 @@ const products = [
     link: "https://amzn.to/4jVQ605",
     badge: "Viral Hit",
     keyword: "Viral desk gadget",
+    description: "More than just a speaker. It's a pixel art display, a mini-game console, and the ultimate retro desk accessory.",
     platform: ["Mac", "Windows"]
   },
   {
@@ -60,6 +62,7 @@ const products = [
     link: "https://amzn.to/4ra5PLd",
     badge: "Pro Choice",
     keyword: "Best power bank",
+    description: "Massive capacity that can charge a MacBook Pro repeatedly. The smart display lets you monitor input/output in real-time.",
     platform: ["Mac", "Windows"]
   },
   {
@@ -69,6 +72,7 @@ const products = [
     image: "https://www.caldigit.com/wp-content/uploads/2021/12/TS4_Thunderbolt-4-Dock_Laptop-Charging1000px_Version04.jpg",
     link: "https://amzn.to/4jTup0o",
     keyword: "Best Thunderbolt 4 dock",
+    description: "The King of Docks. 18 ports to connect everything from monitors to SD cards with a single Thunderbolt cable.",
     platform: ["Mac", "Windows"]
   },
   {
@@ -79,6 +83,7 @@ const products = [
     link: "https://amzn.to/4tdI86K",
     badge: "New Tech",
     keyword: "Best programming keyboard",
+    description: "Hall Effect magnetic switches allow for rapid trigger and adjustable actuation. The ultimate custom keyboard experience.",
     platform: ["Mac", "Windows"]
   },
   {
@@ -88,6 +93,7 @@ const products = [
     image: "https://techjioblog.com/wp-content/uploads/2023/09/BenQ-Screenbar-Halo-monitor-lightbar-cover.jpg",
     link: "https://amzn.to/3ZtHtQG",
     keyword: "Best light bar",
+    description: "Saves desk space and eliminates screen glare. The wireless controller and backlighting make it the premium choice.",
     platform: ["Mac", "Windows"]
   },
   {

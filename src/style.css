@@ -1533,4 +1533,110 @@ footer {
 
 .footer-link:hover {
   color: var(--text-color);
+
+  /* Comparison Page Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .bento-item {
+    position: relative;
+    background-color: var(--zinc-900);
+    border: 1px solid var(--zinc-800);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bento-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--zinc-600);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .bento-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+
+  .bento-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .bento-item:hover .bento-img {
+    transform: scale(1.05);
+  }
+
+  .bento-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .bento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .bento-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--zinc-400);
+    font-weight: 700;
+  }
+
+  .bento-badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--accent-purple);
+    color: white;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .bento-title {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--zinc-100);
+    font-weight: 800;
+  }
+
+  .bento-desc {
+    font-size: 0.9rem;
+    color: var(--zinc-400);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .keyword-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--zinc-300);
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--zinc-800);
+  }
+
+  .keyword-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-purple);
+  }
 }
