@@ -46,7 +46,8 @@ body {
   left: 0;
   right: 0;
   height: auto;
-  min-height: 4.5rem;
+  min-height: 3.5rem;
+  /* Reduced height */
   z-index: 1000;
   background: transparent;
   backdrop-filter: none;
@@ -55,6 +56,8 @@ body {
   display: flex;
   align-items: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 0;
+  /* Reduced padding */
 }
 
 .navbar.sticky-header.scrolled {
@@ -92,8 +95,8 @@ body {
   width: auto;
   display: block;
   object-fit: contain;
-  margin-right: -0.5rem;
-  /* Reduced overlap to move version text slightly right */
+  margin-right: -0.25rem;
+  /* Calculated adjustment to clear text overlap */
   margin-left: -1rem;
   /* Pull it left slightly to balance */
 }
