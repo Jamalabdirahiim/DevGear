@@ -247,9 +247,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 8rem 1.5rem 4rem;
-  /* Balanced padding to prevent cropping at bottom */
+  padding: 8rem 1.5rem 8rem;
+  /* Increased bottom padding significantly to prevent clipping */
   z-index: 10;
+  overflow-y: auto;
+  /* Allow scrolling if content is too tall on small screens */
 }
 
 /* Align content to site container even when background is full-width */
