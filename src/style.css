@@ -92,8 +92,8 @@ body {
   width: auto;
   display: block;
   object-fit: contain;
-  margin-right: -2.5rem;
-  /* Reduced overlap so it touches but doesn't cover */
+  margin-right: -1rem;
+  /* Reduced from -2.5rem to fix overlap */
   margin-left: -1rem;
   /* Pull it left slightly to balance */
 }
