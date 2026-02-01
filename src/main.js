@@ -25,7 +25,7 @@ const products = [
     id: 1,
     title: "Dell UltraSharp 4K",
     category: "Monitor",
-    image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-3.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=872&qlt=100,1&resMode=sharp2&size=872,804&chrss=full",
+    image: "https://i.dell.com/sites/csimages/Video_Imagery/all/ultrasharp-monitor-u3223qe-u2722qe-1280.jpg",
     link: "https://amzn.to/3NJ3HeX",
     badge: "Editor's Choice",
     keyword: "Best 4K monitor",
@@ -223,7 +223,7 @@ const bundles = {
       title: "Dell UltraSharp 4K",
       link: "https://amzn.to/3NJ3HeX",
       category: "Monitor",
-      image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-3.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=872&qlt=100,1&resMode=sharp2&size=872,804&chrss=full",
+      image: "https://i.dell.com/sites/csimages/Video_Imagery/all/ultrasharp-monitor-u3223qe-u2722qe-1280.jpg",
       badge: "Crisp Text"
     },
     {
