@@ -258,7 +258,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem 1.5rem 3rem;
+  padding: 5rem 1.5rem 2rem;
+  /* Reduced top padding to pull content UP slightly, but safe below navbar */
   z-index: 10;
 }
 
@@ -297,11 +298,19 @@ body {
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
+.bg-gradient-hero {
+  background-image: linear-gradient(to right, #c084fc, #db2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .hero-h1 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+  /* Reduced from 2rem */
   font-weight: 900;
-  margin: 0 0 0.75rem 0;
-  line-height: 1.05;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
   letter-spacing: -0.04em;
 }
 
@@ -313,7 +322,8 @@ body {
 
 @media (min-width: 1024px) {
   .hero-h1 {
-    font-size: 4.5rem;
+    font-size: 4rem;
+    /* Reduced from 4.5rem */
   }
 }
 
