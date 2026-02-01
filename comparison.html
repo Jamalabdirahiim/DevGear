@@ -5,20 +5,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student vs Pro | DevGear Comparison</title>
+    <title>DevGear Comparison | Student vs Pro vs Elite</title>
     <meta name="description"
-        content="The $500 Student Grind vs The $5,000 Pro Workflow. See exactly what you get at every budget tier." />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Student vs Pro Setup | DevGear">
-    <meta property="og:description" content="The ultimate desk setup comparison. Budget vs Elite.">
-    <meta property="og:image" content="https://devgear.vercel.app/hero-mesh.png">
-
-    <!-- Security & Fonts -->
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https: ws: wss:; frame-ancestors 'self' https://*.pinterest.com;">
-    <meta name="referrer" content="no-referrer-when-downgrade">
+        content="See exactly what you get at every budget tier. From the $500 starter kit to the $5,000 dream setup." />
 
     <style>
         body {
@@ -36,37 +25,11 @@
         }
     </style>
 
-    <link rel="stylesheet" href="/src/style.css?v=1.5.0">
-    <style>
-        /* CRITICAL FIX: Inline Grid Styles to prevent oversized cards if CSS fails to load/caches */
-        #comparison-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
-            gap: 2rem !important;
-            width: 100% !important;
-        }
-
-        .bento-item {
-            display: flex;
-            flex-direction: column;
-            background-color: #18181b;
-            /* zinc-900 */
-            border: 1px solid #27272a;
-            /* zinc-800 */
-            border-radius: 1rem;
-            overflow: hidden;
-            height: 100%;
-        }
-
-        .bento-img-wrap {
-            width: 100%;
-            aspect-ratio: 16/10;
-        }
-    </style>
+    <link rel="stylesheet" href="/src/style.css?v=2.0.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Analytics -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0LX9YRXDYL"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -96,44 +59,76 @@
     </nav>
 
     <div id="app">
-        <!-- Comparison Hero (Full Width) -->
-        <div id="comparison-hero-container">
-            <section class="comparison-hero">
-                <h1 class="comparison-h1">The Setup Showdown</h1>
-                <p class="comparison-subtitle">Two budgets. Two realities. Use the toggle below to shift the vibe.</p>
+        <!-- Hero Section -->
+        <div class="hero" style="min-height: 50vh;">
+            <div class="hero-overlay" style="padding-top: 6rem; align-items: center; text-align: center;">
+                <span class="hero-top-trust">
+                    <span class="secure-checkout-tag">BUDGET WARS</span>
+                </span>
+                <h1 class="hero-h1">
+                    <span class="text-transparent bg-clip-text bg-gradient-hero">The Setup Showdown</span>
+                </h1>
+                <p class="hero-subtitle" style="max-width: 600px; margin: 0 auto 2rem;">
+                    See exactly what your money buys. Toggle between the gritty student starter pack and the ultimate
+                    dream desk.
+                </p>
 
-                <!-- The Vibe Shift Toggle -->
-                <div class="toggle-container">
-                    <button class="toggle-btn active" data-mode="student">
-                        <span class="emoji">🎓</span> $500 Student
+                <!-- Premium Segmented Control -->
+                <div class="segmented-control">
+                    <button class="segment-btn active" data-mode="student">
+                        <span class="segment-icon">🎓</span> $500 Student
                     </button>
-                    <div class="toggle-track"></div>
-                    <button class="toggle-btn" data-mode="pro">
-                        <span class="emoji">💼</span> $1,500 Pro
+                    <button class="segment-btn" data-mode="pro">
+                        <span class="segment-icon">💼</span> $1,500 Pro
                     </button>
-                    <button class="toggle-btn" data-mode="elite">
-                        <span class="emoji">🚀</span> $5,000 Elite
+                    <button class="segment-btn" data-mode="elite">
+                        <span class="segment-icon">🚀</span> $5,000 Elite
                     </button>
+                    <div class="segment-glider"></div>
                 </div>
-            </section>
+            </div>
+            <img src="/hero-mesh.png" alt="Abstract Background" class="hero-img" style="opacity: 0.4;">
         </div>
 
         <main class="container">
-
-            <!-- Dynamic Comparison Grid -->
-            <div id="comparison-grid" class="bento-grid"></div>
-
-            <!-- Back Link -->
-            <div class="back-link-container" style="margin-top: 4rem;">
-                <a href="/" class="back-link">← Back to All Gear</a>
+            <!-- Grid Container - Using standard grid classes -->
+            <div id="comparison-grid" class="bento-grid">
+                <!-- Content injected by main.js -->
             </div>
 
+            <!-- Internal Links Section -->
+            <section class="internal-links-section">
+                <div class="internal-links-container">
+                    <h3>Explore More</h3>
+                    <div class="internal-links-grid">
+                        <a href="/" class="internal-link-card">
+                            <svg class="link-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <h4>All Gear</h4>
+                            <p>Browse the full catalog of verified developer hardware.</p>
+                        </a>
+                        <a href="/checklist" class="internal-link-card">
+                            <svg class="link-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 11l3 3L22 4"></path>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                            <h4>Setup Checklist</h4>
+                            <p>Ensure you haven't missed a single essential.</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer class="bento-footer">
             <div class="container">
                 <div class="footer-grid">
-
                     <!-- Column 1: Brand & Nav -->
                     <div class="footer-card brand-card">
                         <div class="footer-brand">
@@ -162,24 +157,24 @@
                         </div>
                     </div>
 
-                    <!-- Column 3: Security & Trust -->
+                    <!-- Column 3: Security Trust -->
                     <div class="footer-card security-card">
-                        <div class="card-label">100% Secure</div>
-                        <p class="security-text">
-                            All orders are processed securely by Amazon. We never handle your payment info. Buy with
-                            total peace of mind.
-                        </p>
-                        <div class="secure-badge">
-                            <span>🔒 SSL Encrypted</span>
-                            <span>✓ Amazon Verified</span>
+                        <div class="card-label">Verified Secure</div>
+                        <div class="security-badges">
+                            <div class="security-badge">
+                                <span class="badge-icon">🔒</span>
+                                <span class="badge-text">SSL Encrypted</span>
+                            </div>
+                            <div class="security-badge">
+                                <span class="badge-icon">🛡️</span>
+                                <span class="badge-text">Privacy First</span>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
-                <!-- Bottom Bar -->
                 <div class="footer-bottom">
-                    <p class="copyright">© 2026 DevGear. Independently Curated.</p>
+                    <div class="copyright">© 2026 DevGear. All rights reserved.</div>
                     <div class="legal-links">
                         <span class="affiliate-notice">As an Amazon Associate, I earn from qualifying purchases.</span>
                         <span class="separator">|</span>
@@ -190,7 +185,7 @@
             </div>
         </footer>
     </div>
-    <script type="module" src="/src/main.js?v=1.5.0"></script>
+    <script type="module" src="/src/main.js?v=2.0.0"></script>
 </body>
 
 </html>

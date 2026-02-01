@@ -1534,7 +1534,7 @@ footer {
 .footer-link:hover {
   color: var(--text-color);
 
-  /* Comparison Page Grid */
+  /* Global Bento Grid System */
   .bento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1639,4 +1639,64 @@ footer {
     height: 16px;
     color: var(--accent-purple);
   }
-}
+
+  /* Premium Segmented Control (iOS Style Toggle) */
+  .segmented-control {
+    display: inline-flex;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0.3rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    isolation: isolate;
+    margin-bottom: 2rem;
+  }
+
+  .segment-btn {
+    background: transparent;
+    border: none;
+    color: var(--zinc-400);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 9999px;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .segment-btn:hover {
+    color: var(--zinc-100);
+  }
+
+  .segment-btn.active {
+    color: #fff;
+  }
+
+  /* Javascript will move this glider */
+  .segment-btn.active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--accent-purple);
+    border-radius: 9999px;
+    z-index: -1;
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popIn {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

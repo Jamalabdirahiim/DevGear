@@ -524,64 +524,56 @@ const comparisonLogic = () => {
       return `
       <a href="${product.link}" target="_blank" class="bento-item group" rel="noopener noreferrer">
         <div class="bento-img-wrap">
-          <img 
-            src="${product.image}" 
-            alt="${product.title}" 
-            class="bento-img" 
-            loading="lazy"
-          />
-          <!-- Platform Tags (Over Image) -->
-          <div class="platform-tags">
-            ${product.platform.map(p => `<span class="platform-tag">${p}</span>`).join('')}
-          </div>
+          <img src="${product.image}" loading="lazy" alt="${escapeHTML(product.title)}" class="bento-img">
+          ${product.badge ? `<div class="badge-overlay category-badge">${escapeHTML(product.badge)}</div>` : ''}
         </div>
-        
         <div class="bento-content">
           <div class="bento-header">
-            <span class="bento-category">${product.category}</span>
-            ${product.badge ? `<span class="bento-badge">${product.badge}</span>` : ''}
+            <span class="bento-category">${escapeHTML(product.category || 'Gear')}</span>
           </div>
+          <h3 class="bento-title">${escapeHTML(product.title)}</h3>
+          <p class="bento-desc">${escapeHTML(product.description || 'Verified for daily use.')}</p>
           
-          <h3 class="bento-title">${product.title}</h3>
-          <p class="bento-desc">${product.description}</p>
-          
-          <!-- Keyword Label -->
           <div class="keyword-label">
-            <svg class="keyword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            <svg class="keyword-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
-            <span>${product.keyword}</span>
-          </div>
-
-          <div class="verification-badge">
-            ✓ ${verifiedText}
-          </div>
-
-          <div class="bento-footer">
-            <button class="check-price-btn">
-              Check Price on Amazon
-            </button>
+            <span>${verifiedText}</span>
           </div>
         </div>
       </a>
-    `;
+      `;
     }).join('');
   };
 
-  // Initial Render (Student Mode default)
-  renderComparisonGrid('student');
+  // Event Listeners for Comparison Page
+  const comparisonButtons = document.querySelectorAll('.segment-btn');
+  if (comparisonButtons.length > 0) {
+    // Initial Render (Default: Student)
+    renderComparisonGrid('student');
 
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active from all
-      toggleBtns.forEach(b => b.classList.remove('active'));
-      // Add active to clicked
-      btn.classList.add('active');
+    comparisonButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Visual Update
+        comparisonButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-      const mode = btn.dataset.mode;
-      renderComparisonGrid(mode);
+        // Logic Update
+        const mode = btn.dataset.mode;
+        const grid = document.querySelector('#comparison-grid');
+
+        // Simple Fade Transition
+        if (grid) {
+          grid.style.opacity = '0';
+          setTimeout(() => {
+            renderComparisonGrid(mode);
+            grid.style.opacity = '1';
+          }, 200);
+        }
+      });
     });
-  });
+  }
 };
 
 // Initialize on load
