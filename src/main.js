@@ -179,7 +179,30 @@ const handleImageError = (img) => {
   img.onerror = null; // Prevent infinite loop
   img.src = 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop'; // Technical dark placeholder
   img.style.opacity = '0.5';
+  img.style.opacity = '0.5';
 };
+
+const renderNavbar = () => `
+  <nav class="navbar sticky-header">
+    <div class="nav-wrap">
+      <a href="/" class="logo-link">
+        <img src="/logo-transparent.png" alt="DevGear Logo" class="logo-img" />
+        <span class="logo-version">v1.2</span>
+      </a>
+      <div class="nav-links">
+        <a href="#hero" class="nav-pill active">Home</a>
+        <a href="#focus-grid" class="nav-pill">Focus</a>
+        <a href="#checklist-grid" class="nav-pill">Checklist</a>
+      </div>
+      <div class="filter-pills-container" style="display: flex; gap: 0.5rem; margin-left: auto; padding-left: 2rem;">
+         <button class="nav-badge-pill filter-pill" data-filter="all">Show All</button>
+         <button class="nav-badge-pill filter-pill" data-filter="500">Budget ($500)</button>
+         <button class="nav-badge-pill filter-pill" data-filter="1500">Professional ($1,500)</button>
+         <button class="nav-badge-pill filter-pill" data-filter="5000">Elite ($5,000)</button>
+      </div>
+    </div>
+  </nav>
+`;
 
 const renderApp = () => {
   const app = document.querySelector('#app');
