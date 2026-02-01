@@ -429,8 +429,21 @@ window.addEventListener('error', (event) => {
   }
 });
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
+// Header Scroll Effect
+const handleScroll = () => {
+  const nav = document.querySelector('.navbar');
+  if (!nav) return;
+  if (window.scrollY > 20) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+};
+
+window.addEventListener('scroll', handleScroll);
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
   init();
-}
+  handleScroll(); // Check scroll position immediately
+});

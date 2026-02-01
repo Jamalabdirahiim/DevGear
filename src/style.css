@@ -36,8 +36,7 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
-  padding-top: 5rem;
-  /* ~80px to clear the sticky header */
+  /* padding-top removed to allow header transparency over hero */
 }
 
 /* Sticky Header with Glassmorphism */
@@ -202,8 +201,9 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  height: 70vh;
-  min-height: 500px;
+  min-height: 80vh;
+  /* Increased from 70vh to prevent cropping */
+  display: flex;
   overflow: hidden;
   margin-bottom: 4rem;
   background-color: #000;
@@ -241,7 +241,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 6.5rem 1.5rem 1.5rem;
+  padding: 8rem 1.5rem 4rem;
+  /* Balanced padding to prevent cropping at bottom */
   z-index: 10;
 }
 
