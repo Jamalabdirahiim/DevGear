@@ -179,7 +179,6 @@ const handleImageError = (img) => {
   img.onerror = null; // Prevent infinite loop
   img.src = 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop'; // Technical dark placeholder
   img.style.opacity = '0.5';
-  img.style.opacity = '0.5';
 };
 
 const renderNavbar = () => `
@@ -458,71 +457,74 @@ const initCalculator = () => {
   renderBundle(1500);
 };
 
+const renderFooter = () => `
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 DevGear. Built for developers.</p>
+    </div>
+  </footer>
+`;
+
+const setupFilters = () => {
+  const filterPills = document.querySelectorAll('.filter-pill');
+  if (filterPills.length > 0) {
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        // 1. Visual state
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        // 2. Filter logic
+        const filterValue = pill.dataset.filter;
+
+        // Add fade-out effect for smooth transition
+        const grid = document.querySelector('#grid-container');
+        if (grid) {
+          grid.style.opacity = '0';
+
+          setTimeout(() => {
+            if (filterValue === 'all') {
+              renderGrid();
+            } else if (filterValue === '500') {
+              const budgetIds = [12, 13, 14, 11, 2, 9];
+              renderGrid('#grid-container', (p) => budgetIds.includes(p.id));
+            } else if (filterValue === '1500') {
+              const proIds = [8, 6, 1, 3, 9, 7];
+              renderGrid('#grid-container', (p) => proIds.includes(p.id));
+            } else if (filterValue === '5000') {
+              const eliteIds = [10, 1, 3, 5, 6, 8, 7];
+              renderGrid('#grid-container', (p) => eliteIds.includes(p.id));
+            }
+            // Fade back in
+            grid.style.opacity = '1';
+          }, 200);
+        }
+      });
+    });
+
+    // Set "Show All" as active initially
+    const allBtn = document.querySelector('[data-filter="all"]');
+    if (allBtn) allBtn.classList.add('active');
+  }
+};
+
 const init = () => {
   try {
-    const heroContainer = document.querySelector('#hero-container');
-    const gridContainer = document.querySelector('#grid-container');
     const focusGrid = document.querySelector('#focus-grid');
     const checklistGrid = document.querySelector('#checklist-grid');
     const appContainer = document.querySelector('#app');
 
     // Detect page and render accordingly
     if (focusGrid) {
-      // Focus page: ONLY products that enhance focus (Audio for noise cancellation, Monitor for visual clarity, Light for eye comfort)
       const focusFilter = (p) => ['Monitor', 'Audio', 'Light'].includes(p.category);
       renderGrid('#focus-grid', focusFilter);
     } else if (checklistGrid) {
-      // Checklist page: render all products as "Recommended Picks"
       renderGrid('#checklist-grid');
     } else {
-      // Homepage: render full app structure
-      renderApp();
-
-      // Smart Gear Filter Logic (now that DOM is built)
-      const filterPills = document.querySelectorAll('.filter-pill');
-      if (filterPills.length > 0) {
-        filterPills.forEach(pill => {
-          pill.addEventListener('click', () => {
-            // 1. Visual state
-            filterPills.forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-
-            // 2. Filter logic
-            const filterValue = pill.dataset.filter;
-
-            // Add fade-out effect for smooth transition
-            const grid = document.querySelector('#grid-container');
-            if (grid) {
-              grid.style.opacity = '0';
-
-              setTimeout(() => {
-                if (filterValue === 'all') {
-                  renderGrid();
-                } else if (filterValue === '500') {
-                  // Budget Tier (~$500): G305 mouse, V1 keyboard, KOORUI monitor, Pebble speakers, Divoom, SIHOO chair
-                  const budgetIds = [12, 13, 14, 11, 2, 9]; // IDs: 12=G305, 13=V1, 14=KOORUI, 11=Pebble, 2=Divoom, 9=SIHOO
-                  renderGrid('#grid-container', (p) => budgetIds.includes(p.id));
-                } else if (filterValue === '1500') {
-                  // Professional Tier (~$1,500): MX Master, Q1 HE, Dell 4K, Sony XM5, SIHOO chair, ScreenBar
-                  const proIds = [8, 6, 1, 3, 9, 7]; // IDs: 8=MX Master 3S, 6=Q1 HE, 1=Dell 4K, 3=Sony XM5, 9=SIHOO, 7=ScreenBar
-                  renderGrid('#grid-container', (p) => proIds.includes(p.id));
-                } else if (filterValue === '5000') {
-                  // Elite Tier (~$5,000): Mac mini, Dell 4K, Sony XM5, CalDigit TS4, Q1 HE, MX Master, ScreenBar
-                  const eliteIds = [10, 1, 3, 5, 6, 8, 7]; // IDs: 10=Mac mini, 1=Dell 4K, 3=Sony XM5, 5=CalDigit, 6=Q1 HE, 8=MX Master, 7=ScreenBar
-                  renderGrid('#grid-container', (p) => eliteIds.includes(p.id));
-                }
-
-                // Fade back in
-                grid.style.opacity = '1';
-              }, 200);
-            }
-          });
-        });
-
-        // Set "Show All" as active initially
-        const allBtn = document.querySelector('[data-filter="all"]');
-        if (allBtn) allBtn.classList.add('active');
-      }
+      // Homepage: containers already exist in HTML, just populate them
+      renderHero();
+      renderGrid();
+      setupFilters();
     }
 
     // Final check to ensure app shows up even if parts failed
@@ -532,7 +534,7 @@ const init = () => {
   } catch (error) {
     console.error('Initialization error:', error);
     const appContainer = document.querySelector('#app');
-    if (appContainer) appContainer.classList.add('loaded'); // Force show so user isn't stuck on white screen
+    if (appContainer) appContainer.classList.add('loaded');
   }
 };
 
