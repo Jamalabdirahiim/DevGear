@@ -81,19 +81,21 @@ body {
   text-decoration: none;
   display: flex;
   align-items: center;
-  /* Changed from baseline to fix diagonal misalignment */
   gap: 0;
-  /* Removed gap to allow negative margin to work */
+  overflow: visible;
+  /* Ensure huge logo doesn't get clipped if it exceeds bounds */
 }
 
 .logo-img {
-  height: 8rem;
-  /* Massive size increase to overcome internal image padding */
+  height: 12rem;
+  /* Extreme size to compensate for whitespace */
   width: auto;
   display: block;
   object-fit: contain;
-  margin-right: -1.5rem;
-  /* Pull the version text closer */
+  margin-right: -4rem;
+  /* Aggressive overlap to touch the version tag */
+  margin-left: -1rem;
+  /* Pull it left slightly to balance */
 }
 
 .logo-version {
