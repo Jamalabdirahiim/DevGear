@@ -390,8 +390,8 @@ const init = () => {
 
     // Detect page and render accordingly
     if (focusGrid) {
-      // Focus page: render only focus-related products
-      const focusFilter = (p) => ['Monitor', 'Audio', 'Keyboard', 'Light', 'Dock'].includes(p.category);
+      // Focus page: ONLY products that enhance focus (Audio for noise cancellation, Monitor for visual clarity, Light for eye comfort)
+      const focusFilter = (p) => ['Monitor', 'Audio', 'Light'].includes(p.category);
       renderGrid('#focus-grid', focusFilter);
     } else if (checklistGrid) {
       // Checklist page: render all products as "Recommended Picks"
@@ -422,16 +422,16 @@ const init = () => {
                 if (filterValue === 'all') {
                   renderGrid();
                 } else if (filterValue === '500') {
-                  // Budget Tier
-                  const budgetIds = [11, 12, 13, 14, 2, 10];
+                  // Budget Tier (~$500): G305 mouse, V1 keyboard, KOORUI monitor, Pebble speakers, Divoom, SIHOO chair
+                  const budgetIds = [12, 13, 14, 11, 2, 9]; // IDs: 12=G305, 13=V1, 14=KOORUI, 11=Pebble, 2=Divoom, 9=SIHOO
                   renderGrid('#grid-container', (p) => budgetIds.includes(p.id));
                 } else if (filterValue === '1500') {
-                  // Professional Tier
-                  const proIds = [1, 3, 5, 6, 8, 9];
+                  // Professional Tier (~$1,500): MX Master, Q1 HE, Dell 4K, Sony XM5, SIHOO chair, ScreenBar
+                  const proIds = [8, 6, 1, 3, 9, 7]; // IDs: 8=MX Master 3S, 6=Q1 HE, 1=Dell 4K, 3=Sony XM5, 9=SIHOO, 7=ScreenBar
                   renderGrid('#grid-container', (p) => proIds.includes(p.id));
                 } else if (filterValue === '5000') {
-                  // Elite Tier
-                  const eliteIds = [1, 3, 5, 6, 7, 8, 10];
+                  // Elite Tier (~$5,000): Mac mini, Dell 4K, Sony XM5, CalDigit TS4, Q1 HE, MX Master, ScreenBar
+                  const eliteIds = [10, 1, 3, 5, 6, 8, 7]; // IDs: 10=Mac mini, 1=Dell 4K, 3=Sony XM5, 5=CalDigit, 6=Q1 HE, 8=MX Master, 7=ScreenBar
                   renderGrid('#grid-container', (p) => eliteIds.includes(p.id));
                 }
 
@@ -493,17 +493,17 @@ const comparisonLogic = () => {
   // Filter products by price logic (rough approximation based on ID/Titles)
   const renderComparisonGrid = (mode) => {
     switch (mode) {
-      case 'student': // Renamed from 'budget' to 'student' for consistency with toggle buttons
-        filteredPicks = products.filter(p => [11, 12, 13, 14, 2, 10].includes(p.id)); // Explicit Budget List: Pebble, G305, V1, KOORUI, Divoom, Mac mini
+      case 'student': // Budget tier (~$500)
+        filteredPicks = products.filter(p => [12, 13, 14, 11, 2, 9].includes(p.id)); // G305, V1, KOORUI, Pebble, Divoom, SIHOO
         break;
-      case 'pro': // Renamed from 'professional' for consistency with toggle buttons
-        filteredPicks = products.filter(p => [1, 3, 5, 6, 8, 9].includes(p.id)); // Core Pro Setup (Updated IDs based on instruction's 'professional' list)
+      case 'pro': // Professional tier (~$1,500)
+        filteredPicks = products.filter(p => [8, 6, 1, 3, 9, 7].includes(p.id)); // MX Master, Q1 HE, Dell 4K, Sony XM5, SIHOO, ScreenBar
         break;
-      case 'elite': // Added 'elite' case as per instruction's snippet
-        filteredPicks = products.filter(p => [1, 3, 5, 6, 7, 8, 10].includes(p.id)); // Elite / Dream Setup
+      case 'elite': // Elite tier (~$5,000)
+        filteredPicks = products.filter(p => [10, 1, 3, 5, 6, 8, 7].includes(p.id)); // Mac mini, Dell 4K, Sony XM5, CalDigit, Q1 HE, MX Master, ScreenBar
         break;
       default:
-        filteredPicks = products.filter(p => [11, 12, 13, 14, 2, 10].includes(p.id)); // Default to student picks
+        filteredPicks = products.filter(p => [12, 13, 14, 11, 2, 9].includes(p.id)); // Default to student picks
     }
 
     const items = filteredPicks; // Use the dynamically filtered picks
