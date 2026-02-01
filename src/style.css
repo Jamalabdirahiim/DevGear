@@ -910,11 +910,18 @@ body {
 }
 
 .footer-tile {
-  background-color: var(--zinc-900);
+  background: var(--zinc-900);
   border: 1px solid var(--zinc-800);
-  border-radius: 1rem;
+  border-radius: 12px;
   padding: 2rem;
-  transition: border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 220px;
+  /* Ensure consistent height */
+  height: 100%;
+  /* Fill grid cell */
 }
 
 .footer-tile:hover {
