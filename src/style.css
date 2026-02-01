@@ -106,6 +106,18 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.logo-v.hero-subtitle {
+  font-size: 1.1rem;
+  color: #a1a1aa;
+  /* Zinc 400 */
+  line-height: 1.6;
+  max-width: 800px;
+  /* Restrict width for readability */
+  margin-bottom: 0;
+  /* Badge handles spacing */
+  font-weight: 400;
+}
+
 /* Navigation Pills */
 .nav-links {
   display: none;

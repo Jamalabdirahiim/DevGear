@@ -190,11 +190,10 @@ const renderHero = () => {
           <span class="text-white">Desk Setup Today.</span>
         </h1>
         <p class="hero-subtitle">
-          I'm a 22yo student developer building this site in public. I've simplified the search for you—instead of scrolling for hours, I've curated the ultimate development and focus tools so you can get straight to deep work.
+          I’m a 22yo Somali developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
         </p>
-        <div class="hero-bottom-badge" style="margin-top: 1.5rem; margin-bottom: 2rem; display: none;">
-          <!-- Badge removed temporarily -->
-          <span class="secure-checkout-tag">✓ Secure Amazon Checkout</span>
+        <div class="hero-bottom-badge" style="margin-top: 1.5rem; margin-bottom: 2rem; display: inline-block;">
+          <span class="secure-checkout-tag" style="position: relative; top: 0;">✓ Secure Amazon Checkout</span>
         </div>
         <div class="hero-trust">
           <span>✅ Verified for Mac & PC</span>
