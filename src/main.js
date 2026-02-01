@@ -45,7 +45,7 @@ const products = [
     id: 3,
     title: "Sony WH-1000XM5",
     category: "Audio",
-    image: "https://cdn.mos.cms.futurecdn.net/wKD3wkz4zg8ZY6iLUWjkeN.jpg",
+    image: "https://highxtar.com/wp-content/uploads/2023/06/IMG_5175.jpg",
     link: "https://amzn.to/4pVypyY",
     badge: "Deep Work",
     keyword: "Best focus headphones",
@@ -56,7 +56,7 @@ const products = [
     id: 4,
     title: "Anker Prime 27k",
     category: "Power",
-    image: "https://cdn.shopify.com/s/files/1/0493/9834/9974/files/Rectangle1_885945a5-b5d8-439f-bc99-54bf72715ff4_1600x.png?v=1762766510",
+    image: "https://pccircle.com/wp-content/uploads/2024/04/713YBqjTEfL._AC_SL1500_.jpg",
     link: "https://amzn.to/4ra5PLd",
     badge: "Pro Choice",
     keyword: "Best power bank",
@@ -237,7 +237,7 @@ const bundles = {
       title: "Sony WH-1000XM5",
       link: "https://amzn.to/4pVypyY",
       category: "Audio",
-      image: "https://cdn.mos.cms.futurecdn.net/wKD3wkz4zg8ZY6iLUWjkeN.jpg",
+      image: "https://highxtar.com/wp-content/uploads/2023/06/IMG_5175.jpg",
       badge: "Silence"
     }
   ],
