@@ -437,27 +437,26 @@ const init = () => {
 
                 // Fade back in
                 grid.style.opacity = '1';
-              }, 200); // Wait for fade out
+              }, 200);
             }
           });
         });
-      });
 
-      // Set "Show All" as active initially
-      const allBtn = document.querySelector('[data-filter="all"]');
-      if (allBtn) allBtn.classList.add('active');
+        // Set "Show All" as active initially
+        const allBtn = document.querySelector('[data-filter="all"]');
+        if (allBtn) allBtn.classList.add('active');
+      }
     }
-  }
 
-// Final check to ensure app shows up even if parts failed
-if (appContainer) {
-    setTimeout(() => appContainer.classList.add('loaded'), 50);
+    // Final check to ensure app shows up even if parts failed
+    if (appContainer) {
+      setTimeout(() => appContainer.classList.add('loaded'), 50);
+    }
+  } catch (error) {
+    console.error('Initialization error:', error);
+    const appContainer = document.querySelector('#app');
+    if (appContainer) appContainer.classList.add('loaded'); // Force show so user isn't stuck on white screen
   }
-} catch (error) {
-  console.error('Initialization error:', error);
-  const appContainer = document.querySelector('#app');
-  if (appContainer) appContainer.classList.add('loaded'); // Force show so user isn't stuck on white screen
-}
 };
 
 // Global Catch-all to prevent silent failures
