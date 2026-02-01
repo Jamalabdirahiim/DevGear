@@ -139,7 +139,7 @@ const products = [
     id: 13,
     title: "Keychron V1 QMK",
     category: "Keyboard",
-    image: "https://m.media-amazon.com/images/I/61-v8f895NL._AC_SL1500_.jpg", // High-res product shot
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9MayumOxh9hLo_ZmJXY4Iqn5jYHLjTXIBVg&s", // User provided
     link: "#", // User to provide
     badge: "Entry Custom",
     keyword: "Best budget keyboard",
@@ -150,7 +150,7 @@ const products = [
     id: 14,
     title: "KOORUI 24N1A Monitor",
     category: "Monitor",
-    image: "https://m.media-amazon.com/images/I/71Eic979VRL._AC_SL1500_.jpg", // Clean front-facing shot
+    image: "https://m.media-amazon.com/images/I/713jvNbPrYL.jpg", // User provided
     link: "#", // User to provide
     badge: "Bestseller",
     keyword: "Best budget screen",
