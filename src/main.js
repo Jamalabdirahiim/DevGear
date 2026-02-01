@@ -511,28 +511,59 @@ const comparisonLogic = () => {
     }
 
     const items = filteredPicks; // Use the dynamically filtered picks
-    gridContainer.innerHTML = items.map(product => `
+    gridContainer.innerHTML = items.map(product => {    // Dynamic Verification Badge
+      const isMac = product.platform.includes("Mac");
+      const isWin = product.platform.includes("Windows");
+      let verifiedText = "Verified";
+      if (isMac && isWin) verifiedText = "Mac & Windows Verified";
+      else if (isMac) verifiedText = "Mac Verified";
+      else if (isWin) verifiedText = "Windows Verified";
+
+      return `
       <a href="${product.link}" target="_blank" class="bento-item group" rel="noopener noreferrer">
         <div class="bento-img-wrap">
-          <img src="${product.image}" alt="${product.title}" loading="lazy" />
-          ${product.badge ? `<span class="bento-badge">${product.badge}</span>` : ''}
+          <img 
+            src="${product.image}" 
+            alt="${product.title}" 
+            class="bento-img" 
+            loading="lazy"
+          />
+          <!-- Platform Tags (Over Image) -->
+          <div class="platform-tags">
+            ${product.platform.map(p => `<span class="platform-tag">${p}</span>`).join('')}
+          </div>
         </div>
+        
         <div class="bento-content">
           <div class="bento-header">
-            <h3 class="bento-title">${product.title}</h3>
             <span class="bento-category">${product.category}</span>
+            ${product.badge ? `<span class="bento-badge">${product.badge}</span>` : ''}
           </div>
-          <div class="platform-tags">
-            ${product.platform.map(p => `<span class="platform-tag ${p.toLowerCase()}">${p}</span>`).join('')}
+          
+          <h3 class="bento-title">${product.title}</h3>
+          <p class="bento-desc">${product.description}</p>
+          
+          <!-- Keyword Label -->
+          <div class="keyword-label">
+            <svg class="keyword-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
+            <span>${product.keyword}</span>
           </div>
-          <p class="bento-description">${product.description || `The best ${product.category.toLowerCase()} for your setup.`}</p>
+
+          <div class="verification-badge">
+            ✓ ${verifiedText}
+          </div>
+
           <div class="bento-footer">
-            <span class="keyword-label">#${product.keyword}</span>
-            <button class="amazon-btn">Check Price on Amazon ↗</button>
+            <button class="check-price-btn">
+              Check Price on Amazon
+            </button>
           </div>
         </div>
       </a>
-    `).join('');
+    `;
+    }).join('');
   };
 
   // Initial Render (Student Mode default)
