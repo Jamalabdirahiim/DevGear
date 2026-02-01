@@ -491,9 +491,11 @@ window.addEventListener('scroll', handleScroll);
 const comparisonLogic = () => {
   const toggleBtns = document.querySelectorAll('.toggle-btn');
   const gridContainer = document.querySelector('#comparison-grid');
-  // Initialize on load
-  document.addEventListener('DOMContentLoaded', () => {
-    init();
-    handleScroll(); // Check scroll position immediately
-    comparisonLogic(); // Run comparison logic if on that page
-  });
+}; // Close comparisonLogic function
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  handleScroll(); // Check scroll position immediately
+  comparisonLogic(); // Run comparison logic if on that page
+});
