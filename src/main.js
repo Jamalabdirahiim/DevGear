@@ -142,7 +142,9 @@ const renderHero = () => {
         </p>
         <div class="hero-trust">
           <span>✅ Verified for Mac & PC</span>
+          <span class="pulse-dot"></span>
         </div>
+        <a href="#developer-guide" class="hero-curation-link">How we choose our gear →</a>
       </div>
     </div>
   `;
@@ -176,12 +178,15 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
         <div class="card-category">${escapeHTML(product.category || 'Gear')}</div>
         <h3 class="card-title">${escapeHTML(product.title || 'Untitled Hardware')}</h3>
         ${product.description ? `<p class="card-description">${escapeHTML(product.description)}</p>` : ''}
-        <div class="card-footer">
-          <div class="platform-tags">
-            ${(product.platform || []).map(p => `<span class="platform-tag ${p.toLowerCase()}">${escapeHTML(p)}</span>`).join('')}
+          <div class="card-footer-wrap">
+            <div class="verification-badge">✓ Mac & Windows Verified</div>
+            <div class="card-footer">
+              <div class="platform-tags">
+                ${(product.platform || []).map(p => `<span class="platform-tag ${p.toLowerCase()}">${escapeHTML(p)}</span>`).join('')}
+              </div>
+              <span class="card-cta">Check Price on Amazon</span>
+            </div>
           </div>
-          <span class="card-cta">Check Price on Amazon</span>
-        </div>
       </div>
     </a>
   `).join('');

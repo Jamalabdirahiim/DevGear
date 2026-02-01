@@ -33,71 +33,101 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar */
-.navbar {
-  position: absolute;
+/* Sticky Header with Glassmorphism */
+.navbar.sticky-header {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 4rem;
-  /* Reduced for mobile */
-  z-index: 100;
-  background-color: transparent;
+  height: auto;
+  min-height: 4.5rem;
+  z-index: 1000;
+  background: rgba(9, 9, 11, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #27272a;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  .navbar {
-    height: 5rem;
-  }
-}
-
-.nav-container {
+.nav-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
 }
 
-.logo {
+/* Logo Styling */
+.logo-link {
+  text-decoration: none;
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 
-.logo-img {
-  height: 9rem;
-  /* Significantly larger to compensate for internal padding */
-  width: auto;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-  margin: -2.5rem 0;
-  /* Align the visual center of the logo with the navbar */
-  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.3));
+.logo-text {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--zinc-100);
+  letter-spacing: -0.05em;
 }
 
-.logo-img:hover {
-  transform: scale(1.05);
-  /* Interactive micro-animation */
+.logo-version {
+  font-size: 0.7rem;
+  color: var(--zinc-400);
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
 }
 
-.nav-badge {
-  position: relative;
-  font-size: 0.75rem;
+/* Navigation Pills */
+.nav-links {
+  display: none;
+  /* Mobile first */
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-pill {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  color: var(--zinc-400);
+  transition: all 0.2s ease;
+}
+
+.nav-pill:hover {
+  color: var(--zinc-100);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-pill.active {
+  color: var(--zinc-100);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-badge-pill {
+  font-size: 0.65rem;
   font-weight: 800;
   color: #d8b4fe;
-  /* Premium light purple */
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 0.75rem;
   border-radius: 9999px;
-  background: rgba(10, 10, 10, 0.6);
+  background: rgba(168, 85, 247, 0.1);
   border: 1px solid rgba(168, 85, 247, 0.3);
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1);
-  text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
+  text-transform: uppercase;
   letter-spacing: 0.05em;
-  z-index: 1;
 }
 
 /* "Electric Flow" Shimmer Animation */
@@ -248,20 +278,70 @@ body {
   gap: 0.6rem;
   font-size: 0.8125rem;
   color: #4ade80;
-  /* Bright Neon Green (text-green-400) */
   font-weight: 800;
   padding: 0.5rem 1.25rem;
-  /* More padding */
   border-radius: 9999px;
   background-color: rgba(74, 222, 128, 0.1);
-  /* Clearer background */
   backdrop-filter: blur(12px);
   width: fit-content;
   border: 1px solid rgba(74, 222, 128, 0.5);
-  /* Stronger border */
   box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
-  /* Enhanced Glow */
   margin-top: 1rem;
+  position: relative;
+  cursor: help;
+}
+
+/* Tooltip */
+.hero-trust::after {
+  content: "Gear compatibility manually verified for 2026 workflows.";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.75rem;
+  background: var(--zinc-900);
+  color: var(--zinc-100);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  border: 1px solid var(--zinc-800);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.hero-trust:hover::after {
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0.5rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 4px;
+  box-shadow: 0 0 0 rgba(74, 222, 128, 0.4);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
 }
 
 /* Bento Grid */
@@ -471,6 +551,31 @@ body {
   transform: translateY(-1px);
 }
 
+.verification-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #4ade80;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hero-curation-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--zinc-400);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.hero-curation-link:hover {
+  color: var(--zinc-100);
+  text-decoration: underline;
+}
+
 /* --- Setup Cost Calculator Section --- */
 .calculator-section {
   padding: 2rem 1.5rem 1rem;
@@ -649,49 +754,99 @@ body {
   border-color: var(--zinc-100);
 }
 
-/* --- Developer Guide Section (Footer) --- */
-.guide-section {
+/* --- Bento Footer Styles --- */
+.footer-bento-section {
   padding: 4rem 1.5rem;
-  background-color: var(--bg-color);
-  border-top: 1px solid var(--card-border);
+  background-color: var(--zinc-950);
+  border-top: 1px solid var(--zinc-800);
 }
 
-.guide-footer-layout {
-  max-width: 1200px;
-  margin: 0 auto;
+.footer-bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
-.guide-col {
-  padding: 0;
+@media (min-width: 768px) {
+  .footer-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .legal-tile {
+    grid-column: span 2;
+  }
 }
 
-.guide-icon {
-  width: 32px;
-  height: 32px;
-  color: var(--accent-purple);
-  margin-bottom: 1rem;
-  display: block;
+@media (min-width: 1024px) {
+  .footer-bento-grid {
+    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-rows: auto;
+  }
+
+  .legal-tile {
+    grid-column: span 1;
+  }
 }
 
-.guide-col h4 {
-  font-size: 0.85rem;
+.footer-tile {
+  background-color: var(--zinc-900);
+  border: 1px solid var(--zinc-800);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: border-color 0.2s ease;
+}
+
+.footer-tile:hover {
+  border-color: var(--zinc-400);
+}
+
+.tile-label {
+  font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  color: var(--accent-purple);
   margin-bottom: 1rem;
 }
 
-.guide-col p {
-  color: var(--text-secondary);
+.tile-content {
+  font-size: 1rem;
   line-height: 1.6;
-  font-size: 0.95rem;
-  font-weight: 500;
+  color: var(--zinc-100);
   margin: 0;
 }
+
+.legal-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-disclaimer {
+  font-size: 0.75rem;
+  color: var(--zinc-400);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-link {
+  font-size: 0.75rem;
+  color: var(--zinc-400);
+  text-decoration: none;
+  transition: color 0.1s ease;
+}
+
+.footer-link:hover {
+  color: var(--zinc-100);
+}
+
+/* --- Developer Guide Section (Footer Guide above Bento) --- */
 
 /* --- Focus Page Styles --- */
 .focus-hero {

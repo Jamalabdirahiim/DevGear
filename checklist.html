@@ -66,12 +66,20 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo">
-                <a href="/"><img src="/logo-transparent.png" alt="DevGear official logo" class="logo-img"></a>
+    <nav class="navbar sticky-header">
+        <div class="container nav-wrap">
+            <div class="logo-group">
+                <a href="/" class="logo-link">
+                    <span class="logo-text">DevGear</span>
+                    <span class="logo-version">v1.2</span>
+                </a>
             </div>
-            <div class="nav-badge">2026 EDITION</div>
+            <div class="nav-links">
+                <a href="/" class="nav-pill">Home</a>
+                <a href="/focus" class="nav-pill">Focus</a>
+                <a href="/checklist" class="nav-pill active">Checklist</a>
+            </div>
+            <div class="nav-badge-pill">2026 EDITION</div>
         </div>
     </nav>
 
@@ -189,16 +197,32 @@
             </div>
         </main>
 
-        <footer>
-            <div class="container">
-                <p class="footer-disclaimer">
-                    As an Amazon Associate, I earn from qualifying purchases. This site is independently curated.
-                </p>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
+        <footer class="footer-bento-section">
+            <div class="container footer-bento-container">
+                <div class="footer-bento-grid">
+                    <div class="footer-tile founder-tile">
+                        <div class="tile-label">Meet the Founder</div>
+                        <p class="tile-content">22yo Developer & Student building in public. I curate the gear that
+                            actually survives a 10-hour coding sprint.</p>
+                    </div>
+                    <div class="footer-tile security-tile">
+                        <div class="tile-label">100% Secure</div>
+                        <p class="tile-content">All orders are processed by Amazon. We never handle your payment info.
+                            Buy with total peace of mind.</p>
+                    </div>
+                    <div class="footer-tile legal-tile">
+                        <p class="footer-disclaimer">
+                            As an Amazon Associate, I earn from qualifying purchases. This site is independently
+                            curated.
+                        </p>
+                        <div class="footer-links">
+                            <a href="#" class="footer-link">Privacy Policy</a>
+                            <a href="#" class="footer-link">Terms of Service</a>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.7rem; color: var(--zinc-400);">© 2026 DevGear. All
+                            rights reserved.</p>
+                    </div>
                 </div>
-                <p style="margin-top: 1.5rem; font-size: 0.75rem;">© 2026 DevGear. All rights reserved.</p>
             </div>
         </footer>
     </div>
