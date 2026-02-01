@@ -246,10 +246,10 @@ body {
   background: linear-gradient(to top, rgba(9, 9, 11, 1) 0%, rgba(9, 9, 11, 0.4) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* Changed from flex-start to center for better vertical alignment */
-  padding: 2rem 1.5rem;
-  /* Drastically reduced vertical padding to "lift" content and prevent cropping from top-heavy layout */
+  justify-content: flex-start;
+  /* Reset to flex-start so padding dictates position */
+  padding: 8rem 1.5rem 2rem;
+  /* Top 8rem clears navbar, Bottom 2rem prevents crop but keeps it lifted */
   z-index: 10;
   overflow-y: auto;
   /* Allow scrolling if content is too tall on small screens */
