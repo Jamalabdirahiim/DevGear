@@ -492,12 +492,25 @@ const comparisonLogic = () => {
 
   if (!gridContainer) return; // Only run on comparison page
 
-  // Filter products by price logic (rough approximation based on ID/Titles)
-  const studentPicks = products.filter(p => [11, 12, 13, 14, 2, 10].includes(p.id)); // Explicit Budget List: Pebble, G305, V1, KOORUI, Divoom, Mac mini
-  const proPicks = products.filter(p => [1, 3, 4, 5, 6, 7, 8].includes(p.id)); // Explicit Pro List: Dell, Sony, Anker, CalDigit, Keychron Q1, BenQ, MX Master
+  let filteredPicks = [];
 
+  // Filter products by price logic (rough approximation based on ID/Titles)
   const renderComparisonGrid = (mode) => {
-    const items = mode === 'student' ? studentPicks : proPicks;
+    switch (mode) {
+      case 'student': // Renamed from 'budget' to 'student' for consistency with toggle buttons
+        filteredPicks = products.filter(p => [11, 12, 13, 14, 2, 10].includes(p.id)); // Explicit Budget List: Pebble, G305, V1, KOORUI, Divoom, Mac mini
+        break;
+      case 'pro': // Renamed from 'professional' for consistency with toggle buttons
+        filteredPicks = products.filter(p => [1, 3, 5, 6, 8, 9].includes(p.id)); // Core Pro Setup (Updated IDs based on instruction's 'professional' list)
+        break;
+      case 'elite': // Added 'elite' case as per instruction's snippet
+        filteredPicks = products.filter(p => [1, 3, 5, 6, 7, 8, 10].includes(p.id)); // Elite / Dream Setup
+        break;
+      default:
+        filteredPicks = products.filter(p => [11, 12, 13, 14, 2, 10].includes(p.id)); // Default to student picks
+    }
+
+    const items = filteredPicks; // Use the dynamically filtered picks
     gridContainer.innerHTML = items.map(product => `
       <a href="${product.link}" target="_blank" class="bento-item group" rel="noopener noreferrer">
         <div class="bento-img-wrap">

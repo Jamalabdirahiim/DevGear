@@ -885,10 +885,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  grid-auto-rows: 1fr;
-  /* Force all rows to be equal height */
-  align-items: stretch;
-  /* Stretch tiles to fill grid cells */
+  /* Default align-items is stretch, which makes all items in a row equal height */
 }
 
 @media (max-width: 768px) {
@@ -901,7 +898,7 @@ body {
 @media (min-width: 768px) {
   .footer-bento-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto;
+    /* Let rows size automatically based on content */
   }
 
   .legal-tile {
@@ -912,7 +909,6 @@ body {
 @media (min-width: 1024px) {
   .footer-bento-grid {
     grid-template-columns: 1fr 1fr 1.5fr;
-    grid-template-rows: auto;
   }
 
   .legal-tile {
@@ -929,6 +925,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  height: 100%;
+  /* Critical: forces tile to fill the grid cell height */
 }
 
 .footer-tile:hover {
