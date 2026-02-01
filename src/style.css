@@ -874,108 +874,172 @@ body {
   font-size: 1.2rem;
 }
 
-/* --- Bento Footer Styles --- */
-.footer-bento-section {
-  padding: 4rem 1.5rem;
-  background-color: var(--zinc-950);
+/* --- Professional Bento Footer --- */
+.bento-footer {
+  background-color: #09090b;
+  /* Zinc 950 */
   border-top: 1px solid var(--zinc-800);
+  padding: 4rem 0 2rem;
+  margin-top: 4rem;
 }
 
-.footer-bento-grid {
+.footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-  /* Default align-items is stretch, which makes all items in a row equal height */
-}
-
-@media (max-width: 768px) {
-  .footer-bento-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+  margin-bottom: 3rem;
 }
 
 @media (min-width: 768px) {
-  .footer-bento-grid {
+  .footer-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* Let rows size automatically based on content */
-  }
-
-  .legal-tile {
-    grid-column: span 2;
   }
 }
 
 @media (min-width: 1024px) {
-  .footer-bento-grid {
-    grid-template-columns: 1fr 1fr 1.5fr;
-  }
-
-  .legal-tile {
-    grid-column: span 1;
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.footer-tile {
-  background: var(--zinc-900);
+.footer-card {
+  background-color: #09090b;
   border: 1px solid var(--zinc-800);
   border-radius: 12px;
+  /* Matching product cards */
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-start;
+  text-align: left;
+  transition: border-color 0.2s ease;
   height: 100%;
-  /* Critical: forces tile to fill the grid cell height */
 }
 
-.footer-tile:hover {
-  border-color: var(--zinc-400);
+.footer-card:hover {
+  border-color: var(--zinc-600);
 }
 
-.tile-label {
-  font-size: 0.7rem;
-  font-weight: 800;
+.brand-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.brand-version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+  margin-left: 0.5rem;
+}
+
+.built-in-public-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  margin: 1rem 0;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.footer-nav-link {
+  color: var(--zinc-400);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-link:hover {
+  color: #fff;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   color: var(--accent-purple);
   margin-bottom: 1rem;
 }
 
-.tile-content {
-  font-size: 1rem;
+.founder-text,
+.security-text {
+  font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--zinc-100);
-  margin: 0;
+  color: var(--zinc-300);
+  margin-bottom: 1.5rem;
 }
 
-.legal-tile {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.footer-disclaimer {
-  font-size: 0.75rem;
-  color: var(--zinc-400);
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-.footer-links {
+.social-links {
   display: flex;
   gap: 1rem;
+  margin-top: auto;
 }
 
-.footer-link {
-  font-size: 0.75rem;
-  color: var(--zinc-400);
+.social-link {
+  color: var(--zinc-500);
+  font-size: 0.85rem;
   text-decoration: none;
-  transition: color 0.1s ease;
 }
 
-.footer-link:hover {
-  color: var(--zinc-100);
+.social-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.secure-badge {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--zinc-400);
+  margin-top: auto;
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  border-top: 1px solid var(--zinc-800);
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--zinc-500);
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.legal-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.legal-link {
+  color: var(--zinc-500);
+  text-decoration: none;
+}
+
+.legal-link:hover {
+  color: var(--zinc-300);
+}
+
+.separator {
+  color: var(--zinc-700);
 }
 
 /* --- Developer Guide Section (Above Bento) --- */
