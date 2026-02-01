@@ -1,12 +1,26 @@
 {
-    "rewrites": [
+  "rewrites": [
+    { "source": "/focus", "destination": "/focus.html" },
+    { "source": "/checklist", "destination": "/checklist.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-            "source": "/focus",
-            "destination": "/focus.html"
-        },
-        {
-            "source": "/checklist",
-            "destination": "/checklist.html"
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
         }
-    ]
+      ]
+    },
+    {
+      "source": "/src/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }
