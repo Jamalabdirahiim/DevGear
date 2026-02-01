@@ -82,15 +82,18 @@ body {
   display: flex;
   align-items: center;
   /* Changed from baseline to fix diagonal misalignment */
-  gap: 0.75rem;
+  gap: 0;
+  /* Removed gap to allow negative margin to work */
 }
 
 .logo-img {
-  height: 5.5rem;
-  /* Increased slightly and rely on centering */
+  height: 8rem;
+  /* Massive size increase to overcome internal image padding */
   width: auto;
   display: block;
   object-fit: contain;
+  margin-right: -1.5rem;
+  /* Pull the version text closer */
 }
 
 .logo-version {
