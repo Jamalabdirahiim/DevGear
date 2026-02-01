@@ -136,7 +136,7 @@ const products = [
     platform: ["Mac", "Windows"],
     description: "The best budget ergonomic chair for long coding nights. Essential for back health when you're at the desk for 10+ hours.",
     whyThisPick: "Full lumbar support at budget price for long sessions",
-    notIdealFor: ["You're over 6'2" tall", "You want Herman Miller quality"]
+    notIdealFor: ["You're over 6'2\\\" tall", "You want Herman Miller quality"]
   },
   // --- New Budget Products ($500 Tier) ---
   {
