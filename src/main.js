@@ -108,9 +108,54 @@ const products = [
     image: "https://www.kzchair.com/cdn/shop/products/H5d13d89beeee483b816e7b38b577c4adT.png_960x960_0bad36c7-456a-4e1e-aab6-99392650aa71_1800x1800.png?v=1664608353",
     link: "https://amzn.to/4sXROC3",
     badge: "Comfort",
-    keyword: "Best office chair",
+    keyword: "Best budget chair",
     platform: ["Mac", "Windows"],
     description: "The best budget ergonomic chair for long coding nights. Essential for back health when you're at the desk for 10+ hours."
+  },
+  // --- New Budget Products ($500 Tier) ---
+  {
+    id: 11,
+    title: "Creative Pebble V3",
+    category: "Audio",
+    image: "https://m.media-amazon.com/images/I/61VwMpv9DYL._AC_SL1500_.jpg", // Clean product shot on white/transparent
+    link: "#", // User to provide
+    badge: "Best Value",
+    keyword: "Best budget speakers",
+    platform: ["Mac", "Windows"],
+    description: "Minimalist USB-C speakers that look great and sound surprisingly full. Perfect for a clean, wire-free desk."
+  },
+  {
+    id: 12,
+    title: "Logitech G305 Lightspeed",
+    category: "Mouse",
+    image: "https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g305/g305-gallery-1.png?v=1", // Official transparent asset
+    link: "#", // User to provide
+    badge: "Top Seller",
+    keyword: "Best budget mouse",
+    platform: ["Mac", "Windows"],
+    description: "The undisputed king of budget wireless mice. Zero latency, months of battery life, and a clean shape."
+  },
+  {
+    id: 13,
+    title: "Keychron V1 QMK",
+    category: "Keyboard",
+    image: "https://www.keychron.com/cdn/shop/products/Keychron-V1-custom-mechanical-keyboard-knob-frosted-black-translucent-carbon-black-non-transparent-switch-compatible-with-mac-windows-linux_1800x1800.jpg?v=1658133989", // High-res product shot
+    link: "#", // User to provide
+    badge: "Entry Custom",
+    keyword: "Best budget keyboard",
+    platform: ["Mac", "Windows"],
+    description: "Your gateway to the custom keyboard hobby. Hot-swappable, programmable, and feels incredible out of the box."
+  },
+  {
+    id: 14,
+    title: "KOORUI 24N1A Monitor",
+    category: "Monitor",
+    image: "https://m.media-amazon.com/images/I/71s7HbyO3JL._AC_SL1500_.jpg", // Clean front-facing shot
+    link: "#", // User to provide
+    badge: "Bestseller",
+    keyword: "Best budget screen",
+    platform: ["Mac", "Windows"],
+    description: "An IPS panel with 99% sRGB coverage for ~$100. The perfect secondary vertical monitor or budget main screen."
   }
 ];
 
@@ -450,8 +495,8 @@ const comparisonLogic = () => {
   if (!gridContainer) return; // Only run on comparison page
 
   // Filter products by price logic (rough approximation based on ID/Titles)
-  const studentPicks = products.filter(p => !p.image.includes('dell') && !p.image.includes('mac') && !p.image.includes('caldigit')); // Budget logic
-  const proPicks = products.filter(p => p.image.includes('dell') || p.image.includes('mac') || p.image.includes('caldigit') || p.image.includes('sony'));
+  const studentPicks = products.filter(p => [11, 12, 13, 14, 2, 10].includes(p.id)); // Explicit Budget List: Pebble, G305, V1, KOORUI, Divoom, Mac mini
+  const proPicks = products.filter(p => [1, 3, 4, 5, 6, 7, 8].includes(p.id)); // Explicit Pro List: Dell, Sony, Anker, CalDigit, Keychron Q1, BenQ, MX Master
 
   const renderComparisonGrid = (mode) => {
     const items = mode === 'student' ? studentPicks : proPicks;
