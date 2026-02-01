@@ -84,8 +84,6 @@ body {
   gap: 0;
   overflow: visible;
   /* Ensure huge logo doesn't get clipped if it exceeds bounds */
-  height: 4rem;
-  /* Force a reasonable height for the container to fix the "big transparent" issue */
 }
 
 .logo-img {
@@ -94,31 +92,21 @@ body {
   width: auto;
   display: block;
   object-fit: contain;
-  margin-right: -2.5rem;
-  /* Adjusted back from -3.5rem to be safe */
+  margin-right: -0.5rem;
+  /* Reduced overlap to move version text slightly right */
   margin-left: -1rem;
-  margin-top: -4rem;
-  /* "Crop" top whitespace from flow */
-  margin-bottom: -4rem;
-  /* "Crop" bottom whitespace from flow */
-  pointer-events: none;
-  /* Let clicks pass through the huge whitespace */
+  /* Pull it left slightly to balance */
 }
 
 .logo-version {
-  font-size: 0.8rem;
-  /* Slightly larger */
-  color: #a1a1aa;
+  font-size: 0.7rem;
+  color: #71717a;
+  /* Zinc 500 */
   font-weight: 600;
   font-family: 'Inter', sans-serif;
-  position: relative;
-  z-index: 10;
-  /* Ensure text sits on top if they overlap */
-  margin-top: 0.2rem;
-  /* Micro-adjust vertical alignment */
 }
 
-.hero-subtitle {
+.logo-v.hero-subtitle {
   font-size: 1.1rem;
   color: #a1a1aa;
   /* Zinc 400 */
