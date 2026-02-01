@@ -19,7 +19,9 @@ const products = [
     badge: "Flagship",
     keyword: "Best mini PC",
     platform: ["Mac"],
-    description: "The smallest, most powerful brain for your desk. With the M4 chip, this is the ultimate budget-to-pro transition for developers who need speed without the bulk."
+    description: "The smallest, most powerful brain for your desk. With the M4 chip, this is the ultimate budget-to-pro transition for developers who need speed without the bulk.",
+    whyThisPick: "Unmatched performance-per-watt for coding workflows",
+    notIdealFor: ["You need Windows-native development", "You require extensive GPU expansion"]
   },
   {
     id: 1,
@@ -30,7 +32,9 @@ const products = [
     badge: "Editor's Choice",
     keyword: "Best 4K monitor",
     description: "The gold standard for coding displays. Crisp text, perfect color accuracy, and built-in USB-C hub connectivity.",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    whyThisPick: "Best text clarity for long coding sessions",
+    notIdealFor: ["You need ultra-wide displays", "You want high refresh rate gaming"]
   },
   {
     id: 2,
@@ -41,7 +45,9 @@ const products = [
     badge: "Viral Hit",
     keyword: "Viral desk gadget",
     description: "More than just a speaker. It's a pixel art display, a mini-game console, and the ultimate retro desk accessory.",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    whyThisPick: "Doubles as desk decor and functional Bluetooth speaker",
+    notIdealFor: ["You need audiophile-grade sound", "You prefer minimal desk aesthetics"]
   },
   {
     id: 3,
@@ -52,7 +58,9 @@ const products = [
     badge: "Deep Work",
     keyword: "Best focus headphones",
     platform: ["Mac", "Windows"],
-    description: "Block out the noise in a busy cafe or dorm. These are the only headphones that let me code in deep focus for 4 hours straight."
+    description: "Block out the noise in a busy cafe or dorm. These are the only headphones that let me code in deep focus for 4 hours straight.",
+    whyThisPick: "Industry-leading ANC for deep work sessions",
+    notIdealFor: ["You prefer wired-only setups", "You need open-back soundstage"]
   },
   {
     id: 4,
@@ -84,7 +92,9 @@ const products = [
     badge: "New Tech",
     keyword: "Best programming keyboard",
     description: "Hall Effect magnetic switches allow for rapid trigger and adjustable actuation. The ultimate custom keyboard experience.",
-    platform: ["Mac", "Windows"]
+    platform: ["Mac", "Windows"],
+    whyThisPick: "Magnetic switches for precise, customizable keystrokes",
+    notIdealFor: ["You're new to mechanical keyboards", "You need built-in numpad"]
   },
   {
     id: 7,
@@ -195,6 +205,10 @@ const renderHero = () => {
         <div class="hero-bottom-badge" style="margin-top: 1.5rem; margin-bottom: 2rem; display: none;">
           <span class="secure-checkout-tag" style="position: relative; top: 0;">✓ Secure Amazon Checkout</span>
         </div>
+        <div class="founder-badge">
+          <span class="founder-icon">✓</span>
+          <span class="founder-text">Curated by a developer, not a store</span>
+        </div>
         <div class="hero-trust">
           <span>✅ Verified for Mac & PC</span>
           <span class="pulse-dot"></span>
@@ -233,6 +247,20 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
         <div class="card-category">${escapeHTML(product.category || 'Gear')}</div>
         <h3 class="card-title">${escapeHTML(product.title || 'Untitled Hardware')}</h3>
         ${product.description ? `<p class="card-description">${escapeHTML(product.description)}</p>` : ''}
+        ${product.whyThisPick ? `
+          <div class="why-this-pick">
+            <span class="why-label">Why this pick:</span>
+            <span class="why-text">${escapeHTML(product.whyThisPick)}</span>
+          </div>
+        ` : ''}
+        ${product.notIdealFor && product.notIdealFor.length > 0 ? `
+          <div class="not-ideal-section">
+            <span class="not-ideal-label">Not ideal if:</span>
+            <ul class="not-ideal-list">
+              ${product.notIdealFor.map(reason => `<li>– ${escapeHTML(reason)}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
           <div class="card-footer-wrap">
             <div class="verification-badge">✓ Mac & Windows Verified</div>
             <div class="card-footer">
