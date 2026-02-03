@@ -278,6 +278,13 @@ const renderHero = () => {
           </div>
         </div>
 
+        <div class="filter-bar" style="margin-top: 1rem; position: relative; z-index: 20;">
+           <button class="filter-pill active" data-filter="all">Show All</button>
+           <button class="filter-pill" data-filter="500">Budget ($500)</button>
+           <button class="filter-pill" data-filter="1500">Professional ($1,500)</button>
+           <button class="filter-pill" data-filter="5000">Elite ($5,000)</button>
+        </div>
+
 
       </div>
     </div>
