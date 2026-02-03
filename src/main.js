@@ -260,18 +260,31 @@ const renderHero = () => {
         <p class="hero-subtitle">
           I’m a 22yo developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
         </p>
-        <div class="hero-bottom-badge" style="margin-top: 1.5rem; margin-bottom: 2rem; display: none;">
-          <span class="secure-checkout-tag" style="position: relative; top: 0;">✓ Secure Amazon Checkout</span>
+        <div class="hero-trust-bar">
+          <div class="trust-item">
+            <svg class="trust-icon developer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Curated by a developer</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <div class="verified-pulse">
+               <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+               </svg>
+            </div>
+            <span>Verified for Mac & PC</span>
+          </div>
         </div>
-        <div class="founder-badge">
-          <span class="founder-icon">✓</span>
-          <span class="founder-text">Curated by a developer, not a store</span>
-        </div>
-        <div class="hero-trust">
-          <span>✅ Verified for Mac & PC</span>
-          <span class="pulse-dot"></span>
-        </div>
-        <a href="#developer-guide" class="hero-curation-link">How we choose our gear →</a>
+
+        <a href="#developer-guide" class="hero-curation-btn">
+          <span>How we choose our gear</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
       </div>
     </div>
   `;
