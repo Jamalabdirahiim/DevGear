@@ -102,8 +102,8 @@ body {
   object-fit: contain;
   margin-right: -0.25rem;
   /* Calculated adjustment to clear text overlap */
-  margin-left: -3rem;
-  /* Pulled further left to align with edge */
+  margin-left: -2.5rem;
+  /* Balanced left alignment */
 }
 
 .logo-version {
