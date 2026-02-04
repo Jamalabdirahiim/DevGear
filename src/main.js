@@ -206,17 +206,36 @@ const renderNavbar = () => `
         <img src="/logo-transparent.png" alt="DevGear Logo" class="logo-img" />
         <span class="logo-version">v1.2</span>
       </a>
+      
+      <!-- Desktop Navigation -->
       <div class="nav-links">
         <a href="#hero" class="nav-pill active">Home</a>
         <a href="#focus-grid" class="nav-pill">Focus</a>
         <a href="#checklist-grid" class="nav-pill">Checklist</a>
       </div>
+
       <div class="filter-pills-container" style="display: flex; gap: 0.5rem; margin-left: auto; padding-left: 2rem;">
          <button class="nav-badge-pill filter-pill" data-filter="all">Show All</button>
-         <button class="nav-badge-pill filter-pill" data-filter="500">Budget ($500)</button>
-         <button class="nav-badge-pill filter-pill" data-filter="1500">Professional ($1,500)</button>
-         <button class="nav-badge-pill filter-pill" data-filter="5000">Elite ($5,000)</button>
       </div>
+
+      <!-- Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav">
+      <a href="#hero" class="mobile-nav-link active">Home</a>
+      <a href="#focus-grid" class="mobile-nav-link">Focus</a>
+      <a href="#checklist-grid" class="mobile-nav-link">Checklist</a>
+      <div class="mobile-nav-divider"></div>
+      <div class="mobile-filter-title">Quick Filters</div>
+      <button class="mobile-nav-link filter-pill" data-filter="500">Budget ($500)</button>
+      <button class="mobile-nav-link filter-pill" data-filter="1500">Professional ($1,500)</button>
+      <button class="mobile-nav-link filter-pill" data-filter="5000">Elite ($5,000)</button>
     </div>
   </nav>
 `;
@@ -540,11 +559,39 @@ const setupFilters = () => {
   }
 };
 
+// Mobile Menu Toggle
+const setupMobileMenu = () => {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (toggle && mobileNav) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    });
+
+    // Close menu when clicking a link
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+  }
+};
+
 const init = () => {
   try {
     const focusGrid = document.querySelector('#focus-grid');
     const checklistGrid = document.querySelector('#checklist-grid');
     const appContainer = document.querySelector('#app');
+
+    // Initialize core UI components on all pages
+    setupMobileMenu();
+    setupFilters();
 
     // Detect page and render accordingly
     if (focusGrid) {
@@ -556,7 +603,6 @@ const init = () => {
       // Homepage: containers already exist in HTML, just populate them
       renderHero();
       renderGrid();
-      setupFilters();
     }
 
     // Final check to ensure app shows up even if parts failed
