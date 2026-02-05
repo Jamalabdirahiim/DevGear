@@ -1,3 +1,5 @@
+console.log('DevGear: main.js loaded');
+
 const escapeHTML = (str) => {
   if (!str) return '';
   const div = document.createElement('div');
@@ -512,82 +514,85 @@ const renderFooter = () => `
   </footer>
 `;
 
-const setupFilters = () => {
-  const filterPills = document.querySelectorAll('.filter-pill');
-  if (filterPills.length > 0) {
-    filterPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        // 1. Visual state
-        filterPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
+// --- Unified Event Delegation System ---
+// Using top-level delegation for better performance and reliability
 
-        // 2. Filter logic
-        const filterValue = pill.dataset.filter;
+const initEventListeners = () => {
+  console.log('DevGear: Initializing Event Delegation...');
 
-        // Add fade-out effect for smooth transition
-        const grid = document.querySelector('#grid-container');
-        if (grid) {
-          grid.style.opacity = '0';
+  document.addEventListener('click', (e) => {
+    // 1. Mobile Menu Toggle
+    const toggle = e.target.closest('.mobile-menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
 
-          setTimeout(() => {
-            if (filterValue === 'all') {
-              renderGrid();
-            } else if (filterValue === '500') {
-              const budgetIds = [12, 13, 14, 11, 2, 9];
-              renderGrid('#grid-container', (p) => budgetIds.includes(p.id));
-            } else if (filterValue === '1500') {
-              const proIds = [8, 6, 1, 3, 9, 7];
-              renderGrid('#grid-container', (p) => proIds.includes(p.id));
-            } else if (filterValue === '5000') {
-              const eliteIds = [10, 1, 3, 5, 6, 8, 7];
-              renderGrid('#grid-container', (p) => eliteIds.includes(p.id));
-            }
-            // Fade back in
-            grid.style.opacity = '1';
-          }, 200);
-        }
-      });
-    });
-
-    // Set "Show All" as active initially
-    const allBtn = document.querySelector('[data-filter="all"]');
-    if (allBtn) allBtn.classList.add('active');
-  }
-};
-
-// Mobile Menu Toggle
-const setupMobileMenu = () => {
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  const mobileNav = document.querySelector('.mobile-nav');
-  const navLinks = document.querySelectorAll('.mobile-nav-link');
-
-  if (toggle && mobileNav) {
-    toggle.addEventListener('click', () => {
+    if (toggle && mobileNav) {
+      console.log('DevGear: Mobile menu toggled');
       toggle.classList.toggle('active');
       mobileNav.classList.toggle('active');
       document.body.classList.toggle('no-scroll');
-    });
+      return;
+    }
 
-    // Close menu when clicking a link
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        toggle.classList.remove('active');
-        mobileNav.classList.remove('active');
-        document.body.classList.remove('no-scroll');
+    // 2. Navigation / Page Links (Close mobile nav on click)
+    const isNavLink = e.target.closest('.mobile-nav-link');
+    if (isNavLink && mobileNav && mobileNav.classList.contains('active')) {
+      console.log('DevGear: Closing mobile menu');
+      const realToggle = document.querySelector('.mobile-menu-toggle');
+      if (realToggle) realToggle.classList.remove('active');
+      mobileNav.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      // If it's a filter pill in the mobile nav, don't return, let the next check handle it
+    }
+
+    // 3. Smart Gear Filters
+    const pill = e.target.closest('.filter-pill');
+    if (pill) {
+      const filterValue = pill.dataset.filter;
+      console.log('DevGear: Filter clicked:', filterValue);
+
+      // Sync visual state for ALL pills with this filter across UI
+      document.querySelectorAll('.filter-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.filter === filterValue);
       });
-    });
-  }
+
+      // Find the appropriate grid container for the current page
+      const gridId = document.querySelector('#focus-grid') ? '#focus-grid' :
+        document.querySelector('#checklist-grid') ? '#checklist-grid' :
+          '#grid-container';
+
+      const grid = document.querySelector(gridId);
+      if (grid) {
+        grid.style.opacity = '0';
+        grid.style.transform = 'translateY(10px)';
+
+        setTimeout(() => {
+          if (filterValue === 'all') {
+            renderGrid(gridId);
+          } else if (filterValue === '500') {
+            const budgetIds = [12, 13, 14, 11, 2, 9];
+            renderGrid(gridId, (p) => budgetIds.includes(p.id));
+          } else if (filterValue === '1500') {
+            const proIds = [8, 6, 1, 3, 9, 7];
+            renderGrid(gridId, (p) => proIds.includes(p.id));
+          } else if (filterValue === '5000') {
+            const eliteIds = [10, 1, 3, 5, 6, 8, 7];
+            renderGrid(gridId, (p) => eliteIds.includes(p.id));
+          }
+
+          grid.style.opacity = '1';
+          grid.style.transform = 'translateY(0)';
+        }, 250);
+      }
+    }
+  });
 };
+
 
 const init = () => {
   try {
     const focusGrid = document.querySelector('#focus-grid');
     const checklistGrid = document.querySelector('#checklist-grid');
     const appContainer = document.querySelector('#app');
-
-    // Initialize core UI components on all pages
-    setupMobileMenu();
-    setupFilters();
 
     // Detect page and render accordingly
     if (focusGrid) {
@@ -596,10 +601,13 @@ const init = () => {
     } else if (checklistGrid) {
       renderGrid('#checklist-grid');
     } else {
-      // Homepage: containers already exist in HTML, just populate them
+      // Homepage
       renderHero();
       renderGrid();
     }
+
+    // Initialize Event System once
+    initEventListeners();
 
     // Final check to ensure app shows up even if parts failed
     if (appContainer) {
