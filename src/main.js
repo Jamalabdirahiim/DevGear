@@ -207,9 +207,9 @@ const renderNavbar = () => `
       
       <!-- Desktop Navigation -->
       <div class="nav-links">
-        <a href="#hero" class="nav-pill active">Home</a>
-        <a href="#focus-grid" class="nav-pill">Focus</a>
-        <a href="#checklist-grid" class="nav-pill">Checklist</a>
+        <a href="/" class="nav-pill active">Home</a>
+        <a href="/focus.html" class="nav-pill">Focus</a>
+        <a href="/checklist.html" class="nav-pill">Checklist</a>
       </div>
 
       <div class="filter-pills-container" style="display: flex; gap: 0.5rem; margin-left: auto; padding-left: 2rem;">
@@ -226,9 +226,9 @@ const renderNavbar = () => `
 
     <!-- Mobile Navigation Overlay -->
     <div class="mobile-nav">
-      <a href="#hero" class="mobile-nav-link active">Home</a>
-      <a href="#focus-grid" class="mobile-nav-link">Focus</a>
-      <a href="#checklist-grid" class="mobile-nav-link">Checklist</a>
+      <a href="/" class="mobile-nav-link active">Home</a>
+      <a href="/focus.html" class="mobile-nav-link">Focus</a>
+      <a href="/checklist.html" class="mobile-nav-link">Checklist</a>
       <div class="mobile-nav-divider"></div>
       <div class="mobile-filter-title">Quick Filters</div>
       <button class="mobile-nav-link filter-pill" data-filter="500">Budget ($500)</button>
