@@ -261,48 +261,23 @@ const renderHero = () => {
   if (!heroContainer) return;
 
   heroContainer.innerHTML = `
-    <div class="hero-section group">
-      <img 
-        src="/hero-mesh.png" 
-        alt="Deep Dark Gradient Mesh" 
-        class="hero-img"
-        onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=2000';"
-        loading="lazy"
-      />
-      <div class="hero-overlay">
-        <h1 class="hero-h1">
-          <span class="text-transparent bg-clip-text bg-gradient-hero">Build Your Dream</span><br>
-          <span class="text-white">Desk Setup Today.</span>
-        </h1>
-        <p class="hero-subtitle">
-          I’m a 22yo developer and student building DevGear in public. I curate the high-performance tools I actually use to survive 10-hour coding marathons and university projects. No corporate fluff—just gear I've manually verified for 2026 developer workflows so you can stop scrolling and start shipping. Secure checkout via Amazon.
-        </p>
-        <div class="hero-trust-bar">
-          <div class="trust-item">
-            <svg class="trust-icon developer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Curated by a developer</span>
-          </div>
-          <div class="trust-divider"></div>
-          <div class="trust-item">
-            <div class="verified-pulse">
-               <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-               </svg>
-            </div>
-            <span>Verified for Mac & PC</span>
-          </div>
+    <div class="hero-editorial">
+      <div class="hero-bg-text">FUTURE PRO</div>
+      
+      <div class="hero-product-container">
+        <!-- Using a high-quality Unsplash image as placeholder for the gaming setup -->
+        <img 
+          src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=1600" 
+          alt="Premium Gaming Setup" 
+          class="hero-product-img floating-anim"
+          onerror="this.onerror=null; this.src='/hero-mesh.png';" 
+        />
+        
+        <div class="hero-glass-card">
+          <span class="glass-card-label">Mac + PC Ready</span>
+          <span class="glass-card-price">$349</span>
+          <a href="#grid-container" class="glass-card-btn">View Deal</a>
         </div>
-
-        <div class="filter-bar" style="margin-top: 1rem; position: relative; z-index: 20;">
-           <button class="filter-pill active" data-filter="all">Show All</button>
-           <button class="filter-pill" data-filter="500">Budget ($500)</button>
-           <button class="filter-pill" data-filter="1500">Professional ($1,500)</button>
-           <button class="filter-pill" data-filter="5000">Elite ($5,000)</button>
-        </div>
-
-
       </div>
     </div>
   `;

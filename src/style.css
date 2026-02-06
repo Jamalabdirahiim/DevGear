@@ -1882,3 +1882,188 @@ footer {
 body.no-scroll {
   overflow: hidden;
 }
+
+/* --- New Editorial Hero Section --- */
+.hero-editorial {
+  position: relative;
+  background-color: #0f0f1a;
+  /* Deep dark navy */
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 100px 20px 60px;
+  /* Space for fixed nav */
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18vw;
+  /* Massive responsive text */
+  font-weight: 900;
+  color: #1f1f2e;
+  /* Dark grey visible against #0f0f1a */
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  user-select: none;
+  line-height: 1;
+}
+
+.hero-product-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-product-img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.6));
+  transform-origin: center center;
+}
+
+.floating-anim {
+  animation: floatHero 6s ease-in-out infinite;
+}
+
+@keyframes floatHero {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
+.hero-glass-card {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 180px;
+  transform: translate(20%, 20%);
+  /* Offset slightly */
+  animation: floatCard 8s ease-in-out infinite reverse;
+}
+
+@keyframes floatCard {
+
+  0%,
+  100% {
+    transform: translate(20%, 20%);
+  }
+
+  50% {
+    transform: translate(20%, 10%);
+  }
+}
+
+.glass-card-price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.glass-card-label {
+  color: var(--zinc-400);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.glass-card-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.glass-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .hero-editorial {
+    min-height: auto;
+    padding-top: 120px;
+    padding-bottom: 80px;
+    flex-direction: column;
+  }
+
+  .hero-bg-text {
+    font-size: 22vw;
+    top: 30%;
+  }
+
+  .hero-product-img {
+    max-height: 300px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-glass-card {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    align-items: center;
+    animation: none;
+    background: rgba(15, 15, 26, 0.8);
+    /* Darker bg for readability */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  @keyframes floatCard {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+}
