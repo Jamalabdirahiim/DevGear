@@ -260,8 +260,49 @@ const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
   if (!heroContainer) return;
 
-  // Temporarily removing hero content as requested
-  heroContainer.innerHTML = '';
+  heroContainer.innerHTML = `
+    <div class="hero-editorial">
+      <div class="hero-bg-text">FUTURE PRO</div>
+      
+      <div class="hero-content-wrapper">
+        
+        <!-- Text Content (Restored) -->
+        <div class="hero-text-content">
+           <div class="hero-trust-bar">
+              <span class="nav-badge-pill" style="background: rgba(255,255,255,0.1);">Verified for Mac & PC</span>
+              <span class="nav-badge-pill" style="background: rgba(45, 212, 191, 0.1); color: #2dd4bf; margin-left: 0.5rem;">Curated by a Developer</span>
+           </div>
+
+           <h1 class="editorial-h1">Build Your Dream<br>Desk Setup Today.</h1>
+           
+           <p class="editorial-subtitle">
+             I’m a 22yo developer, and I built DevGear to solve a simple problem: finding gear that actually survives a 10-hour coding sprint. 
+             No fluff, no paid reviews—just code-verified tools for deep focus.
+           </p>
+
+           <div class="hero-cta-group">
+              <button class="primary-btn" onclick="document.querySelector('#grid-container').scrollIntoView({behavior: 'smooth'})">Explore Gear</button>
+           </div>
+        </div>
+
+        <!-- Image Content (New Transparent Image) -->
+        <div class="hero-image-content">
+            <img 
+              src="/hero-transparent-v2.png?v=4.0" 
+              alt="Premium Gaming Setup" 
+              class="hero-product-img floating-anim"
+            />
+            
+            <div class="hero-glass-card">
+              <span class="glass-card-label">Mac + PC Ready</span>
+              <span class="glass-card-price">$349</span>
+              <a href="#grid-container" class="glass-card-btn">View Deal</a>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  `;
 };
 
 const renderGrid = (containerId = '#grid-container', filterFn = null) => {
