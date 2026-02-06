@@ -262,7 +262,6 @@ const renderHero = () => {
 
   heroContainer.innerHTML = `
     <div class="hero-editorial">
-      <div class="hero-bg-text">FUTURE PRO</div>
       
       <div class="hero-content-wrapper">
         
@@ -287,6 +286,8 @@ const renderHero = () => {
 
         <!-- Image Content (New Transparent Image) -->
         <div class="hero-image-content">
+            <div class="hero-bg-text">FUTURE PRO</div>
+            
             <img 
               src="/hero-transparent-v2.png?v=4.0" 
               alt="Premium Gaming Setup" 
@@ -296,7 +297,6 @@ const renderHero = () => {
             <div class="hero-glass-card">
               <span class="glass-card-label">Mac + PC Ready</span>
               <span class="glass-card-price">$349</span>
-              <a href="#grid-container" class="glass-card-btn">View Deal</a>
             </div>
         </div>
 

@@ -2396,11 +2396,40 @@ body.no-scroll {
 /* --- REFINED HERO STYLES (Fixing User Issues) --- */
 
 /* 1. Fix Background Text Visibility */
+/* 1. Fix Background Text Visibility */
 .hero-bg-text {
-  color: #2a2a35;
-  /* Lighter than #1f1f2e for better visibility */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #3f3f4e;
+  /* Lighter/Visible */
+  font-size: 15rem;
+  /* Fixed massive size relative to container */
+  font-weight: 900;
+  white-space: nowrap;
   opacity: 1;
   z-index: 0;
+  /* Behind image (image is z-index 2 usually, need to check stacking context) */
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Ensure image content is relative for absolute positioning of text */
+.hero-image-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-product-img {
+  position: relative;
+  z-index: 2;
+  /* In front of text */
+
+
 }
 
 /* 2. Fix Image Quality & Stacking */
