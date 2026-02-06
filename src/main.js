@@ -265,9 +265,9 @@ const renderHero = () => {
       <div class="hero-bg-text">FUTURE PRO</div>
       
       <div class="hero-product-container">
-        <!-- Using a high-quality Unsplash image as placeholder for the gaming setup -->
+        <!-- User's Custom Gaming Setup Image -->
         <img 
-          src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=1600" 
+          src="/hero-setup.png" 
           alt="Premium Gaming Setup" 
           class="hero-product-img floating-anim"
           onerror="this.onerror=null; this.src='/hero-mesh.png';" 
