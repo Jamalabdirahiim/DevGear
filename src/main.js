@@ -260,25 +260,8 @@ const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
   if (!heroContainer) return;
 
-  heroContainer.innerHTML = `
-    <div class="hero-editorial">
-      <div class="hero-bg-text">FUTURE PRO</div>
-      
-      <div class="hero-product-container">
-        <img 
-          src="/hero-transparent.png?v=3.0" 
-          alt="Premium Gaming Setup" 
-          class="hero-product-img floating-anim"
-        />
-        
-        <div class="hero-glass-card">
-          <span class="glass-card-label">Mac + PC Ready</span>
-          <span class="glass-card-price">$349</span>
-          <a href="#grid-container" class="glass-card-btn">View Deal</a>
-        </div>
-      </div>
-    </div>
-  `;
+  // Temporarily removing hero content as requested
+  heroContainer.innerHTML = '';
 };
 
 const renderGrid = (containerId = '#grid-container', filterFn = null) => {
