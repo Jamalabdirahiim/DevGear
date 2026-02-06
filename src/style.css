@@ -1933,8 +1933,7 @@ body.no-scroll {
   object-fit: contain;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.6));
   transform-origin: center center;
-  /* Blend mode to make black background transparent */
-  mix-blend-mode: screen;
+  /* Blend mode removed - image is transparent */
 }
 
 .floating-anim {

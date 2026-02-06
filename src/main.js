@@ -267,7 +267,7 @@ const renderHero = () => {
       <div class="hero-product-container">
         <!-- User's Custom Gaming Setup Image -->
         <img 
-          src="/hero-setup.png" 
+          src="/hero-transparent.png" 
           alt="Premium Gaming Setup" 
           class="hero-product-img floating-anim"
           onerror="this.onerror=null; this.src='/hero-mesh.png';" 
