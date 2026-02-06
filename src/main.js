@@ -265,12 +265,10 @@ const renderHero = () => {
       <div class="hero-bg-text">FUTURE PRO</div>
       
       <div class="hero-product-container">
-        <!-- User's Custom Gaming Setup Image -->
         <img 
-          src="/hero-transparent.png?v=2.0" 
+          src="/hero-transparent.png?v=3.0" 
           alt="Premium Gaming Setup" 
           class="hero-product-img floating-anim"
-          onerror="this.onerror=null; this.src='/hero-mesh.png';" 
         />
         
         <div class="hero-glass-card">
