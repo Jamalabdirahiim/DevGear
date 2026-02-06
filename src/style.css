@@ -2391,3 +2391,153 @@ body.no-scroll {
     }
   }
 }
+
+
+/* --- REFINED HERO STYLES (Fixing User Issues) --- */
+
+/* 1. Fix Background Text Visibility */
+.hero-bg-text {
+  color: #2a2a35;
+  /* Lighter than #1f1f2e for better visibility */
+  opacity: 1;
+  z-index: 0;
+}
+
+/* 2. Fix Image Quality & Stacking */
+.hero-product-img {
+  /* Optimize rendering */
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  /* Softer shadow to avoid dirty look */
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+  max-width: 100%;
+}
+
+/* 3. Fix "View Deal" Button */
+.glass-card-btn {
+  background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%);
+  color: #000;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 0.85rem 2rem;
+  /* Larger touch target */
+  font-weight: 800;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transform-origin: center;
+}
+
+.glass-card-btn:hover {
+  transform: scale(1.05);
+  /* Pop effect instead of just translate */
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, #ffffff 0%, #d4d4d8 100%);
+}
+
+.hero-glass-card {
+  /* Ensure it doesn't get cut off */
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 20, 30, 0.6);
+  /* Slightly darker for contrast */
+  backdrop-filter: blur(20px);
+}
+
+/* 4. Fix Mobile Layout ("Horrible" on mobile) */
+@media (max-width: 1024px) {
+  .hero-editorial {
+    padding-top: 140px;
+    /* More space for fixed header */
+    padding-bottom: 60px;
+    height: auto;
+    min-height: auto;
+    display: block;
+    /* Use block flow for easier stacking */
+  }
+
+  .hero-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .hero-text-content {
+    order: 1;
+    /* Text first */
+    text-align: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero-image-content {
+    order: 2;
+    /* Image second */
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .hero-bg-text {
+    font-size: 25vw;
+    /* Even larger but lighter */
+    color: #1e1e2aec;
+    /* Slightly visible */
+    top: 40%;
+  }
+
+  .editorial-h1 {
+    font-size: 2.8rem;
+    /* readable size */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-editorial {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .editorial-h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-trust-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .nav-badge-pill {
+    margin: 0 !important;
+  }
+
+  .hero-glass-card {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin-top: -30px;
+    /* Pull up to overlap image slightly */
+    animation: none;
+    flex-direction: row;
+    /* Horizontal layout for card on mobile? */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+  }
+
+  .glass-card-btn {
+    margin-top: 0;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-product-img {
+    max-height: 350px;
+  }
+
+  /* Disable float animation on mobile for performance/cleanliness */
+  .floating-anim {
+    animation: none;
+  }
+}
