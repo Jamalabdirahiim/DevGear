@@ -2403,14 +2403,14 @@ body.no-scroll {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #3f3f4e;
-  /* Lighter/Visible */
-  font-size: 15rem;
-  /* Fixed massive size relative to container */
+  /* Visible dark grey */
+  font-size: 12rem;
+  /* Reduced to fit behind image better */
   font-weight: 900;
   white-space: nowrap;
   opacity: 1;
-  z-index: 0;
-  /* Behind image (image is z-index 2 usually, need to check stacking context) */
+  z-index: -1;
+  /* Strictly behind everything in this container */
   pointer-events: none;
   line-height: 1;
 }
@@ -2422,6 +2422,7 @@ body.no-scroll {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Prevent text from bleeding out if needed, but let's try just z-index first */
 }
 
 .hero-product-img {

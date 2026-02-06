@@ -294,10 +294,7 @@ const renderHero = () => {
               class="hero-product-img floating-anim"
             />
             
-            <div class="hero-glass-card">
-              <span class="glass-card-label">Mac + PC Ready</span>
-              <span class="glass-card-price">$349</span>
-            </div>
+
         </div>
 
       </div>
