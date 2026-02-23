@@ -31,7 +31,7 @@
 
   <!-- Security Headers (Hardened for Production & Dev) -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https: ws: wss:; frame-ancestors 'self' https://*.pinterest.com;">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https: ws: wss:; frame-src https://my.spline.design https://*.spline.design; frame-ancestors 'self' https://*.pinterest.com;">
   <meta name="referrer" content="no-referrer-when-downgrade">
 
   <!-- Critical Styles to prevent FOUC -->
@@ -52,8 +52,8 @@
   </style>
 
   <!-- Performance & Fonts -->
-  <link rel="stylesheet" href="/src/style.css?v=1.5.0">
-  <script type="module" src="/src/main.js?v=1.5.0"></script>
+  <link rel="stylesheet" href="/src/style.css?v=force-refresh-2026-v2">
+  <script type="module" src="/src/main.js?v=force-refresh-2026-v2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Google Analytics -->
@@ -65,6 +65,8 @@
     gtag('config', 'G-0LX9YRXDYL', { 'debug_mode': true });
   </script>
   <meta name="p:domain_verify" content="abd2629ccd3fca71fed832b3f8fa09e1" />
+  <!-- Spline 3D Viewer -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.96/build/spline-viewer.js"></script>
 </head>
 
 <body>
@@ -107,6 +109,9 @@
   <div id="app">
     <!-- Hero Section outside container for true edge-to-edge width -->
     <div id="hero-container"></div>
+
+    <!-- Spline 3D Scroll Section -->
+    <div id="spline-section"></div>
 
     <main class="container">
 
@@ -181,60 +186,109 @@
       </section>
     </main>
 
-    <footer class="bento-footer">
-      <div class="container">
-        <div class="footer-grid">
 
-          <!-- Column 1: Brand & Nav -->
-          <div class="footer-card brand-card">
-            <div class="footer-brand">
-              <span class="brand-logo">DevGear</span>
-              <span class="brand-version">v1.2</span>
-            </div>
-            <span class="built-in-public-tag">Curated by a Developer</span>
-            <nav class="footer-nav">
-              <a href="/" class="footer-nav-link">Home</a>
-              <a href="/focus" class="footer-nav-link">Focus</a>
-              <a href="/checklist" class="footer-nav-link">Checklist</a>
-            </nav>
-          </div>
 
-          <!-- Column 2: Founder Details -->
-          <div class="footer-card founder-card">
-            <div class="card-label">Meet the Founder</div>
-            <p class="founder-text">
-              DevGear is an independent project by a Somali university student. I curate the gear that actually survives
-              a 10-hour coding sprint. No fluff, just code-verified tools.
-            </p>
-          </div>
 
-          <!-- Column 3: Security & Trust -->
-          <div class="footer-card security-card">
-            <div class="card-label">100% Secure</div>
-            <p class="security-text">
-              All orders are processed securely by Amazon. We never handle your payment info. Buy with total peace of
-              mind.
-            </p>
-            <div class="secure-badge">
-              <span>🔒 SSL Encrypted</span>
-              <span>✓ Amazon Verified</span>
-            </div>
-          </div>
 
+    <footer class="site-footer">
+      <!-- High-Impact Searchlight Beam -->
+      <div class="footer-beam-container">
+        <div class="footer-beam"></div>
+        <div class="footer-glow-base"></div>
+      </div>
+
+      <div class="footer-content">
+        <!-- Premium CTA -->
+        <div class="footer-cta">
+          <span class="footer-cta-tag">Elevate Your Engineering</span>
+          <h2 class="footer-cta-title">Build. Ship. Code in Flow.</h2>
         </div>
 
-        <!-- Bottom Bar -->
+        <!-- Glassy Column Grid -->
+        <div class="footer-grid">
+          <!-- Brand Column -->
+          <div class="footer-glass-card">
+            <div style="display:flex; align-items: center; gap: 16px; margin-bottom: 32px;">
+              <img src="/logo-transparent.png?v=2.0" alt="DevGear"
+                style="height:40px; width:auto; filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));" />
+              <div class="footer-badge-premium">v1.2 PRO</div>
+            </div>
+            <p class="footer-brand-desc">
+              Independently curated by a Somali developer obsessed with focus, minimalism, and high-performance
+              environments.
+            </p>
+            <div class="footer-badge-premium">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+              Developer Verified
+            </div>
+          </div>
+
+          <!-- Links Column 1 -->
+          <div class="footer-glass-card">
+            <h4 class="footer-col-header">Ecosystem</h4>
+            <ul class="footer-links">
+              <li><a href="/" class="footer-link">Home Terminal</a></li>
+              <li><a href="/focus.html" class="footer-link">Focus Mode</a></li>
+              <li><a href="/checklist.html" class="footer-link">Verification Checklist</a></li>
+            </ul>
+          </div>
+
+          <!-- Links Column 2 -->
+          <div class="footer-glass-card">
+            <h4 class="footer-col-header">Community</h4>
+            <ul class="footer-links">
+              <li><a href="#" class="footer-link">Discord Engineering</a></li>
+              <li><a href="#" class="footer-link">Submit Desktop Setup</a></li>
+              <li><a href="#" class="footer-link">Weekly Gear Log</a></li>
+            </ul>
+          </div>
+
+          <!-- Trust Column -->
+          <div class="footer-glass-card">
+            <h4 class="footer-col-header">Verified Security</h4>
+            <div class="trust-card-items">
+              <div class="trust-item-pro">
+                <svg class="trust-icon-pro" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span class="trust-text">Amazon Verified</span>
+              </div>
+              <div class="trust-item-pro">
+                <svg class="trust-icon-pro" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span class="trust-text">SSL Secure</span>
+              </div>
+            </div>
+            <p style="margin-top: 24px; font-size: 0.8rem; color: #64748b; line-height: 1.5; font-weight: 500;">
+              Transactions are secured via Amazon's cloud infrastructure.
+            </p>
+          </div>
+        </div>
+
+        <!-- Premium Bottom Bar -->
         <div class="footer-bottom">
-          <p class="copyright">© 2026 DevGear. Independently Curated.</p>
-          <div class="legal-links">
-            <span class="affiliate-notice">As an Amazon Associate, I earn from qualifying purchases.</span>
-            <span class="separator">|</span>
-            <a href="#" class="legal-link">Privacy</a>
-            <a href="#" class="legal-link">Terms</a>
+          <p class="copyright-pro">
+            © 2026 DevGear. Engineered for Focus.
+          </p>
+          <div class="legal-links-pro">
+            <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=201909010&linkCode=ll2&tag=jamalshop0f-20&linkId=b411802a8062534563a61c39c8173516&language=en_US&ref_=as_li_ss_tl"
+              target="_blank" class="legal-link-pro">Associate Disclosure</a>
           </div>
         </div>
       </div>
     </footer>
+
+
+
   </div>
 </body>
 

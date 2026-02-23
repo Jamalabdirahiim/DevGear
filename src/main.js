@@ -245,6 +245,7 @@ const renderApp = () => {
   app.innerHTML = `
     ${renderNavbar()}
     <div id="hero-container"></div>
+    <div id="spline-section"></div>
     <div class="container mx-auto px-4 py-8">
       <div id="grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </div>
@@ -252,6 +253,7 @@ const renderApp = () => {
   `;
 
   renderHero();
+  renderSpline();
   renderGrid();
   setupFilters(); // Re-attach event listeners after DOM update
 };
@@ -261,46 +263,104 @@ const renderHero = () => {
   if (!heroContainer) return;
 
   heroContainer.innerHTML = `
-    <div class="hero-editorial">
-      
-      <div class="hero-content-wrapper">
-        
-        <!-- Text Content (Restored) -->
-        <div class="hero-text-content">
-           <div class="hero-trust-bar">
-              <span class="nav-badge-pill" style="background: rgba(255,255,255,0.1);">Verified for Mac & PC</span>
-              <span class="nav-badge-pill" style="background: rgba(45, 212, 191, 0.1); color: #2dd4bf; margin-left: 0.5rem;">Curated by a Developer</span>
-           </div>
+    <div style="position:relative;background-color:#0D0F1E;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;padding:110px 40px 100px;">
 
-           <h1 class="editorial-h1">Build Your Dream<br>Desk Setup Today.</h1>
-           
-           <p class="editorial-subtitle">
-             I’m a 22yo developer, and I built DevGear to solve a simple problem: finding gear that actually survives a 10-hour coding sprint. 
-             No fluff, no paid reviews—just code-verified tools for deep focus.
-           </p>
+      <!-- Ambient glow orbs -->
+      <div style="position:absolute;top:15%;left:5%;width:420px;height:420px;background:radial-gradient(circle,rgba(124,58,237,0.18) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
+      <div style="position:absolute;bottom:20%;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(6,182,212,0.13) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
 
-           <div class="hero-cta-group">
-              <button class="primary-btn" onclick="document.querySelector('#grid-container').scrollIntoView({behavior: 'smooth'})">Explore Gear</button>
-           </div>
+      <!-- Main two-column grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0;width:100%;max-width:1300px;position:relative;z-index:2;flex:1;">
+
+        <!-- Text Content -->
+        <div style="display:flex;flex-direction:column;justify-content:center;padding-right:3rem;">
+
+          <!-- Trust pills -->
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.6rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);">✦ Verified for Mac &amp; PC</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:rgba(45,212,191,0.1);color:#2dd4bf;border:1px solid rgba(45,212,191,0.25);">⚡ Curated by a Developer</span>
+          </div>
+
+          <!-- Gradient headline -->
+          <h1 style="font-size:clamp(2.6rem,4.2vw,4rem);font-weight:900;line-height:1.07;letter-spacing:-0.03em;margin:0 0 1.3rem;background:linear-gradient(135deg,#e879f9 0%,#a855f7 28%,#6366f1 55%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Build Your Dream<br>Desk Setup Today.</h1>
+
+          <!-- Subtitle -->
+          <p style="font-size:1.05rem;line-height:1.75;color:#94a3b8;margin:0 0 2rem;max-width:90%;">
+            I'm a 22yo developer, and I built <span style="color:#c4b5fd;font-weight:600;">DevGear</span> to solve a simple problem: finding gear that actually survives a <span style="color:#22d3ee;font-weight:600;">10-hour coding sprint</span>. No fluff, no paid reviews—just code-verified tools for deep focus.
+          </p>
+
+          <!-- CTA button -->
+          <div style="margin-bottom:2.5rem;">
+            <button
+              onclick="document.querySelector('#grid-container').scrollIntoView({behavior:'smooth'})"
+              style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.1rem;font-size:0.95rem;font-weight:700;letter-spacing:0.03em;border:none;border-radius:9999px;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#4f46e5,#0891b2);color:#fff;box-shadow:0 0 22px rgba(124,58,237,0.45),0 4px 16px rgba(0,0,0,0.3);transition:all 0.3s ease;"
+              onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 38px rgba(124,58,237,0.65),0 8px 26px rgba(0,0,0,0.4)';"
+              onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 22px rgba(124,58,237,0.45),0 4px 16px rgba(0,0,0,0.3)';"
+            >
+              Explore Gear
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <!-- Stats row -->
+          <div style="display:flex;gap:2rem;align-items:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="display:flex;flex-direction:column;gap:0.2rem;">
+              <span style="font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#a855f7,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">50+</span>
+              <span style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Products Tested</span>
+            </div>
+            <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);"></div>
+            <div style="display:flex;flex-direction:column;gap:0.2rem;">
+              <span style="font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#22d3ee,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">2.4k+</span>
+              <span style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Dev Setups Built</span>
+            </div>
+            <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);"></div>
+            <div style="display:flex;flex-direction:column;gap:0.2rem;">
+              <span style="font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">4.9★</span>
+              <span style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Community Score</span>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Image Content (New Transparent Image) -->
-        <div class="hero-image-content">
-            <div class="hero-bg-text">FUTURE PRO</div>
-            
-            <img 
-              src="/hero-transparent-v2.png?v=4.0" 
-              alt="Premium Gaming Setup" 
-              class="hero-product-img floating-anim"
-            />
-            
-
+        <!-- 3D Headphone Spline (Right side) -->
+        <div style="position:relative;width:100%;height:100%;min-height:520px;overflow:hidden;">
+          <iframe
+            src="https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/"
+            frameborder="0"
+            style="position:absolute;top:-8%;left:-5%;width:110%;height:132%;border:none;background:transparent;"
+            title="3D Headphone"
+            allowfullscreen
+          ></iframe>
         </div>
 
       </div>
+
+      <!-- Scroll cue — pinned to very bottom -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding:1.8rem 0 1.4rem;z-index:3;position:relative;animation:heroCueFade 2.5s ease-in-out infinite;">
+        <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(148,163,184,0.45);">Scroll to explore</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:heroBounce 1.6s ease-in-out infinite;">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+
     </div>
+
+    <style>
+      @keyframes heroCueFade { 0%,100%{opacity:0.45} 50%{opacity:1} }
+      @keyframes heroBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+    </style>
   `;
 };
+
+
+
+const renderSpline = () => {
+  // Spline 3D scene removed
+  const section = document.querySelector('#spline-section');
+  if (section) section.innerHTML = '';
+};
+
+
 
 const renderGrid = (containerId = '#grid-container', filterFn = null) => {
   const gridContainer = document.querySelector(containerId);
@@ -314,8 +374,8 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
   }
 
   gridContainer.innerHTML = filteredProducts.map(product => `
-    <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
-      ${product.badge ? `<div class="badge-top-pick">${escapeHTML(product.badge)}</div>` : ''}
+  <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
+    ${product.badge ? `<div class="badge-top-pick">${escapeHTML(product.badge)}</div>` : ''}
       <div class="card-img-container">
         <img 
           src="${product.image || ''}" 
@@ -450,8 +510,8 @@ const renderBundle = (tier) => {
 
   const items = bundles[tier] || [];
   container.innerHTML = items.map(item => `
-    <a href="${item.link}" target="_blank" class="product-card" aria-label="View ${escapeHTML(item.title)} on Amazon">
-      ${item.badge ? `<div class="badge-top-pick">${escapeHTML(item.badge)}</div>` : ''}
+  <a href="${item.link}" target="_blank" class="product-card" aria-label="View ${escapeHTML(item.title)} on Amazon">
+    ${item.badge ? `<div class="badge-top-pick">${escapeHTML(item.badge)}</div>` : ''}
       <div class="card-img-container">
         <img 
           src="${item.image || ''}" 
@@ -501,10 +561,84 @@ const initCalculator = () => {
 };
 
 const renderFooter = () => `
-  <footer class="footer">
-    <div class="footer-content">
-      <p>&copy; 2026 DevGear. Built for developers.</p>
+  <footer style="position:relative;background:#080A14;overflow:hidden;">
+
+    <!-- ===== LIGHT BEAM ===== -->
+    <div style="
+      pointer-events:none;
+      position:absolute;
+      bottom:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:700px;
+      height:580px;
+      background:conic-gradient(from 270deg at 50% 100%, transparent 30%, rgba(124,58,237,0.28) 43%, rgba(99,102,241,0.22) 50%, rgba(124,58,237,0.28) 57%, transparent 70%);
+      filter:blur(2px);
+      z-index:0;
+    "></div>
+    <!-- soft inner glow core -->
+    <div style="
+      pointer-events:none;
+      position:absolute;
+      bottom:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:320px;
+      height:340px;
+      background:radial-gradient(ellipse at 50% 100%, rgba(139,92,246,0.35) 0%, transparent 70%);
+      z-index:0;
+    "></div>
+
+    <!-- ===== CTA STRIPE ===== -->
+    <div style="position:relative;z-index:2;text-align:center;padding:5rem 2rem 3.5rem;">
+      <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#6366f1;margin-bottom:1rem;">Ready to upgrade?</p>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;letter-spacing:-0.03em;margin:0 0 0.6rem;background:linear-gradient(135deg,#e879f9,#a855f7,#6366f1,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Build. Ship. Code in Flow.</h2>
+      <p style="color:#475569;font-size:0.95rem;max-width:480px;margin:0 auto;">Every product on DevGear was tested on a real dev setup — no sponsored noise.</p>
     </div>
+
+    <!-- ===== 3-COL FOOTER GRID ===== -->
+    <div style="position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 2rem 4rem;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;">
+
+      <!-- Brand col -->
+      <div>
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1.1rem;">
+          <img src="/logo-transparent.png" alt="DevGear" style="height:32px;width:auto;" />
+          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;color:#4f46e5;text-transform:uppercase;background:rgba(79,70,229,0.12);padding:0.2rem 0.55rem;border-radius:999px;border:1px solid rgba(99,102,241,0.3);">v1.2</span>
+        </div>
+        <p style="color:#475569;font-size:0.88rem;line-height:1.7;margin:0 0 1.4rem;max-width:260px;">A curated gear list built by a 22-year-old developer who cares deeply about focus, ergonomics, and clean setups.</p>
+        <div style="display:flex;gap:0.7rem;">
+          <span style="padding:0.3rem 0.8rem;border-radius:999px;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;background:rgba(139,92,246,0.12);color:#a78bfa;border:1px solid rgba(139,92,246,0.25);">✦ Curated by a Developer</span>
+        </div>
+      </div>
+
+      <!-- Nav col -->
+      <div>
+        <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#334155;margin-bottom:1.1rem;">Navigate</p>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="/" style="color:#64748b;font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#64748b'">Home</a>
+          <a href="/focus.html" style="color:#64748b;font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#64748b'">Focus Mode</a>
+          <a href="/checklist.html" style="color:#64748b;font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#64748b'">Checklist</a>
+        </div>
+      </div>
+
+      <!-- Trust col -->
+      <div>
+        <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#334155;margin-bottom:1.1rem;">Trust & Security</p>
+        <p style="color:#475569;font-size:0.85rem;line-height:1.65;margin:0 0 1rem;">Orders go through Amazon directly. We never see or store your payment details.</p>
+        <div style="display:flex;flex-direction:column;gap:0.55rem;">
+          <span style="color:#22d3ee;font-size:0.82rem;font-weight:600;">🔒 SSL Encrypted</span>
+          <span style="color:#22c55e;font-size:0.82rem;font-weight:600;">✓ Amazon Verified</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== BOTTOM BAR ===== -->
+    <div style="position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.05);padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:0.8rem;">
+      <p style="color:#334155;font-size:0.8rem;margin:0;">&copy; 2026 DevGear. Independently Curated.</p>
+      <p style="color:#1e293b;font-size:0.75rem;margin:0;">As an Amazon Associate, I earn from qualifying purchases. &nbsp;<a href="/privacy.html" style="color:#475569;text-decoration:none;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#475569'">Privacy</a> &nbsp;|&nbsp; <a href="/terms.html" style="color:#475569;text-decoration:none;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#475569'">Terms</a></p>
+    </div>
+
   </footer>
 `;
 
@@ -597,6 +731,7 @@ const init = () => {
     } else {
       // Homepage
       renderHero();
+      renderSpline();
       renderGrid();
     }
 
