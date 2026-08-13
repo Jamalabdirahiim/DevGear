@@ -3210,6 +3210,10 @@ body.no-scroll {
   display: none;
 }
 
+.hero-modern__visual--mobile-hidden {
+  display: none !important;
+}
+
 .hero-modern__scroll {
   position: relative;
   z-index: 3;
@@ -3347,36 +3351,46 @@ body.no-scroll {
 
   .navbar.sticky-header {
     padding: 0 12px;
-    height: 64px;
+    height: 72px;
   }
 
   .navbar .nav-wrap {
     padding: 0;
   }
 
+  .logo-group {
+    flex: 1;
+    min-width: 0;
+  }
+
   .logo-link {
-    gap: 0.35rem;
-    max-width: calc(100vw - 56px);
+    gap: 0;
+    max-width: none;
+    overflow: visible;
   }
 
   .logo-img {
-    height: 38px !important;
-    max-height: 38px !important;
+    height: 3.25rem !important;
+    max-height: none !important;
     width: auto !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin-left: -1.25rem !important;
+    margin-right: -0.15rem !important;
     object-fit: contain;
     flex-shrink: 0;
   }
 
   .logo-version {
-    margin-left: 0 !important;
-    font-size: 0.65rem;
+    margin-left: -0.85rem !important;
+    font-size: 0.7rem;
     white-space: nowrap;
   }
 
   .hero-modern {
     padding: 5.5rem 1rem 1.5rem;
+  }
+
+  .hero-modern__grid {
+    gap: 1.25rem;
   }
 
   .hero-modern__title {
@@ -3389,9 +3403,9 @@ body.no-scroll {
     line-height: 1.65;
   }
 
-  .hero-modern__visual {
-    min-height: 280px;
-    height: min(70vw, 360px);
+  .hero-modern__visual,
+  .hero-modern__visual--mobile-hidden {
+    display: none !important;
   }
 
   .focus-hero,

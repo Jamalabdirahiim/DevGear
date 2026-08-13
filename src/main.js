@@ -623,14 +623,13 @@ const renderFooter = () => `
 // --- Unified Event Delegation System ---
 // Using top-level delegation for better performance and reliability
 
-const isMobileViewport = () =>
-  window.matchMedia('(max-width: 767px), (hover: none) and (pointer: coarse)').matches;
+const isMobileViewport = () => window.matchMedia('(max-width: 767px)').matches;
 
 const shouldLoadSpline = () => {
   if (isMobileViewport()) return false;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
   const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g' || conn.effectiveType === '3g')) {
+  if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) {
     return false;
   }
   return true;
@@ -666,13 +665,13 @@ const resumeHeroSpline = (slot) => {
 };
 
 const mountHeroSplineIframe = (slot, visual) => {
-  if (slot.dataset.loaded === 'true') return null;
+  if (slot.dataset.loaded === 'true') return slot.querySelector('iframe');
   slot.dataset.loaded = 'true';
 
   const iframe = document.createElement('iframe');
+  iframe.src = slot.dataset.splineSrc;
   iframe.title = '3D Headphone';
-  iframe.loading = 'lazy';
-  iframe.setAttribute('fetchpriority', 'low');
+  iframe.loading = 'eager';
   iframe.setAttribute('frameborder', '0');
   iframe.allowFullscreen = true;
   iframe.tabIndex = -1;
@@ -684,32 +683,26 @@ const mountHeroSplineIframe = (slot, visual) => {
     setSplineActive(true);
   }, { once: true });
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      iframe.src = slot.dataset.splineSrc;
-    });
-  });
+  setTimeout(() => markHeroSplineReady(visual), 8000);
 
   return iframe;
 };
 
-const watchHeroSplineVisibility = (slot, visual) => {
+const watchHeroSplineVisibility = (slot) => {
   if (heroSplineObserver || !('IntersectionObserver' in window)) return;
 
   heroSplineObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      if (!slot.dataset.loaded) return;
       if (entry.isIntersecting) {
-        if (shouldLoadSpline() && slot.dataset.loaded !== 'true') {
-          mountHeroSplineIframe(slot, visual);
-        }
         resumeHeroSpline(slot);
       } else {
         pauseHeroSpline(slot);
       }
     });
-  }, { rootMargin: '80px', threshold: 0.08 });
+  }, { rootMargin: '0px', threshold: 0 });
 
-  heroSplineObserver.observe(visual);
+  heroSplineObserver.observe(slot.closest('.hero-modern__visual'));
 };
 
 const initHeroSpline = () => {
@@ -717,32 +710,24 @@ const initHeroSpline = () => {
   const visual = document.querySelector('.hero-modern__visual');
   if (!slot || !visual) return;
 
-  watchHeroSplineVisibility(slot, visual);
-
-  if (!shouldLoadSpline()) {
-    visual.classList.add('hero-modern__visual--poster-only');
-    markHeroSplineReady(visual);
+  if (isMobileViewport()) {
+    visual.classList.add('hero-modern__visual--mobile-hidden');
     return;
   }
 
-  const startSpline = () => {
-    if (!shouldLoadSpline()) {
-      visual.classList.add('hero-modern__visual--poster-only');
-      markHeroSplineReady(visual);
-      return;
-    }
+  if (!shouldLoadSpline()) {
+    visual.classList.add('hero-modern__visual--poster-only');
+    return;
+  }
 
-    const rect = visual.getBoundingClientRect();
-    const inView = rect.bottom > 0 && rect.top < window.innerHeight;
-    if (inView) {
-      mountHeroSplineIframe(slot, visual);
-    }
-  };
+  watchHeroSplineVisibility(slot);
 
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(startSpline, { timeout: 3500 });
-  } else {
-    window.addEventListener('load', () => setTimeout(startSpline, 1200), { once: true });
+  window.addEventListener('load', () => {
+    setTimeout(() => mountHeroSplineIframe(slot, visual), 400);
+  }, { once: true });
+
+  if (document.readyState === 'complete') {
+    setTimeout(() => mountHeroSplineIframe(slot, visual), 400);
   }
 };
 
@@ -835,12 +820,7 @@ const init = () => {
       renderHero();
       initEventListeners();
       renderGrid();
-
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => initHeroSpline(), { timeout: 4000 });
-      } else {
-        window.addEventListener('load', () => setTimeout(initHeroSpline, 1500), { once: true });
-      }
+      initHeroSpline();
       return;
     }
 
