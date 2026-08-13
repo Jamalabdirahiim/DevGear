@@ -3157,7 +3157,31 @@ body.no-scroll {
   height: min(55vw, 480px);
   max-height: 480px;
   overflow: hidden;
-  clip-path: inset(0 0 11% 0);
+}
+
+.hero-modern__visual::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 52px;
+  background: #0d0f1e;
+  box-shadow: -40px 0 24px 16px #0d0f1e;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-modern__visual::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18%;
+  background: linear-gradient(to top, #0d0f1e 55%, transparent);
+  z-index: 9;
+  pointer-events: none;
 }
 
 .hero-spline-loader {
@@ -3171,10 +3195,10 @@ body.no-scroll {
 
 .hero-spline-slot {
   position: absolute;
-  top: -8%;
-  right: -3%;
-  bottom: 6%;
-  left: -5%;
+  top: -12%;
+  right: 2%;
+  bottom: 14%;
+  left: -6%;
   z-index: 2;
   opacity: 0;
   overflow: hidden;
@@ -3391,14 +3415,23 @@ body.no-scroll {
     height: 280px;
     max-height: 280px;
     border-radius: 16px;
-    clip-path: inset(0 4% 16% 4%);
+  }
+
+  .hero-modern__visual::after {
+    width: 130px;
+    height: 40px;
+  }
+
+  .hero-modern__visual::before {
+    height: 22%;
   }
 
   .hero-spline-slot {
     inset: 0;
-    bottom: 4%;
-    transform: scale(0.52);
-    transform-origin: center 42%;
+    top: -4%;
+    bottom: 10%;
+    transform: scale(0.5);
+    transform-origin: center 40%;
   }
 
   .hero-spline-slot iframe {
