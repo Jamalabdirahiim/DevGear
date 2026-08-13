@@ -1,4 +1,4 @@
-const CACHE = 'devgear-v1';
+const CACHE = 'devgear-v2';
 const PRECACHE = ['/', '/index.html', '/logo-transparent.png'];
 
 self.addEventListener('install', (event) => {

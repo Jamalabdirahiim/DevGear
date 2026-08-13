@@ -344,6 +344,7 @@ const renderHero = () => {
         </div>
 
         <div class="hero-modern__visual">
+          <div class="hero-spline-poster" aria-hidden="true"></div>
           <div class="hero-spline-loader" aria-hidden="true"></div>
           <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
         </div>
@@ -622,10 +623,16 @@ const renderFooter = () => `
 // --- Unified Event Delegation System ---
 // Using top-level delegation for better performance and reliability
 
+const isMobileViewport = () =>
+  window.matchMedia('(max-width: 767px), (hover: none) and (pointer: coarse)').matches;
+
 const shouldLoadSpline = () => {
+  if (isMobileViewport()) return false;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
   const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) return false;
+  if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g' || conn.effectiveType === '3g')) {
+    return false;
+  }
   return true;
 };
 
@@ -633,32 +640,110 @@ const markHeroSplineReady = (visual) => {
   if (visual) visual.classList.add('hero-modern__visual--ready');
 };
 
+const setSplineActive = (active) => {
+  document.body.classList.toggle('spline-active', active);
+};
+
+let heroSplineObserver = null;
+
+const pauseHeroSpline = (slot) => {
+  const iframe = slot?.querySelector('iframe');
+  if (!iframe || iframe.dataset.paused === 'true') return;
+  iframe.dataset.paused = 'true';
+  iframe.removeAttribute('src');
+  setSplineActive(false);
+};
+
+const resumeHeroSpline = (slot) => {
+  const iframe = slot?.querySelector('iframe');
+  const src = slot?.dataset.splineSrc;
+  if (!iframe || !src) return;
+  iframe.dataset.paused = 'false';
+  if (iframe.getAttribute('src') !== src) {
+    iframe.src = src;
+  }
+  setSplineActive(true);
+};
+
+const mountHeroSplineIframe = (slot, visual) => {
+  if (slot.dataset.loaded === 'true') return null;
+  slot.dataset.loaded = 'true';
+
+  const iframe = document.createElement('iframe');
+  iframe.title = '3D Headphone';
+  iframe.loading = 'lazy';
+  iframe.setAttribute('fetchpriority', 'low');
+  iframe.setAttribute('frameborder', '0');
+  iframe.allowFullscreen = true;
+  iframe.tabIndex = -1;
+  iframe.dataset.paused = 'false';
+  slot.appendChild(iframe);
+
+  iframe.addEventListener('load', () => {
+    markHeroSplineReady(visual);
+    setSplineActive(true);
+  }, { once: true });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      iframe.src = slot.dataset.splineSrc;
+    });
+  });
+
+  return iframe;
+};
+
+const watchHeroSplineVisibility = (slot, visual) => {
+  if (heroSplineObserver || !('IntersectionObserver' in window)) return;
+
+  heroSplineObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (shouldLoadSpline() && slot.dataset.loaded !== 'true') {
+          mountHeroSplineIframe(slot, visual);
+        }
+        resumeHeroSpline(slot);
+      } else {
+        pauseHeroSpline(slot);
+      }
+    });
+  }, { rootMargin: '80px', threshold: 0.08 });
+
+  heroSplineObserver.observe(visual);
+};
+
 const initHeroSpline = () => {
   const slot = document.querySelector('.hero-spline-slot');
   const visual = document.querySelector('.hero-modern__visual');
   if (!slot || !visual) return;
 
-  const existingIframe = slot.querySelector('iframe');
-  if (existingIframe) {
-    existingIframe.addEventListener('load', () => markHeroSplineReady(visual), { once: true });
-    setTimeout(() => markHeroSplineReady(visual), 6000);
+  watchHeroSplineVisibility(slot, visual);
+
+  if (!shouldLoadSpline()) {
+    visual.classList.add('hero-modern__visual--poster-only');
+    markHeroSplineReady(visual);
     return;
   }
 
-  if (!shouldLoadSpline()) return;
+  const startSpline = () => {
+    if (!shouldLoadSpline()) {
+      visual.classList.add('hero-modern__visual--poster-only');
+      markHeroSplineReady(visual);
+      return;
+    }
 
-  const iframe = document.createElement('iframe');
-  iframe.src = slot.dataset.splineSrc;
-  iframe.title = '3D Headphone';
-  iframe.loading = 'eager';
-  iframe.setAttribute('fetchpriority', 'high');
-  iframe.setAttribute('frameborder', '0');
-  iframe.allowFullscreen = true;
-  iframe.tabIndex = -1;
-  slot.appendChild(iframe);
+    const rect = visual.getBoundingClientRect();
+    const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+    if (inView) {
+      mountHeroSplineIframe(slot, visual);
+    }
+  };
 
-  iframe.addEventListener('load', () => markHeroSplineReady(visual), { once: true });
-  setTimeout(() => markHeroSplineReady(visual), 6000);
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startSpline, { timeout: 3500 });
+  } else {
+    window.addEventListener('load', () => setTimeout(startSpline, 1200), { once: true });
+  }
 };
 
 const initEventListeners = () => {
@@ -741,8 +826,6 @@ const init = () => {
     const focusGrid = document.querySelector('#focus-grid');
     const checklistGrid = document.querySelector('#checklist-grid');
 
-    initHeroSpline();
-
     if (focusGrid) {
       const focusFilter = (p) => ['Monitor', 'Audio', 'Light'].includes(p.category);
       renderGrid('#focus-grid', focusFilter);
@@ -750,12 +833,15 @@ const init = () => {
       renderGrid('#checklist-grid');
     } else {
       renderHero();
-      const paintGrid = () => renderGrid();
+      initEventListeners();
+      renderGrid();
+
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(paintGrid, { timeout: 120 });
+        requestIdleCallback(() => initHeroSpline(), { timeout: 4000 });
       } else {
-        setTimeout(paintGrid, 0);
+        window.addEventListener('load', () => setTimeout(initHeroSpline, 1500), { once: true });
       }
+      return;
     }
 
     initEventListeners();

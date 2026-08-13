@@ -26,6 +26,8 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   z-index: 1 !important;
   font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 520px;
 }
 
 .footer-beam-container {
@@ -33,24 +35,19 @@
   inset: 0 !important;
   pointer-events: none !important;
   z-index: 0 !important;
-  mix-blend-mode: screen !important;
+  mix-blend-mode: normal !important;
 }
 
 .footer-beam {
   position: absolute !important;
-  bottom: -400px !important;
-  /* Move even lower to widen the sweep */
+  bottom: -80px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: 3200px !important;
-  /* Massive width */
-  height: 1600px !important;
-  /* Massive height */
-  background: conic-gradient(from 270deg at 50% 100%, transparent 30%, #a855f7 45%, #22d3ee 50%, #a855f7 55%, transparent 70%) !important;
-  filter: blur(120px) !important;
-  /* Softer, larger glow */
-  opacity: 1 !important;
-  /* Full opacity for testing visibility */
+  width: 900px !important;
+  height: 420px !important;
+  background: radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.35) 0%, rgba(99, 102, 241, 0.15) 40%, transparent 72%) !important;
+  filter: none !important;
+  opacity: 0.85 !important;
 }
 
 .footer-glow-base {
@@ -58,10 +55,10 @@
   bottom: 0 !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: 1200px !important;
-  height: 600px !important;
-  background: radial-gradient(circle at 50% 100%, rgba(168, 85, 247, 0.4), transparent 80%) !important;
-  filter: blur(100px) !important;
+  width: 480px !important;
+  height: 220px !important;
+  background: radial-gradient(circle at 50% 100%, rgba(168, 85, 247, 0.22), transparent 75%) !important;
+  filter: none !important;
 }
 
 .footer-content {
@@ -2875,24 +2872,19 @@ body.no-scroll {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  mix-blend-mode: screen;
+  mix-blend-mode: normal;
 }
 
 .footer-beam {
   position: absolute;
-  bottom: -100px;
+  bottom: -80px;
   left: 50%;
   transform: translateX(-50%);
-  width: 1200px;
-  height: 900px;
-  background: conic-gradient(from 270deg at 50% 100%,
-      transparent 38%,
-      rgba(168, 85, 247, 0.6) 48%,
-      rgba(34, 211, 238, 0.7) 50%,
-      rgba(168, 85, 247, 0.6) 52%,
-      transparent 62%);
-  filter: blur(50px);
-  opacity: 0.95;
+  width: 900px;
+  height: 420px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.35) 0%, rgba(99, 102, 241, 0.15) 40%, transparent 72%);
+  filter: none;
+  opacity: 0.85;
 }
 
 .footer-glow-base {
@@ -2900,12 +2892,10 @@ body.no-scroll {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
-  background: radial-gradient(circle at 50% 100%,
-      var(--footer-accent-glow),
-      transparent 80%);
-  filter: blur(60px);
+  width: 480px;
+  height: 220px;
+  background: radial-gradient(circle at 50% 100%, var(--footer-accent-glow), transparent 75%);
+  filter: none;
 }
 
 .footer-content {
@@ -3157,15 +3147,28 @@ body.no-scroll {
   height: min(55vw, 480px);
   max-height: 480px;
   overflow: hidden;
+  contain: layout paint style;
+  isolation: isolate;
+}
+
+.hero-spline-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(124, 58, 237, 0.28) 0%, transparent 52%),
+    radial-gradient(circle at 62% 58%, rgba(6, 182, 212, 0.14) 0%, transparent 48%),
+    #0d0f1e;
+  transition: opacity 0.7s ease;
 }
 
 .hero-spline-loader {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 55%, rgba(124, 58, 237, 0.18) 0%, transparent 62%);
-  animation: heroLoaderPulse 2.2s ease-in-out infinite;
-  transition: opacity 0.5s ease;
+  background: transparent;
   z-index: 1;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .hero-spline-slot {
@@ -3173,7 +3176,10 @@ body.no-scroll {
   inset: -8% -5%;
   z-index: 2;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0s linear 0.7s;
+  transform: translateZ(0);
+  will-change: opacity;
 }
 
 .hero-spline-slot iframe {
@@ -3183,24 +3189,25 @@ body.no-scroll {
   height: 100%;
   border: none;
   background: transparent;
-}
-
-.hero-modern__visual {
-  contain: layout paint;
+  pointer-events: none;
 }
 
 .hero-modern__visual--ready .hero-spline-slot {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 0.7s ease, visibility 0s;
 }
 
-.hero-modern__visual--ready .hero-spline-loader {
+.hero-modern__visual--ready .hero-spline-poster {
   opacity: 0;
-  pointer-events: none;
 }
 
-@keyframes heroLoaderPulse {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
+.hero-modern__visual--poster-only .hero-spline-poster {
+  opacity: 1;
+}
+
+.hero-modern__visual--poster-only .hero-spline-slot {
+  display: none;
 }
 
 .hero-modern__scroll {
@@ -3216,11 +3223,6 @@ body.no-scroll {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  animation: heroCueFade 2.5s ease-in-out infinite;
-}
-
-.hero-modern__scroll svg {
-  animation: heroBounce 1.6s ease-in-out infinite;
 }
 
 @keyframes heroCueFade {
@@ -3420,4 +3422,9 @@ body.no-scroll {
   .hero-modern__scroll svg {
     animation: none !important;
   }
+}
+
+body.spline-active .footer-beam,
+body.spline-active .footer-glow-base {
+  opacity: 0.45;
 }
