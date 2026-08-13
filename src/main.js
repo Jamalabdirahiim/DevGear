@@ -7,6 +7,7 @@ const escapeHTML = (str) => {
 
 const optimizeImageUrl = (url, width = 480) => {
   if (!url) return url;
+  if (url.startsWith('/')) return url;
 
   try {
     const parsed = new URL(url);
@@ -58,13 +59,15 @@ const optimizeImageUrl = (url, width = 480) => {
 const PRODUCT_IMG_WIDTH = 420;
 const warmedImages = new Set();
 
+const productImageSrc = (product) => `/products/${product.id}.jpg`;
+
 const warmProductImageCache = (items) => {
   items.forEach((product, index) => {
-    const src = optimizeImageUrl(product.image || '', PRODUCT_IMG_WIDTH);
-    if (!src || warmedImages.has(src)) return;
+    const src = productImageSrc(product);
+    if (warmedImages.has(src)) return;
     warmedImages.add(src);
     const img = new Image();
-    if (index < 3) {
+    if (index < 6) {
       try { img.fetchPriority = 'high'; } catch (_) { /* unsupported */ }
     }
     img.src = src;
@@ -76,7 +79,7 @@ const products = [
     id: 10,
     title: "Apple Mac mini (M4)",
     category: "Computer",
-    image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
+    image: "/products/10.jpg",
     link: "https://www.amazon.com/Apple-2024-Desktop-Computer-10%E2%80%91core/dp/B0DLBTPDCS?th=1&linkCode=ll1&tag=jamalshop0f-20&linkId=5246b69944c8dfc444889137a64a0cdc&language=en_US&ref_=as_li_ss_tl",
     badge: "Flagship",
     keyword: "Best mini PC",
@@ -89,7 +92,7 @@ const products = [
     id: 1,
     title: "Dell UltraSharp 4K",
     category: "Monitor",
-    image: "https://i.dell.com/sites/csimages/Video_Imagery/all/ultrasharp-monitor-u3223qe-u2722qe-1280.jpg",
+    image: "/products/1.jpg",
     link: "https://amzn.to/3NJ3HeX",
     badge: "Editor's Choice",
     keyword: "Best 4K monitor",
@@ -102,7 +105,7 @@ const products = [
     id: 2,
     title: "Divoom Ditoo-Pro",
     category: "Viral",
-    image: "https://i1.wp.com/techacute.com/wp-content/uploads/2020/06/PSX_20200603_011735.jpg?resize=696%2C522&quality=95&strip=all&ssl=1",
+    image: "/products/2.jpg",
     link: "https://amzn.to/4jVQ605",
     badge: "Viral Hit",
     keyword: "Viral desk gadget",
@@ -115,7 +118,7 @@ const products = [
     id: 3,
     title: "Sony WH-1000XM5",
     category: "Audio",
-    image: "https://highxtar.com/wp-content/uploads/2023/06/IMG_5175.jpg",
+    image: "/products/3.jpg",
     link: "https://amzn.to/4pVypyY",
     badge: "Deep Work",
     keyword: "Best focus headphones",
@@ -128,7 +131,7 @@ const products = [
     id: 4,
     title: "Anker Prime 27k",
     category: "Power",
-    image: "https://cdn.mos.cms.futurecdn.net/Jqkrpqzc5E27MRQdyhH2h3.jpg",
+    image: "/products/4.jpg",
     link: "https://amzn.to/4ra5PLd",
     badge: "Pro Choice",
     keyword: "Best power bank",
@@ -141,7 +144,7 @@ const products = [
     id: 5,
     title: "CalDigit TS4",
     category: "Dock",
-    image: "https://www.caldigit.com/wp-content/uploads/2021/12/TS4_Thunderbolt-4-Dock_Laptop-Charging1000px_Version04.jpg",
+    image: "/products/5.jpg",
     link: "https://amzn.to/4jTup0o",
     keyword: "Best Thunderbolt 4 dock",
     description: "The King of Docks. 18 ports to connect everything from monitors to SD cards with a single Thunderbolt cable.",
@@ -153,7 +156,7 @@ const products = [
     id: 6,
     title: "Keychron Q1 HE",
     category: "Keyboard",
-    image: "https://www.keychron.com/cdn/shop/files/Keychron-Q1-HE-QMK-Wireless-Custom-Keyboard-Shell-White.jpg?v=1754623218&width=1214",
+    image: "/products/6.jpg",
     link: "https://amzn.to/4tdI86K",
     badge: "New Tech",
     keyword: "Best programming keyboard",
@@ -166,7 +169,7 @@ const products = [
     id: 7,
     title: "BenQ ScreenBar Halo",
     category: "Light",
-    image: "https://techjioblog.com/wp-content/uploads/2023/09/BenQ-Screenbar-Halo-monitor-lightbar-cover.jpg",
+    image: "/products/7.jpg",
     link: "https://amzn.to/3ZtHtQG",
     keyword: "Best light bar",
     description: "Saves desk space and eliminates screen glare. The wireless controller and backlighting make it the premium choice.",
@@ -178,7 +181,7 @@ const products = [
     id: 8,
     title: "Logitech MX Master 3S",
     category: "Mouse",
-    image: "https://www.logitech.com/content/dam/logitech/en/products/mice/mx-master-3s/mx-master-3s-graphite-ident.jpg", // Official Logitech asset
+    image: "/products/8.jpg",
     link: "https://amzn.to/3LMFfJc",
     badge: "Essential",
     keyword: "Best ergonomic mouse",
@@ -191,7 +194,7 @@ const products = [
     id: 9,
     title: "SIHOO M57 Ergonomic Mesh Office Chair",
     category: "Chair",
-    image: "https://www.kzchair.com/cdn/shop/products/H5d13d89beeee483b816e7b38b577c4adT.png_960x960_0bad36c7-456a-4e1e-aab6-99392650aa71_1800x1800.png?v=1664608353",
+    image: "/products/9.jpg",
     link: "https://amzn.to/4sXROC3",
     badge: "Comfort",
     keyword: "Best budget chair",
@@ -205,7 +208,7 @@ const products = [
     id: 11,
     title: "Creative Pebble V3",
     category: "Audio",
-    image: "/assets/pebble.jpg", // Local asset
+    image: "/products/11.jpg",
     link: "https://amzn.to/3O2Iugd",
     badge: "Best Value",
     keyword: "Best budget speakers",
@@ -218,7 +221,7 @@ const products = [
     id: 12,
     title: "Logitech G305 Lightspeed",
     category: "Mouse",
-    image: "/assets/g305.jpg", // Local asset
+    image: "/products/12.jpg",
     link: "https://amzn.to/4khfSfs",
     badge: "Top Seller",
     keyword: "Best budget mouse",
@@ -231,7 +234,7 @@ const products = [
     id: 13,
     title: "Keychron V1 QMK",
     category: "Keyboard",
-    image: "/assets/keychron.jpg", // Local asset
+    image: "/products/13.jpg",
     link: "https://amzn.to/3M6MPyf",
     badge: "Entry Custom",
     keyword: "Best budget keyboard",
@@ -244,7 +247,7 @@ const products = [
     id: 14,
     title: "KOORUI 24N1A Monitor",
     category: "Monitor",
-    image: "/assets/koorui.jpg", // Local asset
+    image: "/products/14.jpg",
     link: "https://amzn.to/4qcdXdc",
     badge: "Bestseller",
     keyword: "Best budget screen",
@@ -399,13 +402,10 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
   const isHomeGrid = containerId === '#grid-container';
 
   gridContainer.innerHTML = filteredProducts.map((product, index) => {
-    const imgSrc = optimizeImageUrl(product.image || '', PRODUCT_IMG_WIDTH);
-    const priority = index === 0
-      ? 'fetchpriority="high"'
-      : index < 4
-        ? 'fetchpriority="auto"'
-        : 'fetchpriority="low"';
+    const imgSrc = productImageSrc(product);
+    const priority = index < 6 ? 'fetchpriority="high"' : 'fetchpriority="auto"';
     const loadingMode = isHomeGrid ? 'eager' : index < 6 ? 'eager' : 'lazy';
+    const decodingMode = index < 6 ? 'sync' : 'async';
 
     return `
   <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
@@ -418,7 +418,7 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
           width="420"
           height="315"
           loading="${loadingMode}"
-          decoding="async"
+          decoding="${decodingMode}"
           ${priority}
           onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=420';"
         />
@@ -463,21 +463,21 @@ const bundles = {
       title: "Keychron C3 Pro",
       link: "https://amzn.to/3B4HjA7",
       category: "Keyboard",
-      image: "https://m.media-amazon.com/images/I/61hn0-nLw+L._AC_SL1500_.jpg",
+      image: "/products/13.jpg",
       badge: "Value King"
     },
     {
       title: "Logitech G305 Wireless",
       link: "https://amzn.to/4t6V7B2",
       category: "Mouse",
-      image: "https://resource.logitechg.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g305/g305-gallery-1.png?v=1",
+      image: "/products/12.jpg",
       badge: "Best Seller"
     },
     {
       title: "KOORUI 24\" 1080p Monitor",
       link: "https://amzn.to/3ZtHtQG",
       category: "Monitor",
-      image: "https://m.media-amazon.com/images/I/71Xyg-d6BFL._AC_SL1500_.jpg",
+      image: "/products/14.jpg",
       badge: "165Hz"
     }
   ],
@@ -486,28 +486,28 @@ const bundles = {
       title: "Apple Mac mini (M4)",
       link: "https://amzn.to/3LOdy2J",
       category: "Computer",
-      image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
+      image: "/products/10.jpg",
       badge: "Flagship"
     },
     {
       title: "Dell UltraSharp 4K",
       link: "https://amzn.to/3NJ3HeX",
       category: "Monitor",
-      image: "https://i.dell.com/sites/csimages/Video_Imagery/all/ultrasharp-monitor-u3223qe-u2722qe-1280.jpg",
+      image: "/products/1.jpg",
       badge: "Crisp Text"
     },
     {
       title: "Logitech MX Master 3S",
       link: "https://amzn.to/3LMFfJc",
       category: "Mouse",
-      image: "https://www.logitech.com/content/dam/logitech/en/products/mice/mx-master-3s/mx-master-3s-graphite-ident.jpg",
+      image: "/products/8.jpg",
       badge: "Productivity"
     },
     {
       title: "Sony WH-1000XM5",
       link: "https://amzn.to/4pVypyY",
       category: "Audio",
-      image: "https://highxtar.com/wp-content/uploads/2023/06/IMG_5175.jpg",
+      image: "/products/3.jpg",
       badge: "Silence"
     }
   ],
@@ -516,7 +516,7 @@ const bundles = {
       title: "Apple Mac mini (M4)",
       link: "https://amzn.to/3LOdy2J",
       category: "Computer",
-      image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25717370/DSC_1249.jpg?quality=90&strip=all&crop=16.666666666667,0,66.666666666667,100",
+      image: "/products/10.jpg",
       badge: "Flagship"
     },
     {
@@ -537,7 +537,7 @@ const bundles = {
       title: "CalDigit TS4 Dock",
       link: "https://amzn.to/4jTup0o",
       category: "Dock",
-      image: "https://www.caldigit.com/wp-content/uploads/2021/12/TS4_Thunderbolt-4-Dock_Laptop-Charging1000px_Version04.jpg",
+      image: "/products/5.jpg",
       badge: "The Hub"
     }
   ]

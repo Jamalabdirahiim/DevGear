@@ -1,8 +1,22 @@
-const CACHE = 'devgear-v4';
+const CACHE = 'devgear-v5';
 const PRECACHE = [
   '/',
   '/index.html',
-  '/logo-transparent.png'
+  '/logo-transparent.png',
+  '/products/10.jpg',
+  '/products/1.jpg',
+  '/products/2.jpg',
+  '/products/3.jpg',
+  '/products/4.jpg',
+  '/products/5.jpg',
+  '/products/6.jpg',
+  '/products/7.jpg',
+  '/products/8.jpg',
+  '/products/9.jpg',
+  '/products/11.jpg',
+  '/products/12.jpg',
+  '/products/13.jpg',
+  '/products/14.jpg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -27,7 +41,7 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  if (url.pathname.startsWith('/assets/')) {
+  if (url.pathname.startsWith('/products/') || url.pathname.startsWith('/assets/')) {
     event.respondWith(cacheFirst(request));
     return;
   }
