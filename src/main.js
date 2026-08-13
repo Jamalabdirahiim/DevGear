@@ -235,8 +235,7 @@ const renderNavbar = () => `
   <nav class="navbar sticky-header">
     <div class="nav-wrap">
       <a href="/" class="logo-link">
-        <img src="/logo-transparent.png" alt="DevGear Logo" class="logo-img" />
-        <span class="logo-version">v1.2</span>
+        <img src="/logo-transparent.png?v=3.0" alt="DevGear Logo" class="logo-img" />
       </a>
       
       <!-- Desktop Navigation -->

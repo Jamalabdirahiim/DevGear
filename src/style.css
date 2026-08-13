@@ -3348,8 +3348,8 @@ body.no-scroll {
   }
 
   .navbar.sticky-header {
-    padding: 0 10px 0 6px;
-    height: 80px;
+    padding: 0 14px;
+    height: 76px;
     overflow: visible;
   }
 
@@ -3367,12 +3367,11 @@ body.no-scroll {
   }
 
   .logo-link {
-    gap: 0;
-    max-width: none;
-    overflow: visible;
     display: inline-flex;
     align-items: center;
-    height: 80px;
+    height: auto;
+    max-width: calc(100vw - 56px);
+    overflow: visible;
   }
 
   .logo-version {
@@ -3380,15 +3379,16 @@ body.no-scroll {
   }
 
   .logo-img {
-    height: 6.5rem !important;
-    max-height: none !important;
+    display: block !important;
+    height: 64px !important;
     width: auto !important;
-    min-width: 140px;
-    margin-left: -2.75rem !important;
-    margin-right: -1.25rem !important;
-    object-fit: contain;
-    object-position: left center;
-    flex-shrink: 0;
+    max-width: min(72vw, 280px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    flex-shrink: 0 !important;
+    transform: none !important;
   }
 
   .hero-modern {
