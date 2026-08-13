@@ -307,7 +307,9 @@ const renderHero = () => {
 
         <div class="hero-modern__visual">
           <div class="hero-spline-loader" aria-hidden="true"></div>
-          <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
+          <div class="hero-spline-frame">
+            <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
+          </div>
         </div>
       </div>
 
