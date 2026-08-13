@@ -256,49 +256,7 @@ const renderApp = () => {
   setupFilters(); // Re-attach event listeners after DOM update
 };
 
-const GEAR_PATH = 'M50 6 L53.5 16 L63 14.5 L59.5 24 L69 27.5 L59.5 31 L63 40.5 L53.5 39 L50 49 L46.5 39 L37 40.5 L40.5 31 L31 27.5 L40.5 24 L37 14.5 L46.5 16 Z';
-
-const renderGearSvg = (id, className = '') => `
-  <svg class="hero-gear ${className}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs>
-      <linearGradient id="gearGrad${id}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#e879f9"/>
-        <stop offset="45%" stop-color="#818cf8"/>
-        <stop offset="100%" stop-color="#22d3ee"/>
-      </linearGradient>
-      <filter id="gearGlow${id}" x="-40%" y="-40%" width="180%" height="180%">
-        <feGaussianBlur stdDeviation="2" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-    <path d="${GEAR_PATH}" fill="url(#gearGrad${id})" filter="url(#gearGlow${id})"/>
-    <circle cx="50" cy="50" r="15" fill="#0a0c18"/>
-    <circle cx="50" cy="50" r="8" fill="#312e81" stroke="rgba(168,85,247,0.45)" stroke-width="1.5"/>
-    <circle cx="50" cy="50" r="3.5" fill="#a855f7"/>
-  </svg>
-`;
-
-const renderGearScene = () => `
-  <div class="hero-gear-scene">
-    <div class="hero-gear-scene__aura" aria-hidden="true"></div>
-    <div class="hero-gear-scene__orbit hero-gear-scene__orbit--1" aria-hidden="true"></div>
-    <div class="hero-gear-scene__orbit hero-gear-scene__orbit--2" aria-hidden="true"></div>
-    <div class="hero-gear-scene__center">
-      ${renderGearSvg(1, 'hero-gear--xl hero-gear--cw')}
-    </div>
-    ${renderGearSvg(2, 'hero-gear--lg hero-gear--ccw')}
-    ${renderGearSvg(3, 'hero-gear--md hero-gear--cw')}
-    ${renderGearSvg(4, 'hero-gear--sm hero-gear--ccw')}
-    ${renderGearSvg(5, 'hero-gear--xs hero-gear--cw')}
-    ${renderGearSvg(6, 'hero-gear--xxs hero-gear--ccw')}
-    <span class="hero-gear-scene__spark hero-gear-scene__spark--1"></span>
-    <span class="hero-gear-scene__spark hero-gear-scene__spark--2"></span>
-    <span class="hero-gear-scene__spark hero-gear-scene__spark--3"></span>
-    <span class="hero-gear-scene__spark hero-gear-scene__spark--4"></span>
-    <span class="hero-gear-scene__spark hero-gear-scene__spark--5"></span>
-    <span class="hero-gear-scene__spark hero-gear-scene__spark--6"></span>
-  </div>
-`;
+const SPLINE_HERO_URL = 'https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/';
 
 const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
@@ -347,14 +305,9 @@ const renderHero = () => {
           </div>
         </div>
 
-        <div class="hero-modern__visual" aria-hidden="true">
-          <div class="hero-visual-fallback">
-            ${renderGearScene()}
-          </div>
-          <div
-            class="hero-spline-slot"
-            data-spline-src="https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/"
-          ></div>
+        <div class="hero-modern__visual">
+          <div class="hero-spline-loader" aria-hidden="true"></div>
+          <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
         </div>
       </div>
 
@@ -364,14 +317,6 @@ const renderHero = () => {
       </div>
     </section>
   `;
-};
-
-
-
-const renderSpline = () => {
-  // Spline 3D scene removed
-  const section = document.querySelector('#spline-section');
-  if (section) section.innerHTML = '';
 };
 
 
@@ -396,6 +341,7 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
           alt="${escapeHTML(product.title || 'Product')}" 
           class="card-img" 
           loading="lazy"
+          decoding="async"
           onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000&opacity=0.3';"
         />
         ${product.keyword ? `<div class="badge-keyword">${escapeHTML(product.keyword)}</div>` : ''}
@@ -532,6 +478,7 @@ const renderBundle = (tier) => {
           alt="${escapeHTML(item.title)}" 
           class="card-img" 
           loading="lazy"
+          decoding="async"
           onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000&opacity=0.3';"
         />
       </div>
@@ -623,14 +570,13 @@ const renderFooter = () => `
 // Using top-level delegation for better performance and reliability
 
 const shouldLoadSpline = () => {
-  if (window.matchMedia('(max-width: 1023px)').matches) return false;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
   const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) return false;
   return true;
 };
 
-const initLazySpline = () => {
+const initHeroSpline = () => {
   const slot = document.querySelector('.hero-spline-slot');
   const visual = document.querySelector('.hero-modern__visual');
   if (!slot || !visual || !shouldLoadSpline()) return;
@@ -648,12 +594,16 @@ const initLazySpline = () => {
     slot.appendChild(iframe);
 
     iframe.addEventListener('load', () => {
-      visual.classList.add('hero-modern__visual--spline-ready');
+      visual.classList.add('hero-modern__visual--ready');
     }, { once: true });
   };
 
   const scheduleLoad = () => {
-    setTimeout(loadSpline, 400);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadSpline, { timeout: 2500 });
+    } else {
+      setTimeout(loadSpline, 800);
+    }
   };
 
   if ('IntersectionObserver' in window) {
@@ -662,10 +612,10 @@ const initLazySpline = () => {
         scheduleLoad();
         observer.disconnect();
       }
-    }, { rootMargin: '100px' });
+    }, { rootMargin: '50px' });
     observer.observe(visual);
   } else {
-    window.addEventListener('load', scheduleLoad, { once: true });
+    scheduleLoad();
   }
 };
 
@@ -749,15 +699,15 @@ const init = () => {
     } else if (checklistGrid) {
       renderGrid('#checklist-grid');
     } else {
-      // Homepage
       renderHero();
-      renderSpline();
       renderGrid();
     }
 
-    // Initialize Event System once
     initEventListeners();
-    initLazySpline();
+
+    requestAnimationFrame(() => {
+      initHeroSpline();
+    });
   } catch (error) {
     console.error('Initialization error:', error);
   }

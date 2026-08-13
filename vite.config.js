@@ -6,6 +6,7 @@ export default defineConfig({
     build: {
         target: 'es2020',
         cssMinify: true,
+        modulePreload: { polyfill: true },
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
