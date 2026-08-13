@@ -593,43 +593,6 @@ const renderFooter = () => `
       <p style="color:#475569;font-size:0.95rem;max-width:480px;margin:0 auto;">Every product on DevGear was tested on a real dev setup — no sponsored noise.</p>
     </div>
 
-    <!-- ===== 3-COL FOOTER GRID ===== -->
-    <div style="position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 2rem 4rem;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;">
-
-      <!-- Brand col -->
-      <div>
-        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1.1rem;">
-          <img src="/logo-transparent.png" alt="DevGear" style="height:32px;width:auto;" />
-          <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;color:#4f46e5;text-transform:uppercase;background:rgba(79,70,229,0.12);padding:0.2rem 0.55rem;border-radius:999px;border:1px solid rgba(99,102,241,0.3);">v1.2</span>
-        </div>
-        <p style="color:#475569;font-size:0.88rem;line-height:1.7;margin:0 0 1.4rem;max-width:260px;">A curated gear list built by a 22-year-old developer who cares deeply about focus, ergonomics, and clean setups.</p>
-        <div style="display:flex;gap:0.7rem;">
-          <span style="padding:0.3rem 0.8rem;border-radius:999px;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;background:rgba(139,92,246,0.12);color:#a78bfa;border:1px solid rgba(139,92,246,0.25);">✦ Curated by a Developer</span>
-        </div>
-      </div>
-
-      <!-- Nav col -->
-      <div>
-        <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#334155;margin-bottom:1.1rem;">Navigate</p>
-        <div style="display:flex;flex-direction:column;gap:0.6rem;">
-          <a href="/" style="color:#64748b;font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#64748b'">Home</a>
-          <a href="/focus.html" style="color:#64748b;font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#64748b'">Focus Mode</a>
-          <a href="/checklist.html" style="color:#64748b;font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#64748b'">Checklist</a>
-        </div>
-      </div>
-
-      <!-- Trust col -->
-      <div>
-        <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#334155;margin-bottom:1.1rem;">Trust & Security</p>
-        <p style="color:#475569;font-size:0.85rem;line-height:1.65;margin:0 0 1rem;">Orders go through Amazon directly. We never see or store your payment details.</p>
-        <div style="display:flex;flex-direction:column;gap:0.55rem;">
-          <span style="color:#22d3ee;font-size:0.82rem;font-weight:600;">🔒 SSL Encrypted</span>
-          <span style="color:#22c55e;font-size:0.82rem;font-weight:600;">✓ Amazon Verified</span>
-        </div>
-      </div>
-
-    </div>
-
     <!-- ===== BOTTOM BAR ===== -->
     <div style="position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.05);padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:0.8rem;">
       <p style="color:#334155;font-size:0.8rem;margin:0;">&copy; 2026 DevGear. Independently Curated.</p>
