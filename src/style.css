@@ -3349,7 +3349,7 @@ body.no-scroll {
 
   .navbar.sticky-header {
     padding: 0 14px;
-    height: 76px;
+    height: 88px;
     overflow: visible;
   }
 
@@ -3380,9 +3380,9 @@ body.no-scroll {
 
   .logo-img {
     display: block !important;
-    height: 64px !important;
+    height: 128px !important;
     width: auto !important;
-    max-width: min(72vw, 280px) !important;
+    max-width: min(88vw, 360px) !important;
     margin: 0 !important;
     padding: 0 !important;
     object-fit: contain !important;
