@@ -373,8 +373,14 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
 
   gridContainer.innerHTML = filteredProducts.map((product, index) => {
     const imgSrc = optimizeImageUrl(product.image || '', 520);
-    const eager = index < 3 ? 'eager' : 'lazy';
-    const priority = index < 2 ? 'fetchpriority="high"' : 'fetchpriority="low"';
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const eagerLimit = isMobile ? 6 : 4;
+    const eager = index < eagerLimit ? 'eager' : 'lazy';
+    const priority = index === 0
+      ? 'fetchpriority="high"'
+      : index < eagerLimit
+        ? 'fetchpriority="auto"'
+        : 'fetchpriority="low"';
 
     return `
   <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
@@ -424,6 +430,22 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
     </a>
   `;
   }).join('');
+
+  preloadVisibleProductImages(filteredProducts, window.matchMedia('(max-width: 767px)').matches ? 6 : 4);
+};
+
+const preloadVisibleProductImages = (items, count = 4) => {
+  items.slice(0, count).forEach((product) => {
+    const href = optimizeImageUrl(product.image || '', 520);
+    if (!href) return;
+    const existing = document.querySelector(`link[rel="preload"][href="${href}"]`);
+    if (existing) return;
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = href;
+    document.head.appendChild(link);
+  });
 };
 
 const bundles = {
