@@ -34,11 +34,41 @@ const optimizeImageUrl = (url, width = 480) => {
       parsed.searchParams.set('quality', '80');
       return parsed.toString();
     }
+
+    if (parsed.hostname.includes('keychron.com')) {
+      parsed.searchParams.set('width', String(width));
+      return parsed.toString();
+    }
+
+    if (parsed.hostname.includes('logitechg.com') && url.includes('w_')) {
+      return url.replace(/w_\d+/, `w_${width}`);
+    }
+
+    if (parsed.hostname.includes('shopify') || parsed.hostname.includes('cdn.shop')) {
+      parsed.searchParams.set('width', String(width));
+      return parsed.toString();
+    }
   } catch {
     return url;
   }
 
   return url;
+};
+
+const PRODUCT_IMG_WIDTH = 420;
+const warmedImages = new Set();
+
+const warmProductImageCache = (items) => {
+  items.forEach((product, index) => {
+    const src = optimizeImageUrl(product.image || '', PRODUCT_IMG_WIDTH);
+    if (!src || warmedImages.has(src)) return;
+    warmedImages.add(src);
+    const img = new Image();
+    if (index < 3) {
+      try { img.fetchPriority = 'high'; } catch (_) { /* unsupported */ }
+    }
+    img.src = src;
+  });
 };
 
 const products = [
@@ -364,16 +394,18 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
     return;
   }
 
+  warmProductImageCache(filteredProducts);
+
+  const isHomeGrid = containerId === '#grid-container';
+
   gridContainer.innerHTML = filteredProducts.map((product, index) => {
-    const imgSrc = optimizeImageUrl(product.image || '', 520);
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    const eagerLimit = isMobile ? 6 : 4;
-    const eager = index < eagerLimit ? 'eager' : 'lazy';
+    const imgSrc = optimizeImageUrl(product.image || '', PRODUCT_IMG_WIDTH);
     const priority = index === 0
       ? 'fetchpriority="high"'
-      : index < eagerLimit
+      : index < 4
         ? 'fetchpriority="auto"'
         : 'fetchpriority="low"';
+    const loadingMode = isHomeGrid ? 'eager' : index < 6 ? 'eager' : 'lazy';
 
     return `
   <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
@@ -383,12 +415,12 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
           src="${imgSrc}" 
           alt="${escapeHTML(product.title || 'Product')}" 
           class="card-img" 
-          width="520"
-          height="390"
-          loading="${eager}"
+          width="420"
+          height="315"
+          loading="${loadingMode}"
           decoding="async"
           ${priority}
-          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=520';"
+          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=420';"
         />
         ${product.keyword ? `<div class="badge-keyword">${escapeHTML(product.keyword)}</div>` : ''}
       </div>
@@ -423,22 +455,6 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
     </a>
   `;
   }).join('');
-
-  preloadVisibleProductImages(filteredProducts, window.matchMedia('(max-width: 767px)').matches ? 6 : 4);
-};
-
-const preloadVisibleProductImages = (items, count = 4) => {
-  items.slice(0, count).forEach((product) => {
-    const href = optimizeImageUrl(product.image || '', 520);
-    if (!href) return;
-    const existing = document.querySelector(`link[rel="preload"][href="${href}"]`);
-    if (existing) return;
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = href;
-    document.head.appendChild(link);
-  });
 };
 
 const bundles = {
@@ -650,25 +666,29 @@ const initHeroSpline = () => {
     return;
   }
 
-  const markReady = () => visual.classList.add('hero-modern__visual--ready');
+  let ready = false;
+  const markReady = () => {
+    if (ready) return;
+    ready = true;
+    visual.classList.add('hero-modern__visual--ready');
+  };
 
-  const iframe = slot.querySelector('iframe');
-  if (iframe) {
-    iframe.addEventListener('load', markReady, { once: true });
-    setTimeout(markReady, 6000);
-    return;
+  let iframe = slot.querySelector('iframe');
+  if (!iframe) {
+    iframe = document.createElement('iframe');
+    iframe.src = slot.dataset.splineSrc || SPLINE_HERO_URL;
+    iframe.title = '3D Headphone';
+    iframe.loading = 'eager';
+    iframe.setAttribute('frameborder', '0');
+    iframe.allowFullscreen = true;
+    iframe.tabIndex = -1;
+    slot.appendChild(iframe);
   }
 
-  const created = document.createElement('iframe');
-  created.src = slot.dataset.splineSrc;
-  created.title = '3D Headphone';
-  created.loading = 'eager';
-  created.setAttribute('frameborder', '0');
-  created.allowFullscreen = true;
-  created.tabIndex = -1;
-  slot.appendChild(created);
-  created.addEventListener('load', markReady, { once: true });
-  setTimeout(markReady, 6000);
+  iframe.addEventListener('load', markReady, { once: true });
+  requestAnimationFrame(markReady);
+  setTimeout(markReady, 500);
+  setTimeout(markReady, 2000);
 };
 
 const initEventListeners = () => {
@@ -757,10 +777,10 @@ const init = () => {
     } else if (checklistGrid) {
       renderGrid('#checklist-grid');
     } else {
-      renderHero();
-      initEventListeners();
+      initHeroSpline();
+      warmProductImageCache(products);
       renderGrid();
-      initHeroVisual();
+      initEventListeners();
       return;
     }
 
@@ -799,6 +819,8 @@ const registerServiceWorker = () => {
 };
 
 registerServiceWorker();
+
+warmProductImageCache(products);
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {

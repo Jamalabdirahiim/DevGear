@@ -616,7 +616,8 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.25s ease;
+  background-color: #1a1a1e;
 }
 
 .product-card:hover .card-img {
@@ -3150,18 +3151,19 @@ body.no-scroll {
 .hero-spline-loader {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
   background: radial-gradient(circle at 50% 55%, rgba(124, 58, 237, 0.18) 0%, transparent 62%);
   animation: heroLoaderPulse 2.2s ease-in-out infinite;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: none;
 }
 
 .hero-spline-slot {
   position: absolute;
   inset: -8% -5%;
   z-index: 2;
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  opacity: 1;
+  visibility: visible;
 }
 
 .hero-spline-slot iframe {
@@ -3170,14 +3172,12 @@ body.no-scroll {
   border: none;
   background: transparent;
   pointer-events: none;
-}
-
-.hero-modern__visual--ready .hero-spline-slot {
-  opacity: 1;
+  display: block;
 }
 
 .hero-modern__visual--ready .hero-spline-loader {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
@@ -3415,6 +3415,7 @@ body.no-scroll {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-spline-loader,
   .hero-cached-visual,
   .hero-modern__scroll,
   .hero-modern__scroll svg {

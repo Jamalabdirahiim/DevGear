@@ -1,9 +1,8 @@
-const CACHE = 'devgear-v3';
+const CACHE = 'devgear-v4';
 const PRECACHE = [
   '/',
   '/index.html',
-  '/logo-transparent.png',
-  '/hero-mesh.png'
+  '/logo-transparent.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -33,12 +32,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (url.pathname === '/hero-mesh.png' || url.pathname === '/logo-transparent.png') {
+  if (url.pathname === '/logo-transparent.png') {
     event.respondWith(cacheFirst(request));
     return;
   }
 
-  if (/\.(png|jpg|jpeg|webp|svg|ico)$/i.test(url.pathname)) {
+  if (request.destination === 'image' || /\.(png|jpg|jpeg|webp|svg|ico|gif)$/i.test(url.pathname)) {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
