@@ -1,9 +1,16 @@
-const CACHE = 'devgear-v2';
-const PRECACHE = ['/', '/index.html', '/logo-transparent.png'];
+const CACHE = 'devgear-v3';
+const PRECACHE = [
+  '/',
+  '/index.html',
+  '/logo-transparent.png',
+  '/hero-mesh.png'
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      .then((cache) => cache.addAll(PRECACHE))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -22,6 +29,11 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   if (url.pathname.startsWith('/assets/')) {
+    event.respondWith(cacheFirst(request));
+    return;
+  }
+
+  if (url.pathname === '/hero-mesh.png' || url.pathname === '/logo-transparent.png') {
     event.respondWith(cacheFirst(request));
     return;
   }

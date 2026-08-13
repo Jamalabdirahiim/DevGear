@@ -286,7 +286,7 @@ const renderApp = () => {
   setupFilters(); // Re-attach event listeners after DOM update
 };
 
-const SPLINE_HERO_URL = 'https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/';
+const HERO_MESH_URL = '/hero-mesh.png';
 
 const renderSpline = () => {};
 
@@ -338,9 +338,15 @@ const renderHero = () => {
         </div>
 
         <div class="hero-modern__visual">
-          <div class="hero-spline-poster" aria-hidden="true"></div>
-          <div class="hero-spline-loader" aria-hidden="true"></div>
-          <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
+          <img
+            src="${HERO_MESH_URL}"
+            alt="DevGear 3D desk setup preview"
+            class="hero-cached-visual"
+            width="960"
+            height="720"
+            decoding="async"
+            fetchpriority="high"
+          >
         </div>
       </div>
 
@@ -641,110 +647,10 @@ const renderFooter = () => `
 
 const isMobileViewport = () => window.matchMedia('(max-width: 767px)').matches;
 
-const shouldLoadSpline = () => {
-  if (isMobileViewport()) return false;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) {
-    return false;
-  }
-  return true;
-};
-
-const markHeroSplineReady = (visual) => {
-  if (visual) visual.classList.add('hero-modern__visual--ready');
-};
-
-const setSplineActive = (active) => {
-  document.body.classList.toggle('spline-active', active);
-};
-
-let heroSplineObserver = null;
-
-const pauseHeroSpline = (slot) => {
-  const iframe = slot?.querySelector('iframe');
-  if (!iframe || iframe.dataset.paused === 'true') return;
-  iframe.dataset.paused = 'true';
-  iframe.removeAttribute('src');
-  setSplineActive(false);
-};
-
-const resumeHeroSpline = (slot) => {
-  const iframe = slot?.querySelector('iframe');
-  const src = slot?.dataset.splineSrc;
-  if (!iframe || !src) return;
-  iframe.dataset.paused = 'false';
-  if (iframe.getAttribute('src') !== src) {
-    iframe.src = src;
-  }
-  setSplineActive(true);
-};
-
-const mountHeroSplineIframe = (slot, visual) => {
-  if (slot.dataset.loaded === 'true') return slot.querySelector('iframe');
-  slot.dataset.loaded = 'true';
-
-  const iframe = document.createElement('iframe');
-  iframe.src = slot.dataset.splineSrc;
-  iframe.title = '3D Headphone';
-  iframe.loading = 'eager';
-  iframe.setAttribute('frameborder', '0');
-  iframe.allowFullscreen = true;
-  iframe.tabIndex = -1;
-  iframe.dataset.paused = 'false';
-  slot.appendChild(iframe);
-
-  iframe.addEventListener('load', () => {
-    markHeroSplineReady(visual);
-    setSplineActive(true);
-  }, { once: true });
-
-  setTimeout(() => markHeroSplineReady(visual), 8000);
-
-  return iframe;
-};
-
-const watchHeroSplineVisibility = (slot) => {
-  if (heroSplineObserver || !('IntersectionObserver' in window)) return;
-
-  heroSplineObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!slot.dataset.loaded) return;
-      if (entry.isIntersecting) {
-        resumeHeroSpline(slot);
-      } else {
-        pauseHeroSpline(slot);
-      }
-    });
-  }, { rootMargin: '0px', threshold: 0 });
-
-  heroSplineObserver.observe(slot.closest('.hero-modern__visual'));
-};
-
-const initHeroSpline = () => {
-  const slot = document.querySelector('.hero-spline-slot');
+const initHeroVisual = () => {
   const visual = document.querySelector('.hero-modern__visual');
-  if (!slot || !visual) return;
-
-  if (isMobileViewport()) {
-    visual.classList.add('hero-modern__visual--mobile-hidden');
-    return;
-  }
-
-  if (!shouldLoadSpline()) {
-    visual.classList.add('hero-modern__visual--poster-only');
-    return;
-  }
-
-  watchHeroSplineVisibility(slot);
-
-  window.addEventListener('load', () => {
-    setTimeout(() => mountHeroSplineIframe(slot, visual), 400);
-  }, { once: true });
-
-  if (document.readyState === 'complete') {
-    setTimeout(() => mountHeroSplineIframe(slot, visual), 400);
-  }
+  if (!visual || !isMobileViewport()) return;
+  visual.classList.add('hero-modern__visual--mobile-hidden');
 };
 
 const initEventListeners = () => {
@@ -836,7 +742,7 @@ const init = () => {
       renderHero();
       initEventListeners();
       renderGrid();
-      initHeroSpline();
+      initHeroVisual();
       return;
     }
 
