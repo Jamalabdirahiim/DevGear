@@ -3157,6 +3157,7 @@ body.no-scroll {
   height: min(55vw, 480px);
   max-height: 480px;
   overflow: hidden;
+  clip-path: inset(0 0 11% 0);
 }
 
 .hero-spline-loader {
@@ -3170,9 +3171,13 @@ body.no-scroll {
 
 .hero-spline-slot {
   position: absolute;
-  inset: -8% -5%;
+  top: -8%;
+  right: -3%;
+  bottom: 6%;
+  left: -5%;
   z-index: 2;
   opacity: 0;
+  overflow: hidden;
   transition: opacity 0.6s ease;
 }
 
@@ -3386,12 +3391,14 @@ body.no-scroll {
     height: 280px;
     max-height: 280px;
     border-radius: 16px;
+    clip-path: inset(0 4% 16% 4%);
   }
 
   .hero-spline-slot {
     inset: 0;
+    bottom: 4%;
     transform: scale(0.52);
-    transform-origin: center center;
+    transform-origin: center 42%;
   }
 
   .hero-spline-slot iframe {
