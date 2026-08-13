@@ -261,91 +261,79 @@ const renderHero = () => {
   if (!heroContainer) return;
 
   heroContainer.innerHTML = `
-    <div style="position:relative;background-color:#0D0F1E;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;padding:110px 40px 100px;">
+    <section class="hero-modern" aria-label="DevGear hero">
+      <div class="hero-modern__glow hero-modern__glow--left" aria-hidden="true"></div>
+      <div class="hero-modern__glow hero-modern__glow--right" aria-hidden="true"></div>
 
-      <!-- Ambient glow orbs -->
-      <div style="position:absolute;top:15%;left:5%;width:420px;height:420px;background:radial-gradient(circle,rgba(124,58,237,0.18) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
-      <div style="position:absolute;bottom:20%;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(6,182,212,0.13) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
-
-      <!-- Main two-column grid -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0;width:100%;max-width:1300px;position:relative;z-index:2;flex:1;">
-
-        <!-- Text Content -->
-        <div style="display:flex;flex-direction:column;justify-content:center;padding-right:3rem;">
-
-          <!-- Trust pills -->
-          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.6rem;">
-            <span style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);">✦ Verified for Mac &amp; PC</span>
-            <span style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:rgba(45,212,191,0.1);color:#2dd4bf;border:1px solid rgba(45,212,191,0.25);">⚡ Curated by a Developer</span>
+      <div class="hero-modern__grid">
+        <div class="hero-modern__content">
+          <div class="hero-modern__pills">
+            <span class="hero-modern__pill hero-modern__pill--purple">✦ Verified for Mac &amp; PC</span>
+            <span class="hero-modern__pill hero-modern__pill--teal">⚡ Curated by a Developer</span>
           </div>
 
-          <!-- Gradient headline -->
-          <h1 style="font-size:clamp(2.6rem,4.2vw,4rem);font-weight:900;line-height:1.07;letter-spacing:-0.03em;margin:0 0 1.3rem;background:linear-gradient(135deg,#e879f9 0%,#a855f7 28%,#6366f1 55%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Build Your Dream<br>Desk Setup Today.</h1>
+          <h1 class="hero-modern__title">Build Your Dream<br>Desk Setup Today.</h1>
 
-          <!-- Subtitle -->
-          <p style="font-size:1.05rem;line-height:1.75;color:#94a3b8;margin:0 0 2rem;max-width:90%;">
-            I'm a 22yo developer, and I built <span style="color:#c4b5fd;font-weight:600;">DevGear</span> to solve a simple problem: finding gear that actually survives a <span style="color:#22d3ee;font-weight:600;">10-hour coding sprint</span>. No fluff, no paid reviews—just code-verified tools for deep focus.
+          <p class="hero-modern__subtitle">
+            I'm a 22yo developer, and I built <strong>DevGear</strong> to solve a simple problem: finding gear that actually survives a <strong>10-hour coding sprint</strong>. No fluff, no paid reviews—just code-verified tools for deep focus.
           </p>
 
-          <!-- CTA button -->
-          <div style="margin-bottom:2.5rem;">
-            <button
-              onclick="document.querySelector('#grid-container').scrollIntoView({behavior:'smooth'})"
-              style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.1rem;font-size:0.95rem;font-weight:700;letter-spacing:0.03em;border:none;border-radius:9999px;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#4f46e5,#0891b2);color:#fff;box-shadow:0 0 22px rgba(124,58,237,0.45),0 4px 16px rgba(0,0,0,0.3);transition:all 0.3s ease;"
-              onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 38px rgba(124,58,237,0.65),0 8px 26px rgba(0,0,0,0.4)';"
-              onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 22px rgba(124,58,237,0.45),0 4px 16px rgba(0,0,0,0.3)';"
-            >
-              Explore Gear
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-          </div>
+          <button
+            type="button"
+            class="hero-modern__cta"
+            onclick="document.querySelector('#grid-container').scrollIntoView({behavior:'smooth'})"
+          >
+            Explore Gear
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
 
-          <!-- Stats row -->
-          <div style="display:flex;gap:2rem;align-items:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07);">
-            <div style="display:flex;flex-direction:column;gap:0.2rem;">
-              <span style="font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#a855f7,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">50+</span>
-              <span style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Products Tested</span>
+          <div class="hero-modern__stats">
+            <div class="hero-modern__stat">
+              <span class="hero-modern__stat-value hero-modern__stat-value--purple">50+</span>
+              <span class="hero-modern__stat-label">Products Tested</span>
             </div>
-            <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);"></div>
-            <div style="display:flex;flex-direction:column;gap:0.2rem;">
-              <span style="font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#22d3ee,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">2.4k+</span>
-              <span style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Dev Setups Built</span>
+            <div class="hero-modern__stat">
+              <span class="hero-modern__stat-value hero-modern__stat-value--cyan">2.4k+</span>
+              <span class="hero-modern__stat-label">Dev Setups Built</span>
             </div>
-            <div style="width:1px;height:36px;background:rgba(255,255,255,0.08);"></div>
-            <div style="display:flex;flex-direction:column;gap:0.2rem;">
-              <span style="font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">4.9★</span>
-              <span style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Community Score</span>
+            <div class="hero-modern__stat">
+              <span class="hero-modern__stat-value hero-modern__stat-value--amber">4.9★</span>
+              <span class="hero-modern__stat-label">Community Score</span>
             </div>
           </div>
-
         </div>
 
-        <!-- 3D Headphone Spline (lazy-loaded) -->
-        <div style="position:relative;width:100%;height:100%;min-height:520px;overflow:hidden;">
+        <div class="hero-modern__visual" aria-hidden="true">
+          <div class="hero-visual-fallback">
+            <div class="hero-visual-fallback__ring hero-visual-fallback__ring--outer"></div>
+            <div class="hero-visual-fallback__ring hero-visual-fallback__ring--inner"></div>
+            <div class="hero-visual-fallback__platform"></div>
+            <div class="hero-visual-fallback__panel hero-visual-fallback__panel--1"></div>
+            <div class="hero-visual-fallback__panel hero-visual-fallback__panel--2"></div>
+            <div class="hero-visual-fallback__panel hero-visual-fallback__panel--3"></div>
+            <svg class="hero-visual-fallback__headphones" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 52V42a30 30 0 0 1 60 0v10" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+              <rect x="18" y="52" width="18" height="34" rx="9" fill="currentColor"/>
+              <rect x="84" y="52" width="18" height="34" rx="9" fill="currentColor"/>
+              <path d="M36 64h48" stroke="rgba(168,85,247,0.5)" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--1"></span>
+            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--2"></span>
+            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--3"></span>
+            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--4"></span>
+          </div>
           <div
-            class="hero-spline-placeholder"
+            class="hero-spline-slot"
             data-spline-src="https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/"
-            style="position:absolute;top:-8%;left:-5%;width:110%;height:132%;background:radial-gradient(circle at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%);"
-            aria-hidden="true"
           ></div>
         </div>
-
       </div>
 
-      <!-- Scroll cue — pinned to very bottom -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding:1.8rem 0 1.4rem;z-index:3;position:relative;animation:heroCueFade 2.5s ease-in-out infinite;">
-        <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(148,163,184,0.45);">Scroll to explore</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:heroBounce 1.6s ease-in-out infinite;">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
+      <div class="hero-modern__scroll" aria-hidden="true">
+        <span>Scroll to explore</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
       </div>
-
-    </div>
-
-    <style>
-      @keyframes heroCueFade { 0%,100%{opacity:0.45} 50%{opacity:1} }
-      @keyframes heroBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
-    </style>
+    </section>
   `;
 };
 
@@ -605,34 +593,54 @@ const renderFooter = () => `
 // --- Unified Event Delegation System ---
 // Using top-level delegation for better performance and reliability
 
+const shouldLoadSpline = () => {
+  if (window.matchMedia('(max-width: 1023px)').matches) return false;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) return false;
+  return true;
+};
+
 const initLazySpline = () => {
-  const placeholder = document.querySelector('.hero-spline-placeholder');
-  if (!placeholder) return;
+  const slot = document.querySelector('.hero-spline-slot');
+  const visual = document.querySelector('.hero-modern__visual');
+  if (!slot || !visual || !shouldLoadSpline()) return;
 
   const loadSpline = () => {
-    if (placeholder.dataset.loaded === 'true') return;
-    placeholder.dataset.loaded = 'true';
+    if (slot.dataset.loaded === 'true') return;
+    slot.dataset.loaded = 'true';
 
     const iframe = document.createElement('iframe');
-    iframe.src = placeholder.dataset.splineSrc;
+    iframe.src = slot.dataset.splineSrc;
     iframe.title = '3D Headphone';
     iframe.loading = 'lazy';
     iframe.setAttribute('frameborder', '0');
     iframe.allowFullscreen = true;
-    iframe.style.cssText = 'position:absolute;top:-8%;left:-5%;width:110%;height:132%;border:none;background:transparent;';
-    placeholder.replaceWith(iframe);
+    slot.appendChild(iframe);
+
+    iframe.addEventListener('load', () => {
+      visual.classList.add('hero-modern__visual--spline-ready');
+    }, { once: true });
+  };
+
+  const scheduleLoad = () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadSpline, { timeout: 3000 });
+    } else {
+      setTimeout(loadSpline, 1500);
+    }
   };
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
-        loadSpline();
+        scheduleLoad();
         observer.disconnect();
       }
-    }, { rootMargin: '200px' });
-    observer.observe(placeholder);
+    }, { rootMargin: '100px' });
+    observer.observe(visual);
   } else {
-    window.addEventListener('load', loadSpline, { once: true });
+    window.addEventListener('load', scheduleLoad, { once: true });
   }
 };
 
