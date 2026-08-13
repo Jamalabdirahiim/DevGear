@@ -256,7 +256,9 @@ const renderApp = () => {
   setupFilters(); // Re-attach event listeners after DOM update
 };
 
-const SPLINE_HERO_URL = 'https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/';
+const SPLINE_SCENE_URL = 'https://prod.spline.design/ZYOPMQGoJace0HIXR0gN4yTR/scene.splinecode';
+const SPLINE_IFRAME_URL = 'https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/';
+const SPLINE_VIEWER_SCRIPT = 'https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js';
 
 const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
@@ -307,9 +309,7 @@ const renderHero = () => {
 
         <div class="hero-modern__visual">
           <div class="hero-spline-loader" aria-hidden="true"></div>
-          <div class="hero-spline-frame">
-            <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
-          </div>
+          <div class="hero-spline-slot" data-spline-scene="${SPLINE_SCENE_URL}" data-spline-fallback="${SPLINE_IFRAME_URL}"></div>
         </div>
       </div>
 
@@ -578,26 +578,61 @@ const shouldLoadSpline = () => {
   return true;
 };
 
+const loadSplineViewerScript = () => {
+  if (customElements.get('spline-viewer')) return Promise.resolve();
+  if (window.__splineViewerLoading) return window.__splineViewerLoading;
+
+  window.__splineViewerLoading = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = SPLINE_VIEWER_SCRIPT;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Spline viewer script failed'));
+    document.head.appendChild(script);
+  });
+
+  return window.__splineViewerLoading;
+};
+
+const mountSplineIframe = (slot, visual) => {
+  const iframe = document.createElement('iframe');
+  iframe.src = slot.dataset.splineFallback;
+  iframe.title = '3D Headphone';
+  iframe.loading = 'lazy';
+  iframe.setAttribute('frameborder', '0');
+  iframe.allowFullscreen = true;
+  slot.appendChild(iframe);
+
+  iframe.addEventListener('load', () => {
+    visual.classList.add('hero-modern__visual--ready');
+  }, { once: true });
+};
+
 const initHeroSpline = () => {
   const slot = document.querySelector('.hero-spline-slot');
   const visual = document.querySelector('.hero-modern__visual');
   if (!slot || !visual || !shouldLoadSpline()) return;
 
-  const loadSpline = () => {
+  const markReady = () => visual.classList.add('hero-modern__visual--ready');
+
+  const loadSpline = async () => {
     if (slot.dataset.loaded === 'true') return;
     slot.dataset.loaded = 'true';
 
-    const iframe = document.createElement('iframe');
-    iframe.src = slot.dataset.splineSrc;
-    iframe.title = '3D Headphone';
-    iframe.loading = 'lazy';
-    iframe.setAttribute('frameborder', '0');
-    iframe.allowFullscreen = true;
-    slot.appendChild(iframe);
+    try {
+      await loadSplineViewerScript();
 
-    iframe.addEventListener('load', () => {
-      visual.classList.add('hero-modern__visual--ready');
-    }, { once: true });
+      const viewer = document.createElement('spline-viewer');
+      viewer.setAttribute('url', slot.dataset.splineScene);
+      viewer.setAttribute('hint', 'false');
+      viewer.setAttribute('loading-anim-type', 'none');
+      slot.appendChild(viewer);
+
+      viewer.addEventListener('load', markReady, { once: true });
+      setTimeout(markReady, 5000);
+    } catch {
+      mountSplineIframe(slot, visual);
+    }
   };
 
   const scheduleLoad = () => {
