@@ -262,11 +262,6 @@ const renderNavbar = () => `
       <a href="/" class="mobile-nav-link active">Home</a>
       <a href="/focus.html" class="mobile-nav-link">Focus</a>
       <a href="/checklist.html" class="mobile-nav-link">Checklist</a>
-      <div class="mobile-nav-divider"></div>
-      <div class="mobile-filter-title">Quick Filters</div>
-      <button class="mobile-nav-link filter-pill" data-filter="500">Budget ($500)</button>
-      <button class="mobile-nav-link filter-pill" data-filter="1500">Professional ($1,500)</button>
-      <button class="mobile-nav-link filter-pill" data-filter="5000">Elite ($5,000)</button>
     </div>
   </nav>
 `;
