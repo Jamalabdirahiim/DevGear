@@ -5,6 +5,42 @@ const escapeHTML = (str) => {
   return div.innerHTML;
 };
 
+const optimizeImageUrl = (url, width = 480) => {
+  if (!url) return url;
+
+  try {
+    const parsed = new URL(url);
+
+    if (parsed.hostname.includes('media-amazon.com')) {
+      return url.replace(/\._AC_[A-Z0-9_]+\./, `._AC_SL${width}_.`);
+    }
+
+    if (parsed.hostname.includes('unsplash.com')) {
+      parsed.searchParams.set('w', String(width));
+      parsed.searchParams.set('q', '80');
+      parsed.searchParams.set('auto', 'format');
+      parsed.searchParams.set('fit', 'crop');
+      return parsed.toString();
+    }
+
+    if (parsed.hostname.includes('wp.com') || parsed.hostname.includes('wordpress.com')) {
+      parsed.searchParams.set('w', String(width));
+      parsed.searchParams.set('quality', '80');
+      return parsed.toString();
+    }
+
+    if (parsed.hostname.includes('futurecdn.net')) {
+      parsed.searchParams.set('w', String(width));
+      parsed.searchParams.set('quality', '80');
+      return parsed.toString();
+    }
+  } catch {
+    return url;
+  }
+
+  return url;
+};
+
 const products = [
   {
     id: 10,
@@ -258,9 +294,11 @@ const renderApp = () => {
 
 const SPLINE_HERO_URL = 'https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/';
 
+const renderSpline = () => {};
+
 const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
-  if (!heroContainer) return;
+  if (!heroContainer || heroContainer.querySelector('.hero-modern')) return;
 
   heroContainer.innerHTML = `
     <section class="hero-modern" aria-label="DevGear hero">
@@ -283,7 +321,7 @@ const renderHero = () => {
           <button
             type="button"
             class="hero-modern__cta"
-            onclick="document.querySelector('#grid-container').scrollIntoView({behavior:'smooth'})"
+            data-scroll-target="#grid-container"
           >
             Explore Gear
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -332,17 +370,25 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
     return;
   }
 
-  gridContainer.innerHTML = filteredProducts.map(product => `
+  gridContainer.innerHTML = filteredProducts.map((product, index) => {
+    const imgSrc = optimizeImageUrl(product.image || '', 520);
+    const eager = index < 3 ? 'eager' : 'lazy';
+    const priority = index < 2 ? 'fetchpriority="high"' : 'fetchpriority="low"';
+
+    return `
   <a href="${product.link || '#'}" target="_self" class="product-card" aria-label="View ${escapeHTML(product.title)} on Amazon">
     ${product.badge ? `<div class="badge-top-pick">${escapeHTML(product.badge)}</div>` : ''}
       <div class="card-img-container">
         <img 
-          src="${product.image || ''}" 
+          src="${imgSrc}" 
           alt="${escapeHTML(product.title || 'Product')}" 
           class="card-img" 
-          loading="lazy"
+          width="520"
+          height="390"
+          loading="${eager}"
           decoding="async"
-          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000&opacity=0.3';"
+          ${priority}
+          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=520';"
         />
         ${product.keyword ? `<div class="badge-keyword">${escapeHTML(product.keyword)}</div>` : ''}
       </div>
@@ -375,7 +421,8 @@ const renderGrid = (containerId = '#grid-container', filterFn = null) => {
           </div>
       </div>
     </a>
-  `).join('');
+  `;
+  }).join('');
 };
 
 const bundles = {
@@ -469,17 +516,22 @@ const renderBundle = (tier) => {
   if (!container) return;
 
   const items = bundles[tier] || [];
-  container.innerHTML = items.map(item => `
+  container.innerHTML = items.map(item => {
+    const imgSrc = optimizeImageUrl(item.image || '', 480);
+    return `
   <a href="${item.link}" target="_blank" class="product-card" aria-label="View ${escapeHTML(item.title)} on Amazon">
     ${item.badge ? `<div class="badge-top-pick">${escapeHTML(item.badge)}</div>` : ''}
       <div class="card-img-container">
         <img 
-          src="${item.image || ''}" 
+          src="${imgSrc}" 
           alt="${escapeHTML(item.title)}" 
           class="card-img" 
+          width="480"
+          height="360"
           loading="lazy"
           decoding="async"
-          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000&opacity=0.3';"
+          fetchpriority="low"
+          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=480';"
         />
       </div>
       <div class="card-content">
@@ -490,7 +542,8 @@ const renderBundle = (tier) => {
         </div>
       </div>
     </a>
-  `).join('');
+  `;
+  }).join('');
 
   // Re-attach GA tracking
   container.querySelectorAll('.product-card').forEach(card => {
@@ -576,47 +629,36 @@ const shouldLoadSpline = () => {
   return true;
 };
 
+const markHeroSplineReady = (visual) => {
+  if (visual) visual.classList.add('hero-modern__visual--ready');
+};
+
 const initHeroSpline = () => {
   const slot = document.querySelector('.hero-spline-slot');
   const visual = document.querySelector('.hero-modern__visual');
-  if (!slot || !visual || !shouldLoadSpline()) return;
+  if (!slot || !visual) return;
 
-  const loadSpline = () => {
-    if (slot.dataset.loaded === 'true') return;
-    slot.dataset.loaded = 'true';
-
-    const iframe = document.createElement('iframe');
-    iframe.src = slot.dataset.splineSrc;
-    iframe.title = '3D Headphone';
-    iframe.loading = 'lazy';
-    iframe.setAttribute('frameborder', '0');
-    iframe.allowFullscreen = true;
-    slot.appendChild(iframe);
-
-    iframe.addEventListener('load', () => {
-      visual.classList.add('hero-modern__visual--ready');
-    }, { once: true });
-  };
-
-  const scheduleLoad = () => {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadSpline, { timeout: 2500 });
-    } else {
-      setTimeout(loadSpline, 800);
-    }
-  };
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        scheduleLoad();
-        observer.disconnect();
-      }
-    }, { rootMargin: '50px' });
-    observer.observe(visual);
-  } else {
-    scheduleLoad();
+  const existingIframe = slot.querySelector('iframe');
+  if (existingIframe) {
+    existingIframe.addEventListener('load', () => markHeroSplineReady(visual), { once: true });
+    setTimeout(() => markHeroSplineReady(visual), 6000);
+    return;
   }
+
+  if (!shouldLoadSpline()) return;
+
+  const iframe = document.createElement('iframe');
+  iframe.src = slot.dataset.splineSrc;
+  iframe.title = '3D Headphone';
+  iframe.loading = 'eager';
+  iframe.setAttribute('fetchpriority', 'high');
+  iframe.setAttribute('frameborder', '0');
+  iframe.allowFullscreen = true;
+  iframe.tabIndex = -1;
+  slot.appendChild(iframe);
+
+  iframe.addEventListener('load', () => markHeroSplineReady(visual), { once: true });
+  setTimeout(() => markHeroSplineReady(visual), 6000);
 };
 
 const initEventListeners = () => {
@@ -643,7 +685,15 @@ const initEventListeners = () => {
       // If it's a filter pill in the mobile nav, don't return, let the next check handle it
     }
 
-    // 3. Smart Gear Filters
+    // 3. Hero CTA scroll
+    const heroCta = e.target.closest('.hero-modern__cta');
+    if (heroCta) {
+      const target = document.querySelector(heroCta.dataset.scrollTarget || '#grid-container');
+      target?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    // 4. Smart Gear Filters
     const pill = e.target.closest('.filter-pill');
     if (pill) {
       const filterValue = pill.dataset.filter;
@@ -690,9 +740,9 @@ const init = () => {
   try {
     const focusGrid = document.querySelector('#focus-grid');
     const checklistGrid = document.querySelector('#checklist-grid');
-    const appContainer = document.querySelector('#app');
 
-    // Detect page and render accordingly
+    initHeroSpline();
+
     if (focusGrid) {
       const focusFilter = (p) => ['Monitor', 'Audio', 'Light'].includes(p.category);
       renderGrid('#focus-grid', focusFilter);
@@ -700,14 +750,15 @@ const init = () => {
       renderGrid('#checklist-grid');
     } else {
       renderHero();
-      renderGrid();
+      const paintGrid = () => renderGrid();
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(paintGrid, { timeout: 120 });
+      } else {
+        setTimeout(paintGrid, 0);
+      }
     }
 
     initEventListeners();
-
-    requestAnimationFrame(() => {
-      initHeroSpline();
-    });
   } catch (error) {
     console.error('Initialization error:', error);
   }
@@ -718,21 +769,33 @@ window.addEventListener('error', () => {
   // Keep page usable if a non-critical script fails.
 });
 
-// Header Scroll Effect
+// Header Scroll Effect (throttled)
+let scrollTicking = false;
 const handleScroll = () => {
-  const nav = document.querySelector('.navbar');
-  if (!nav) return;
-  if (window.scrollY > 20) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => {
+    const nav = document.querySelector('.navbar');
+    if (nav) {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }
+    scrollTicking = false;
+  });
 };
 
-window.addEventListener('scroll', handleScroll);
+window.addEventListener('scroll', handleScroll, { passive: true });
+
+const registerServiceWorker = () => {
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+};
+
+registerServiceWorker();
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
   init();
-  handleScroll(); // Check scroll position immediately
+  handleScroll();
 });
