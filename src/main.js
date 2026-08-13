@@ -1,5 +1,3 @@
-console.log('DevGear: main.js loaded');
-
 const escapeHTML = (str) => {
   if (!str) return '';
   const div = document.createElement('div');
@@ -322,15 +320,14 @@ const renderHero = () => {
 
         </div>
 
-        <!-- 3D Headphone Spline (Right side) -->
+        <!-- 3D Headphone Spline (lazy-loaded) -->
         <div style="position:relative;width:100%;height:100%;min-height:520px;overflow:hidden;">
-          <iframe
-            src="https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/"
-            frameborder="0"
-            style="position:absolute;top:-8%;left:-5%;width:110%;height:132%;border:none;background:transparent;"
-            title="3D Headphone"
-            allowfullscreen
-          ></iframe>
+          <div
+            class="hero-spline-placeholder"
+            data-spline-src="https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/"
+            style="position:absolute;top:-8%;left:-5%;width:110%;height:132%;background:radial-gradient(circle at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%);"
+            aria-hidden="true"
+          ></div>
         </div>
 
       </div>
@@ -645,8 +642,38 @@ const renderFooter = () => `
 // --- Unified Event Delegation System ---
 // Using top-level delegation for better performance and reliability
 
+const initLazySpline = () => {
+  const placeholder = document.querySelector('.hero-spline-placeholder');
+  if (!placeholder) return;
+
+  const loadSpline = () => {
+    if (placeholder.dataset.loaded === 'true') return;
+    placeholder.dataset.loaded = 'true';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = placeholder.dataset.splineSrc;
+    iframe.title = '3D Headphone';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('frameborder', '0');
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'position:absolute;top:-8%;left:-5%;width:110%;height:132%;border:none;background:transparent;';
+    placeholder.replaceWith(iframe);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        loadSpline();
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(placeholder);
+  } else {
+    window.addEventListener('load', loadSpline, { once: true });
+  }
+};
+
 const initEventListeners = () => {
-  console.log('DevGear: Initializing Event Delegation...');
 
   document.addEventListener('click', (e) => {
     // 1. Mobile Menu Toggle
@@ -654,7 +681,6 @@ const initEventListeners = () => {
     const mobileNav = document.querySelector('.mobile-nav');
 
     if (toggle && mobileNav) {
-      console.log('DevGear: Mobile menu toggled');
       toggle.classList.toggle('active');
       mobileNav.classList.toggle('active');
       document.body.classList.toggle('no-scroll');
@@ -664,7 +690,6 @@ const initEventListeners = () => {
     // 2. Navigation / Page Links (Close mobile nav on click)
     const isNavLink = e.target.closest('.mobile-nav-link');
     if (isNavLink && mobileNav && mobileNav.classList.contains('active')) {
-      console.log('DevGear: Closing mobile menu');
       const realToggle = document.querySelector('.mobile-menu-toggle');
       if (realToggle) realToggle.classList.remove('active');
       mobileNav.classList.remove('active');
@@ -676,7 +701,6 @@ const initEventListeners = () => {
     const pill = e.target.closest('.filter-pill');
     if (pill) {
       const filterValue = pill.dataset.filter;
-      console.log('DevGear: Filter clicked:', filterValue);
 
       // Sync visual state for ALL pills with this filter across UI
       document.querySelectorAll('.filter-pill').forEach(p => {
@@ -737,25 +761,15 @@ const init = () => {
 
     // Initialize Event System once
     initEventListeners();
-
-    // Final check to ensure app shows up even if parts failed
-    if (appContainer) {
-      setTimeout(() => appContainer.classList.add('loaded'), 50);
-    }
+    initLazySpline();
   } catch (error) {
     console.error('Initialization error:', error);
-    const appContainer = document.querySelector('#app');
-    if (appContainer) appContainer.classList.add('loaded');
   }
 };
 
 // Global Catch-all to prevent silent failures
-window.addEventListener('error', (event) => {
-  console.warn('Recovered from global error:', event.message);
-  const appContainer = document.querySelector('#app');
-  if (appContainer && !appContainer.classList.contains('loaded')) {
-    appContainer.classList.add('loaded');
-  }
+window.addEventListener('error', () => {
+  // Keep page usable if a non-critical script fails.
 });
 
 // Header Scroll Effect

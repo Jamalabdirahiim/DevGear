@@ -7,21 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Desk Setup Checklist for Productivity | DevGear</title>
     <meta name="description" content="A simple desk setup checklist to build a clean and productive workspace." />
+    <link rel="canonical" href="https://devgear.netlify.app/checklist.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://devgear.vercel.app/checklist.html">
+    <meta property="og:url" content="https://devgear.netlify.app/checklist.html">
     <meta property="og:title" content="Desk Setup Checklist for Productivity | DevGear">
     <meta property="og:description" content="A simple desk setup checklist to build a clean and productive workspace.">
-    <meta property="og:image" content="https://devgear.vercel.app/hero-mesh.png">
+    <meta property="og:image" content="https://devgear.netlify.app/hero-mesh.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://devgear.vercel.app/checklist.html">
+    <meta property="twitter:url" content="https://devgear.netlify.app/checklist.html">
     <meta property="twitter:title" content="Desk Setup Checklist for Productivity | DevGear">
     <meta property="twitter:description"
         content="A simple desk setup checklist to build a clean and productive workspace.">
-    <meta property="twitter:image" content="https://devgear.vercel.app/hero-mesh.png">
+    <meta property="twitter:image" content="https://devgear.netlify.app/hero-mesh.png">
 
     <!-- Pinterest Rich Pin Data -->
     <meta property="og:site_name" content="DevGear">
@@ -38,31 +39,25 @@
             background-color: #09090b;
             color: #ededed;
         }
-
-        #app {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        #app.loaded {
-            opacity: 1;
-        }
     </style>
 
     <!-- Performance & Fonts -->
-    <link rel="stylesheet" href="/src/style.css?v=1.5.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0LX9YRXDYL"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-0LX9YRXDYL', { 'debug_mode': true });
-    </script>
+    <link rel="preload" href="/src/style.css?v=1.6.0" as="style">
+    <link rel="stylesheet" href="/src/style.css?v=1.6.0">
     <meta name="p:domain_verify" content="abd2629ccd3fca71fed832b3f8fa09e1" />
+    <script>
+        window.addEventListener('load', () => {
+            const ga = document.createElement('script');
+            ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-0LX9YRXDYL';
+            ga.async = true;
+            document.head.appendChild(ga);
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-0LX9YRXDYL');
+        });
+    </script>
 </head>
 
 <body>
@@ -277,7 +272,7 @@
             </div>
         </footer>
     </div>
-    <script type="module" src="/src/main.js?v=1.4.0"></script>
+    <script type="module" src="/src/main.js?v=1.6.0"></script>
 </body>
 
 </html>

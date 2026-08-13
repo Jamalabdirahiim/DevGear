@@ -2,8 +2,10 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-    base: './', // Works for both Vercel (root) and GitHub Pages (subdir)
+    base: './',
     build: {
+        target: 'es2020',
+        cssMinify: true,
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
@@ -11,5 +13,8 @@ export default defineConfig({
                 checklist: resolve(__dirname, 'checklist.html')
             }
         }
+    },
+    esbuild: {
+        drop: ['console', 'debugger']
     }
 })
