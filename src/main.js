@@ -286,7 +286,7 @@ const renderApp = () => {
   setupFilters(); // Re-attach event listeners after DOM update
 };
 
-const HERO_MESH_URL = '/hero-mesh.png';
+const SPLINE_HERO_URL = 'https://my.spline.design/techinspired3dassetsheadphone-ZYOPMQGoJace0HIXR0gN4yTR/';
 
 const renderSpline = () => {};
 
@@ -338,15 +338,8 @@ const renderHero = () => {
         </div>
 
         <div class="hero-modern__visual">
-          <img
-            src="${HERO_MESH_URL}"
-            alt="DevGear 3D desk setup preview"
-            class="hero-cached-visual"
-            width="960"
-            height="720"
-            decoding="async"
-            fetchpriority="high"
-          >
+          <div class="hero-spline-loader" aria-hidden="true"></div>
+          <div class="hero-spline-slot" data-spline-src="${SPLINE_HERO_URL}"></div>
         </div>
       </div>
 
@@ -647,10 +640,35 @@ const renderFooter = () => `
 
 const isMobileViewport = () => window.matchMedia('(max-width: 767px)').matches;
 
-const initHeroVisual = () => {
+const initHeroSpline = () => {
+  const slot = document.querySelector('.hero-spline-slot');
   const visual = document.querySelector('.hero-modern__visual');
-  if (!visual || !isMobileViewport()) return;
-  visual.classList.add('hero-modern__visual--mobile-hidden');
+  if (!slot || !visual) return;
+
+  if (isMobileViewport()) {
+    visual.classList.add('hero-modern__visual--mobile-hidden');
+    return;
+  }
+
+  const markReady = () => visual.classList.add('hero-modern__visual--ready');
+
+  const iframe = slot.querySelector('iframe');
+  if (iframe) {
+    iframe.addEventListener('load', markReady, { once: true });
+    setTimeout(markReady, 6000);
+    return;
+  }
+
+  const created = document.createElement('iframe');
+  created.src = slot.dataset.splineSrc;
+  created.title = '3D Headphone';
+  created.loading = 'eager';
+  created.setAttribute('frameborder', '0');
+  created.allowFullscreen = true;
+  created.tabIndex = -1;
+  slot.appendChild(created);
+  created.addEventListener('load', markReady, { once: true });
+  setTimeout(markReady, 6000);
 };
 
 const initEventListeners = () => {
