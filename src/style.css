@@ -3157,7 +3157,6 @@ body.no-scroll {
   height: min(55vw, 480px);
   max-height: 480px;
   overflow: hidden;
-  background: #0d0f1e;
 }
 
 .hero-spline-loader {
@@ -3171,27 +3170,17 @@ body.no-scroll {
 
 .hero-spline-slot {
   position: absolute;
-  inset: 0;
+  inset: -8% -5%;
   z-index: 2;
   opacity: 0;
   transition: opacity 0.6s ease;
 }
 
-.hero-spline-slot spline-viewer,
 .hero-spline-slot iframe {
-  display: block;
   width: 100%;
   height: 100%;
   border: none;
   background: transparent;
-}
-
-.hero-spline-slot spline-viewer {
-  --spline-viewer-logo-display: none;
-}
-
-.hero-spline-slot spline-viewer::part(logo) {
-  display: none !important;
 }
 
 .hero-modern__visual--ready .hero-spline-slot {
@@ -3393,15 +3382,8 @@ body.no-scroll {
   }
 
   .hero-modern__visual {
-    min-height: 300px;
-    height: 320px;
-    max-height: 320px;
-    border-radius: 12px;
-  }
-
-  .hero-spline-slot spline-viewer,
-  .hero-spline-slot iframe {
-    pointer-events: none;
+    min-height: 280px;
+    height: min(70vw, 360px);
   }
 
   .focus-hero,
