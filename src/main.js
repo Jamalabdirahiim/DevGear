@@ -256,6 +256,50 @@ const renderApp = () => {
   setupFilters(); // Re-attach event listeners after DOM update
 };
 
+const GEAR_PATH = 'M50 6 L53.5 16 L63 14.5 L59.5 24 L69 27.5 L59.5 31 L63 40.5 L53.5 39 L50 49 L46.5 39 L37 40.5 L40.5 31 L31 27.5 L40.5 24 L37 14.5 L46.5 16 Z';
+
+const renderGearSvg = (id, className = '') => `
+  <svg class="hero-gear ${className}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="gearGrad${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#e879f9"/>
+        <stop offset="45%" stop-color="#818cf8"/>
+        <stop offset="100%" stop-color="#22d3ee"/>
+      </linearGradient>
+      <filter id="gearGlow${id}" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="2" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <path d="${GEAR_PATH}" fill="url(#gearGrad${id})" filter="url(#gearGlow${id})"/>
+    <circle cx="50" cy="50" r="15" fill="#0a0c18"/>
+    <circle cx="50" cy="50" r="8" fill="#312e81" stroke="rgba(168,85,247,0.45)" stroke-width="1.5"/>
+    <circle cx="50" cy="50" r="3.5" fill="#a855f7"/>
+  </svg>
+`;
+
+const renderGearScene = () => `
+  <div class="hero-gear-scene">
+    <div class="hero-gear-scene__aura" aria-hidden="true"></div>
+    <div class="hero-gear-scene__orbit hero-gear-scene__orbit--1" aria-hidden="true"></div>
+    <div class="hero-gear-scene__orbit hero-gear-scene__orbit--2" aria-hidden="true"></div>
+    <div class="hero-gear-scene__center">
+      ${renderGearSvg(1, 'hero-gear--xl hero-gear--cw')}
+    </div>
+    ${renderGearSvg(2, 'hero-gear--lg hero-gear--ccw')}
+    ${renderGearSvg(3, 'hero-gear--md hero-gear--cw')}
+    ${renderGearSvg(4, 'hero-gear--sm hero-gear--ccw')}
+    ${renderGearSvg(5, 'hero-gear--xs hero-gear--cw')}
+    ${renderGearSvg(6, 'hero-gear--xxs hero-gear--ccw')}
+    <span class="hero-gear-scene__spark hero-gear-scene__spark--1"></span>
+    <span class="hero-gear-scene__spark hero-gear-scene__spark--2"></span>
+    <span class="hero-gear-scene__spark hero-gear-scene__spark--3"></span>
+    <span class="hero-gear-scene__spark hero-gear-scene__spark--4"></span>
+    <span class="hero-gear-scene__spark hero-gear-scene__spark--5"></span>
+    <span class="hero-gear-scene__spark hero-gear-scene__spark--6"></span>
+  </div>
+`;
+
 const renderHero = () => {
   const heroContainer = document.querySelector('#hero-container');
   if (!heroContainer) return;
@@ -305,22 +349,7 @@ const renderHero = () => {
 
         <div class="hero-modern__visual" aria-hidden="true">
           <div class="hero-visual-fallback">
-            <div class="hero-visual-fallback__ring hero-visual-fallback__ring--outer"></div>
-            <div class="hero-visual-fallback__ring hero-visual-fallback__ring--inner"></div>
-            <div class="hero-visual-fallback__platform"></div>
-            <div class="hero-visual-fallback__panel hero-visual-fallback__panel--1"></div>
-            <div class="hero-visual-fallback__panel hero-visual-fallback__panel--2"></div>
-            <div class="hero-visual-fallback__panel hero-visual-fallback__panel--3"></div>
-            <svg class="hero-visual-fallback__headphones" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M30 52V42a30 30 0 0 1 60 0v10" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-              <rect x="18" y="52" width="18" height="34" rx="9" fill="currentColor"/>
-              <rect x="84" y="52" width="18" height="34" rx="9" fill="currentColor"/>
-              <path d="M36 64h48" stroke="rgba(168,85,247,0.5)" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--1"></span>
-            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--2"></span>
-            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--3"></span>
-            <span class="hero-visual-fallback__particle hero-visual-fallback__particle--4"></span>
+            ${renderGearScene()}
           </div>
           <div
             class="hero-spline-slot"
@@ -624,11 +653,7 @@ const initLazySpline = () => {
   };
 
   const scheduleLoad = () => {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadSpline, { timeout: 3000 });
-    } else {
-      setTimeout(loadSpline, 1500);
-    }
+    setTimeout(loadSpline, 400);
   };
 
   if ('IntersectionObserver' in window) {
